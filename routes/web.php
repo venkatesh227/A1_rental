@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\ProductController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', [FrontendController::class, 'index']);
+
+Route::get('login', [MainController::class, 'login'])->name('login');
+
+Route::post('login_check', [MainController::class, 'login_check']);
+
+Route::get('dashboard',  [MainController::class, 'dashboard']);
+Route::get('logout', [MainController::class, 'logout']);
+
+
+
+Route::group(['middleware' => ['AuthCheck']], function () {
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::get('add-category', [CategoryController::class, 'add_category']);
+    Route::post('insert-category', [CategoryController::class, 'insert_category']);
+    Route::get('edit-category/{id}', [CategoryController::class, 'edit_category']);
+    Route::post('upadate-category/{id}', [CategoryController::class, 'upadate_category']);
+    Route::get('subcategories', [SubcategoryController::class, 'index']);
+    // 
+
+    Route::post('insert-subcategory', [SubcategoryController::class, 'insert_subcategory']);
+    // 
+    Route::get('add-subcategory', [SubcategoryController::class, 'add_subcategory']);
+
+    Route::get('edit-subcategory/{id}', [SubcategoryController::class, 'edit_subcategory']);
+    Route::post('upadate-subcategory/{id}', [SubcategoryController::class, 'upadate_subcategory']);
+
+
+    // Products
+    Route::get('products', [ProductController::class, 'index']);
+    // 
+
+    Route::get('add-product', [ProductController::class, 'add_product']);
+    // 
+    Route::post('fetchSubcategories', [ProductController::class, 'fetchSubcategories'])
+        ->name('fetchSubcategories');
+
+
+    // 
+    Route::post('insert-product', [ProductController::class, 'insert_product']);
+    // 
+    Route::get('edit-product/{id}', [ProductController::class, 'edit_product']);
+});
