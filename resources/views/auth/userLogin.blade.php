@@ -127,7 +127,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
                         <div class="section-title text-center mb-0">
-                            <h1 class="page-title">Login or Register</h1>
+                            <h1 class="page-title">Login or Register User</h1>
                             <ul class="page-list">
                                 <li><a href="#">HOME</a></li>
                                 <li>Login or Register</li>
