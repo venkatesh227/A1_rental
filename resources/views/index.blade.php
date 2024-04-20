@@ -41,59 +41,7 @@
     <div class="body-overlay" id="body-overlay"></div>
 
     <!-- navbar start -->
-    <div class="navbar-area">
-        <nav class="navbar navbar-area-2 navbar-area navbar-expand-lg">
-            <div class="container-fluid nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#st_main_menu" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a href="home.html"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
-                </div>
-                <div class="nav-right-part nav-right-part-mobile">
-                    <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
-                    <a class="user-btn" href="wishlist.html"><i class="lnr lnr-user"></i></a>
-                    <a class="cart-btn" href="cart.html"><span class="cart-count">2</span><i
-                            class="lnr lnr-cart"></i></a>
-                </div>
-                <div class="collapse navbar-collapse" id="st_main_menu">
-                    <ul class="navbar-nav menu-open">
-                        <li class="menu-item-has-children current-item-has-children">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Products</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">Tables</a></li>
-                                <li><a href="#">Chairs</a></li>
-                                <li><a href="#">Liners</a></li>
-                                <li><a href="#">Tents</a></li>
-                                <li><a href="#">Flooring</a></li>
-                                <li><a href="#">Carpet</a></li>
-                                <li><a href="#">Centerpiece</a></li>
-                                <li><a href="#">Lighting</a></li>
-                                <li><a href="#">Others</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="nav-right-part nav-right-part-desktop">
-                    <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
-
-                    <a class="user-btn" href="{{ route('login') }}"><i class="lnr lnr-user"></i></a>
-
-                    <a class="cart-btn" href="#"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
-                </div>
-            </div>
-        </nav>
-    </div>
+    @include('frontend.inc.navbar')
     <!-- navbar end -->
 
     <!-- Banner Starts -->
@@ -605,79 +553,7 @@
 
 
     <!-- Footer Starts -->
-    <footer class="footer-area">
-        <div class="footer-widget">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget widget widget_nav_menu">
-                            <h5 class="widget-title">help & information</h5>
-                            <ul>
-                                <li><a href="#">help</a></li>
-                                <li><a href="#">track order</a></li>
-                                <li><a href="#">delivery & returns</a></li>
-                                <li><a href="#">10% student discount</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget widget widget_nav_menu">
-                            <h5 class="widget-title">about us</h5>
-                            <ul>
-                                <li><a href="#">about us</a></li>
-                                <li><a href="#">career at theshop</a></li>
-                                <li><a href="#">investors site</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget widget widget_nav_menu">
-                            <h5 class="widget-title">Customer Care</h5>
-                            <ul>
-                                <li><a href="#">gift card</a></li>
-                                <li><a href="#">size guide</a></li>
-                                <li><a href="#">terms & condition</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-widget widget widget-newsletter">
-                            <h5 class="widget-title">newsletter</h5>
-                            <p>Sign up to Theshop newlettter for 10% <br>Discount code.</p>
-                            <form action="#" class="mt-4">
-                                <input type="email" class="" placeholder="Your Email Address"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'"
-                                    required>
-                                <button type="submit"> <span>&rharu;</span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 d-lg-flex justify-content-between">
-                        <div class="copyright-logo align-self-center">
-                            <a href="#">
-                                <img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
-                        </div>
-                        <div class="copyright-content align-self-center text-center">
-                            &copy; Copyright 2023 - All rights reserved.
-                        </div>
-                        <div class="copyright-link align-self-center">
-                            <ul>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @include('frontend.inc.footer')
     <!-- Footer End -->
 
     <!-- back to top area start -->
