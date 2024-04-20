@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ClientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,16 +58,22 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // Products
     Route::get('products', [ProductController::class, 'index']);
-    // 
-
     Route::get('add-product', [ProductController::class, 'add_product']);
-    // 
     Route::post('fetchSubcategories', [ProductController::class, 'fetchSubcategories'])
         ->name('fetchSubcategories');
-
-
-    // 
     Route::post('insert-product', [ProductController::class, 'insert_product']);
-    // 
     Route::get('edit-product/{id}', [ProductController::class, 'edit_product']);
+    Route::post('update-Products/{id}', [ProductController::class, 'update_products']);
+
+
+    // Clients
+
+    Route::get('clients', [ClientsController::class, 'index']);
+    // edit-client
+
+    Route::get('edit-client/{id}', [ClientsController::class, 'edit_client']);
+    Route::post('update-status/{userId}/{currentStatus}', [ClientsController::class, 'update_status'])
+    ->name('update-status');
+
+    // 
 });

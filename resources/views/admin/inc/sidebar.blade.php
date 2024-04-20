@@ -37,6 +37,15 @@
                </a>
            </li>
 
+
+           <li>
+            <a href="{{ url('clients') }}">
+                <div class="parent-icon"><i class="bx bx-upload"></i>
+                </div>
+                <div class="menu-title">Clients</div>
+            </a>
+        </li>
+
            <li>
                <a href="{{ url('logout') }}">
                    <div class="parent-icon"><i class="bx bx-message-square-edit"></i>

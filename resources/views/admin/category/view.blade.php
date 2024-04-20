@@ -1,14 +1,4 @@
-<head>
-    <style>
-        b {
-            color: black;
-            background: 20px;
 
-            font-size: 25px;
-            /* Set the font size here */
-        }
-    </style>
-</head>
 @extends('admin.index')
 
 @section('content')
@@ -19,7 +9,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item active" aria-current="page"><b>Categories</b></li>
                         </ol>
                     </nav>
                 </div>
@@ -38,7 +28,8 @@
                                 <tr>
                                     <th>Sl. No</th>
                                     <th>Caregory Name</th>
-                                    <th>Date</th>
+                                     <th>image</th>
+                                    <th>Created At</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                 </tr>
                             </thead>
@@ -47,6 +38,14 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
+                                        
+                                        <td>
+                                            @if ($item->image)
+                                                <img src="{{ asset('images/categories/' . $item->image) }}" alt="Product Image"
+                                                    width="100" height="100">
+                                            @endif
+                                        </td>
+                                        
                                         <td>{{ date('d-m-y h:i:s A', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('edit-category/' . $item->id) }}"
@@ -63,3 +62,11 @@
         </div>
     </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#categorytable').DataTable();
+    });
+</script>

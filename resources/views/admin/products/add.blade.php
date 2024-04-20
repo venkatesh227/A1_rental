@@ -25,7 +25,7 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page"><b> Add Category</b></li>
+                            <li class="breadcrumb-item active" aria-current="page"><b> Add Product</b></li>
                         </ol>
                     </nav>
                 </div>
@@ -74,7 +74,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">ProductName</label>
+                                <label for="name" class="col-form-label">Product Name</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ old('name') }}">
                                 @error('name')
@@ -90,33 +90,63 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
 
-                        <div class="row">
+
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">Small Description</label>
-                                <input type="text" class="form-control" id="small_description" name="small_description"
-                                    value="{{ old('small_description') }}">
+                                <label for="title" class="col-form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    value="{{ old('title') }}">
+                                @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="small_description" class="col-form-label">Small Description</label>
+                                <textarea class="form-control" id="small_description" name="small_description">{{ old('small_description') }}</textarea>
+
                                 @error('small_description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
+
+
                             <div class="col-md-6">
-                                <label for="slug" class="col-form-label">description</label>
-                                <input type="text" class="form-control" id="description" name="description"
-                                    value="{{ old('description') }}">
-                                @error('slug')
+                                <label for="description" class="col-form-label">Large Description</label>
+                                <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+
+
+                                @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
 
-                        <div class="row">
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">Price</label>
+                                <label for="additional_info" class="col-form-label">Additional Info</label>
+                                <textarea class="form-control" id="additional_info" name="additional_info">{{ old('additional_info') }}</textarea>
+
+                                @error('additional_info')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <label for="shipping_delivery" class="col-form-label">Shipping & Delivery</label>
+                                <textarea class="form-control" id="shipping_delivery" name="shipping_delivery">{{ old('shipping_delivery') }}</textarea>
+                                @error('shipping_delivery')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <label for="price" class="col-form-label">Price</label>
                                 <input type="text" class="form-control" id="price" name="price"
                                     value="{{ old('price') }}">
                                 @error('price')
@@ -125,22 +155,17 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="slug" class="col-form-label">Quantity</label>
-                                <input type="text" class="form-control" id="qty" name="qty"
+                                <label for="qty" class="col-form-label">Quantity</label>
+                                <input type="number" class="form-control" id="qty" name="qty"
                                     value="{{ old('qty') }}">
                                 @error('qty')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
 
 
-
-                        <!-- More form fields here -->
-
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="status" name="status"
                                         value="1">
@@ -150,21 +175,19 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
                         </div>
+
 
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="image" class="col-form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="image"
-                                    value="{{ old('image') }}">
-                                @error('image')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <label for="image" class="col-form-label">Images</label>
+                                <input type="file" class="form-control" id="image" name="image[]" multiple value="{{ old('image') }}">
+                                     @error('image')
+                                     <span class="text-danger">{{ $message }}</span>
+                                 @enderror
                             </div>
                         </div>
-
-
-
 
                         <div class="row">
                             <div class="col-md-12">
