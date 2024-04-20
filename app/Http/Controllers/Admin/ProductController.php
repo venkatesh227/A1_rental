@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Product;
+use App\Models\Product_images;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
     public function index()
     {
         $products = Product::all();
-        // dd($products[0]->category->name);
-        return view('admin.products.view', compact('products'));
+        $product_images = Product_images::all();
+        // dd($products[0]->Product_images);
+        return view('admin.products.view', compact('products', 'product_images'));
     }
 
 
@@ -52,13 +55,16 @@ class ProductController extends Controller
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
-            'name' => 'required|regex:/^[\pL\s]+$/u|min:3',
+            'name' => 'required',
             'slug' => 'required',
+            'description' => 'required',
             'small_description' => 'required',
             'price' => 'required',
             'qty' => 'required',
-            'status' => 'required',
-            'image' => 'required',
+            'title' => 'required',
+            'additional_info' => 'required',
+            'shipping_delivery' => 'required',
+            // 'image.*' => 'required|mimes:jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',
@@ -67,45 +73,200 @@ class ProductController extends Controller
             'slug.required' => 'Slug is Required',
             'price.required' => 'Price is Required',
             'qty.required' => 'Quantity is Required',
-            'status.required' => 'Status is Required',
-            'image.required' => 'Image is Required',
+            'description.required' => 'Large Description is Required',
             'small_description.required' => 'Small Description is Required',
-            'regex' => 'Allow Alphabets and Spaces Only'
+
+            'title.required' => 'Title is Required',
+            'additional_info.required' => 'Additional Info is Required',
+            'shipping_delivery.required' => 'Shipping Delivery is Required',
+            // 'image.*.required' => 'Image is required.',
+            // 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
 
 
-        $subcategory = new Product;
+        $Product = new Product;
+        $Product->subcategory_id = $request->input('subcategory_id');
+        $Product->name = $request->input('name');
+        $Product->slug = $request->input('slug');
 
-        $subcategory->category_id = $request->input('category_id');
-        $subcategory->subcategory_id = $request->input('subcategory_id');
-        $subcategory->name = $request->input('name');
+        $Product->title = $request->input('title');
 
-        $subcategory->slug = $request->input('slug');
-        $subcategory->small_description = $request->input('small_description');
-        $subcategory->description = $request->input('description');
-        $subcategory->price = $request->input('price');
-        $subcategory->qty = $request->input('qty');
-        $subcategory->status = $request->input('status');
+        $Product->additional_info = $request->input('additional_info');
+        $Product->shipping_delivery = $request->input('shipping_delivery');
 
+        $Product->small_description = $request->input('small_description');
+        $Product->description = $request->input('description');
+        $Product->price = $request->input('price');
+        $Product->qty = $request->input('qty');
+        $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
+        $Product->created_by = session('userId');
+        $Product->save();
+        $insertedId = $Product->id;
+
+
+        $images = array();
+        $counter = 1;
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $filename); // Move the uploaded file to the public/images directory
-            $subcategory->image = $filename; // Save the filename to the database
+            if ($files = $request->file('image')) {
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = 'image_' . $counter . '.' . $extension;
+
+                    // Check if the filename already exists, if so, increment the counter
+                    while (file_exists(public_path('images/products/' . $filename))) {
+                        $counter++;
+                        $filename = 'image_' . $counter . '.' . $extension;
+                    }
+
+                    $file->move(public_path('images/products'), $filename);
+                    $images[] = $filename; // Store the filename in the array
+                    $counter++; // Increment the counter for the next file
+                }
+            }
         }
 
+        /*Insert your data*/
+        $imageData = [];
+        foreach ($images as $image) {
+            $imageData[] = [
+                'product_id' => $insertedId,
+                'image' => $image,
+                'created_at' => now(),
+                'created_by' => session('userId'),
+            ];
+        }
 
-        $subcategory->created_by = session('userId');
-        $subcategory->save();
-        return redirect('add-product')->with('status', "Added Product Successfully");
+        Product_images::insert($imageData);
+
+        return redirect('products')->with('status', "Added Product Successfully");
     }
+
+
+
 
     public function edit_product($id)
     {
-        $Product = Product::find($id);
-        //  dd($Product->image);
-        $subcategory = Subcategory::all();
+        $Products = Product::find($id);
+        // dd($Products->subcategory->category_id);   
+        $subcategories = Subcategory::all();
+        // dd($subcategory[0]->category_id);  
         $categories = Category::all();
-        return view('admin.products.edit', compact('Product', 'subcategory', 'categories'));
+        return view('admin.products.edit', compact('Products', 'subcategories', 'categories'));
+    }
+
+
+    public function update_products(Request $request, $id)
+    {
+
+
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'name' => 'required',
+            'slug' => 'required',
+            'small_description' => 'required',
+            'price' => 'required',
+            'qty' => 'required',
+            'title' => 'required',
+            'additional_info' => 'required',
+            'shipping_delivery' => 'required',
+            // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
+        ], [
+            'category_id.required' => 'Category is Required',
+            'subcategory_id.required' => 'Subcategory Name is Required',
+            'name.required' => 'Product is Required',
+            'name.unique' => 'Product is Already Exists',
+            'slug.required' => 'Slug is Required',
+            'price.required' => 'Price is Required',
+            'qty.required' => 'Quantity is Required',
+
+            'image.required' => 'Image is Required',
+            'small_description.required' => 'Small Description is Required',
+            'title.required' => 'Title is Required',
+            'additional_info.required' => 'Additional Info is Required',
+            'shipping_delivery.required' => 'Shipping Delivery is Required',
+            // 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+        ]);
+
+
+        $Product = Product::find($id);
+        $Product->subcategory->category->category_id = $request->input('category_id');
+
+        $Product->subcategory_id = $request->input('subcategory_id');
+
+        $Product->name = $request->input('name');
+
+        $Product->slug = $request->input('slug');
+
+
+        $Product->title = $request->input('title');
+
+        $Product->additional_info = $request->input('additional_info');
+        $Product->shipping_delivery = $request->input('shipping_delivery');
+
+
+        $Product->small_description = $request->input('small_description');
+        $Product->description = $request->input('description');
+        $Product->price = $request->input('price');
+        $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
+
+        $Product->updated_by = session('userId');
+        $Product->updated_at = now();
+        $oldImages = $Product->images;
+        $Product->update();
+
+        $images = [];
+        $counter = 1;
+        if ($request->hasFile('image')) {
+            if (!empty($oldImages)) {
+                $oldImagePaths = explode(",", $oldImages);
+                foreach ($oldImagePaths as $oldImagePath) {
+                    $oldImagePath = public_path('images/products/' . $oldImagePath);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+            }
+
+            if ($files = $request->file('image')) {
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = 'image_' . $counter . '.' . $extension;
+
+                    // Check if the filename already exists, if so, increment the counter
+                    while (file_exists(public_path('images/products/' . $filename))) {
+                        $counter++;
+                        $filename = 'image_' . $counter . '.' . $extension;
+                    }
+
+                    $file->move(public_path('images/products'), $filename);
+                    $images[] = $filename; // Store the filename in the array
+                    $counter++; // Increment the counter for the next file
+                }
+            }
+        }
+
+        foreach ($images as $image) {
+            Product_images::where('product_id', $id)
+                ->update([
+                    'image' => $image,
+                    'updated_at' => now(),
+                    'updated_by' => session('userId'),
+                ]);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return redirect('products')->with('status', "Product Updated Successfully");
     }
 }

@@ -1,12 +1,4 @@
-<head>
-    <style>
-        b {
-            color: black;
-            background: 20px;
-            font-size: 20px;
-        }
-    </style>
-</head>
+
 @extends('admin.index')
 
 @section('content')
@@ -21,7 +13,7 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                            <li class="breadcrumb-item active" aria-current="page"><b>Add Category</b></li>
                         </ol>
                     </nav>
                 </div>
@@ -35,16 +27,26 @@
             <hr />
             <div class="card">
                 <div class="card-body p-4">
-                    <h5 class="mb-4">Add Category</h5>
                     <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-6">
                             <label for="input1" class="form-label">Category Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Category Name"
-                                value="">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                value="{{ old('name') }}">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <label for="image" class="col-form-label">Image</label>
+                            <input type="file" class="form-control" id="image" name="image"
+                                value="{{ old('image') }}">
+                            @error('image')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
 

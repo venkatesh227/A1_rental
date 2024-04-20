@@ -42,6 +42,7 @@ class MainController extends Controller
         } else {
             return back()->with('fail', 'Please enter valid details');
         }
+
     }
 
     public function dashboard()

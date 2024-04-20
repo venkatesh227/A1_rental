@@ -1,16 +1,3 @@
-<head>
-    <style>
-        /* b {
-            color: black;
-            background: 20px;
-
-            font-size: 25px;
-            /* Set the font size here */
-        }
-
-        */
-    </style>
-</head>
 @extends('admin.index')
 
 @section('content')
@@ -43,9 +30,12 @@
                                     <th>Category</th>
                                     <th>SubCategory</th>
                                     <th>Product Name</th>
+                                    <th>Title</th>
                                     <th>Slug</th>
                                     <th>Small Description</th>
-                                    <th>Description</th>
+                                    <th>Large Description</th>
+                                    <th>Additional Info</th>
+                                    <th>Shipping & Delivery</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>status</th>
@@ -59,26 +49,34 @@
                                 <?php $i = 1; ?>
 
                                 @foreach ($products as $item)
+                                    @php
+                                        $product_id = $item->id;
+                                        $option_name = \App\Models\Product_images::Where(
+                                            'product_id',
+                                            $product_id,
+                                        )->first();
+                                    @endphp
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $item->subcategory->category->name }}</td>
                                         <td>{{ $item->subcategory->name }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->title }}</td>
                                         <td>{{ $item->slug }}</td>
                                         <td>{{ $item->small_description }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->additional_info }}</td>
+                                        <td>{{ $item->shipping_delivery }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->qty }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
-                                            @if ($item->image)
-                                                <img src="{{ asset('images/' . $item->image) }}" alt="Product Image"
-                                                    width="100" height="100">
-                                            @else
-                                                No Image Available
+                                            @if (!empty($option_name->image))
+                                                <img src="{{ asset('images/products/' . $option_name->image) }}"
+                                                    alt="Product Image" width="100" height="100">
                                             @endif
-                                        </td>
 
+                                        </td>
                                         <td>{{ date('d-m-y', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('edit-product/' . $item->id) }}"

@@ -13,8 +13,11 @@ class Product extends Model
         'subcategory_id',
         'name',
         'slug',
+        'title',
         'small_description',
         'description',
+        'additional_info',
+        'shipping_delivery',
         'price',
         'qty',
         'status',
@@ -27,4 +30,11 @@ class Product extends Model
     {
         return $this->belongsTo(SubCategory::class, 'subcategory_id', 'id');
     }
+
+
+    // public function Product_images()
+    // {
+    //     return $this->belongsTo(Product_images::class, 'product_id', 'id');
+    // }
+    
 }

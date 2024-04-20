@@ -23,7 +23,7 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page"><b> Add Category</b></li>
+                            <li class="breadcrumb-item active" aria-current="page"><b> Add SubCategory</b></li>
                         </ol>
                     </nav>
                 </div>
@@ -35,13 +35,14 @@
 
 
             <div class="card">
+                <div class="col-md-6">
                 <div class="card-body">
                     <form action="{{ url('insert-subcategory') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row align-items-center">
-                            <label class="col-md-1 col-form-label">Category</label>
+                            <label class="col-md-12 col-form-label">Category</label>
 
-                            <div class="col-md-2">
+                            <div class="col-md-12">
                                 <select class="form-select" id="category_id" name="category_id">
                                     <option value=""><b>Select a Category</b></option>
                                     @foreach ($categories as $category)
@@ -54,14 +55,24 @@
                             </div>
 
 
-                            <label class="col-md-1">Subcategory</label>
-                            <div class="col-md-2 mt-2">
+                            <label class="col-md-12 mt-2">Subcategory</label>
+                            <div class="col-md-12 mt-2">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
+
+                                <div class="col-md-12">
+                                    <label for="image" class="col-form-label">Image</label>
+                                    <input type="file" class="form-control" id="image" name="image"
+                                        value="{{ old('image') }}">
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            
 
 
                             <div class="col-md-2">
@@ -70,6 +81,7 @@
 
                         </div>
                 </div>
+            </div>
                 </form>
             </div>
 
