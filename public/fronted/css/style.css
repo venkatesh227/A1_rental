@@ -3041,9 +3041,12 @@ ul {
 .single-product-item .single-product-image {
   position: relative;
   overflow: hidden;
+  max-height:300px;
+  min-height: 300px;
 }
 .single-product-item .single-product-image img {
   width: 100%;
+  height:auto;
 }
 .single-product-item .single-product-image .item-hide {
   width: 100%;
