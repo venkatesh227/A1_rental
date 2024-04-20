@@ -20,15 +20,31 @@ class CategoryController extends Controller
     public  function insert_category(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:categories|regex:/^[A-Za-z\s]+$/',
+            'image' => 'required|mimes:jpeg,png,gif',
         ], [
-            'name.required' => 'Category name is required.',
-            'name.unique' => 'Category name already exists',
+            'name.required' => 'Category Name is Required.',
+            'name.unique' => 'Category Name Already Exists',
+            'name.regex' => 'Spaces and Letters should be Allowed.',
+            'image.required' => 'Image is Required',
+            'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+
         ]);
+
 
 
         $category = new Category;
         $category->name = $request->input('name');
+        $category->image = $request->input('image');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/categories'), $filename); // Move the uploaded file to the public/images directory
+            $category->image = $filename; // Save the filename to the database
+        }
+
+
         $category->created_by = session('userId');
         $category->save();
         return redirect('categories')->with('status', "Category Added Successfully");
@@ -38,10 +54,46 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('admin.category.edit', compact('category'));
     }
+
     public function upadate_category(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|unique:categories,name,' . $id,
+            'image' => 'nullable|mimes:jpeg,png,gif', 
+        ], [
+            'name.required' => 'Category Name is Required',
+            'name.unique' => 'Category Name Already Exists',
+            'image.required' => 'Image is Required',
+            'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+        ]);
+
+
         $category = Category::find($id);
         $category->name = $request->input('name');
+
+
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|mimes:jpeg,png,gif',
+            ], [
+                'image.required' => 'Image is Required',
+                'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+            ]);
+        
+            // Delete old image if it exists
+            if ($category->image && file_exists(public_path('images/categories/' . $category->image))) {
+                unlink(public_path('images/categories/' . $category->image));
+            }
+        
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            
+            // Make sure the 'subcategories' folder exists inside the 'images' folder
+            $image->move(public_path('images/categories/'), $filename);
+            $category->image = $filename;
+        }
+
+
         $category->updated_by = session('userId');
         $category->updated_at = now();
         $category->update();

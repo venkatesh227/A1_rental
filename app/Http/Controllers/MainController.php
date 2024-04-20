@@ -36,10 +36,12 @@ class MainController extends Controller
 
         if ($userInfo) {
             $request->session()->put('userId', $userInfo->id);
-            return view('admin.index');
+            
+            return redirect('categories');
         } else {
             return back()->with('fail', 'Please enter valid details');
         }
+
     }
 
     public function dashboard()

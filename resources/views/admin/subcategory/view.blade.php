@@ -6,7 +6,9 @@
 
             font-size: 25px;
             /* Set the font size here */
-        } */
+        }
+
+        */
     </style>
 </head>
 @extends('admin.index')
@@ -33,24 +35,31 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="categorytable" class="table table-striped table-bordered">
+                        <table id="subcategorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Sl. No</th>
                                     <th>Category</th>
                                     <th>SubCategory Name</th>
+                                    <th>Image</th>
                                     <th>Date</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
-                      
+                                
                                 @foreach ($subcategories as $item)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $item->category->name }}</td> 
+                                        <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>
+                                            @if ($item->image)
+                                                <img src="{{ asset('images/subcategories/' . $item->image) }}" alt="Product Image"
+                                                    width="100" height="100">
+                                            @endif
+                                        </td>
                                         <td>{{ date('d-m-y h:i:s A', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('edit-subcategory/' . $item->id) }}"
@@ -58,7 +67,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            
+
                             </tbody>
 
                         </table>
@@ -68,3 +77,13 @@
         </div>
     </div>
 @endsection
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#subcategorytable').DataTable();
+    });
+</script>
