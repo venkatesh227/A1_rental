@@ -27,7 +27,16 @@ Route::post('login_check', [MainController::class, 'login_check']);
 
 Route::get('dashboard',  [MainController::class, 'dashboard']);
 Route::get('logout', [MainController::class, 'logout']);
+Route::get('user-login', [MainController::class, 'user_login'])->name('user-login');
+Route::post('user-login-check', [MainController::class, 'user_login_check']);
+Route::get('user-logout', [MainController::class, 'user_logout']);
+Route::get('view-subCategory/{id}', [FrontendController::class, 'view_subCategory']);
+Route::get('view-products/{sub_id}', [FrontendController::class, 'view_products']);
+Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'product_details']);
 
+Route::group(['middleware' => ['UserAuthCheck']], function () {
+    Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
+});
 
 
 Route::group(['middleware' => ['AuthCheck']], function () {
