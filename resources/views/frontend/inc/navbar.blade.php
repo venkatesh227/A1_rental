@@ -14,8 +14,7 @@
             <div class="nav-right-part nav-right-part-mobile">
                 <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
                 <a class="user-btn" href="wishlist.html"><i class="lnr lnr-user"></i></a>
-                <a class="cart-btn" href="cart.html"><span class="cart-count">2</span><i
-                        class="lnr lnr-cart"></i></a>
+                <a class="cart-btn" href="cart.html"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
             </div>
             <div class="collapse navbar-collapse" id="st_main_menu">
                 <ul class="navbar-nav menu-open">
@@ -25,15 +24,10 @@
                     <li class="menu-item-has-children">
                         <a href="#">Products</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Tables</a></li>
-                            <li><a href="#">Chairs</a></li>
-                            <li><a href="#">Liners</a></li>
-                            <li><a href="#">Tents</a></li>
-                            <li><a href="#">Flooring</a></li>
-                            <li><a href="#">Carpet</a></li>
-                            <li><a href="#">Centerpiece</a></li>
-                            <li><a href="#">Lighting</a></li>
-                            <li><a href="#">Others</a></li>
+                            @foreach ($category as $item)
+                                <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a></li>
+                            @endforeach
+
                         </ul>
                     </li>
 
@@ -43,9 +37,9 @@
             </div>
             <div class="nav-right-part nav-right-part-desktop">
                 <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
-                <a class="user-btn" href="{{ route('login') }}"><i class="lnr lnr-user"></i></a>
 
-             
+                <a class="user-btn" href="{{url('user-login')}}"><i class="lnr lnr-user"></i></a>
+
                 <a class="cart-btn" href="#"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
             </div>
         </div>
