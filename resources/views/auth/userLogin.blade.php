@@ -98,7 +98,7 @@
                                 <li><a href="#">Chairs</a></li>
                                 <li><a href="#">Liners</a></li>
                                 <li><a href="#">Tents</a></li>
-                                <li><a href="#">Flooring</a></li>
+                                <li><a href="#">Floorin</a></li>
                                 <li><a href="#">Carpet</a></li>
                                 <li><a href="#">Centerpiece</a></li>
                                 <li><a href="#">Lighting</a></li>
