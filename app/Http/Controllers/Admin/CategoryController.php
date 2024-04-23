@@ -44,8 +44,7 @@ class CategoryController extends Controller
             $category->image = $filename; // Save the filename to the database
         }
 
-
-        $category->created_by = session('userId');
+        $category->created_by = session('adminId');
         $category->save();
         return redirect('categories')->with('status', "Category Added Successfully");
     }
@@ -59,7 +58,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,' . $id,
-            'image' => 'nullable|mimes:jpeg,png,gif', 
+            'image' => 'nullable|mimes:jpeg,png,gif',
         ], [
             'name.required' => 'Category Name is Required',
             'name.unique' => 'Category Name Already Exists',
@@ -79,15 +78,15 @@ class CategoryController extends Controller
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
             ]);
-        
+
             // Delete old image if it exists
             if ($category->image && file_exists(public_path('images/categories/' . $category->image))) {
                 unlink(public_path('images/categories/' . $category->image));
             }
-        
+
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            
+
             // Make sure the 'subcategories' folder exists inside the 'images' folder
             $image->move(public_path('images/categories/'), $filename);
             $category->image = $filename;
@@ -98,5 +97,17 @@ class CategoryController extends Controller
         $category->updated_at = now();
         $category->update();
         return redirect('categories')->with('status', "Category Updated Successfully");
+    }
+
+    public function category_status($category_id, $currentStatus)
+    {
+        $category_status = Category::find($category_id);
+        $category_status->status = $currentStatus;
+
+        $category_status->update();
+
+        $updateCategory = Category::find($category_id);
+
+        return response()->json(['status' => 'success', 'user' => $updateCategory]);
     }
 }

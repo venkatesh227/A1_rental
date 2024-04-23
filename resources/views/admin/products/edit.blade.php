@@ -175,14 +175,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="slug" class="col-form-label">Quantity</label>
-                                <input type="number" class="form-control" id="qty" name="qty"
-                                    value="{{ $Products->qty }}">
-                                @error('qty')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                         
 
                             <div class="col-md-6">
                                 <div class="form-check">

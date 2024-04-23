@@ -37,17 +37,23 @@ Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'pr
 Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
 });
+Route::get('register',  [MainController::class, 'register']);
+Route::post('add_register', [MainController::class, 'add_register']);
+// 
 
 
-Route::group(['middleware' => ['AuthCheck']], function () {
+ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('add-category', [CategoryController::class, 'add_category']);
     Route::post('insert-category', [CategoryController::class, 'insert_category']);
     Route::get('edit-category/{id}', [CategoryController::class, 'edit_category']);
     Route::post('upadate-category/{id}', [CategoryController::class, 'upadate_category']);
-    Route::get('subcategories', [SubcategoryController::class, 'index']);
-    // 
 
+    Route::post('category-status/{userId}/{currentStatus}', [CategoryController::class, 'category_status'])
+    ->name('category-status');
+
+
+    Route::get('subcategories', [SubcategoryController::class, 'index']);
     Route::post('insert-subcategory', [SubcategoryController::class, 'insert_subcategory']);
     // 
     Route::get('add-subcategory', [SubcategoryController::class, 'add_subcategory']);
@@ -55,7 +61,10 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('edit-subcategory/{id}', [SubcategoryController::class, 'edit_subcategory']);
     Route::post('upadate-subcategory/{id}', [SubcategoryController::class, 'upadate_subcategory']);
 
+    Route::post('subcategory-status/{userId}/{currentStatus}', [subcategoryController::class, 'subcategory_status'])
+    ->name('subcategory-status');
 
+    // 
     // Products
     Route::get('products', [ProductController::class, 'index']);
     Route::get('add-product', [ProductController::class, 'add_product']);
@@ -74,6 +83,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('edit-client/{id}', [ClientsController::class, 'edit_client']);
     Route::post('update-status/{userId}/{currentStatus}', [ClientsController::class, 'update_status'])
     ->name('update-status');
+
+    // 
 
     // 
 });

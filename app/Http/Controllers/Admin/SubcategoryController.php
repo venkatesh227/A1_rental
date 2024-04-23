@@ -44,7 +44,7 @@ class SubcategoryController extends Controller
 
         $subcategory->category_id = $request->input('category_id');
         $subcategory->name = $request->input('name');
-        $subcategory->created_by = session('userId');
+        $subcategory->created_by = session('adminId');
 
 
         if ($request->hasFile('image')) {
@@ -126,10 +126,16 @@ class SubcategoryController extends Controller
 
     
 
-    // public function add()
-    // {
-    //     return view('admin.products.add');
-    // }
+    public function subcategory_status($subcategory_id, $currentStatus)
+    {
+        $subcategory_status = Subcategory::find($subcategory_id);
+        $subcategory_status->status = $currentStatus;
+        $subcategory_status->update();
+
+        $updatesubCategory = Subcategory::find($subcategory_id);
+
+        return response()->json(['status' => 'success', 'user' => $updatesubCategory]);
+    }
 
 
 }

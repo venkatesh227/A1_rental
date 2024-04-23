@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Product_images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,9 +25,11 @@ class FrontendController extends Controller
     public function view_subCategory($id)
     {
         $category  = Category::all();
+        $category_name  = Category::find($id);
         if (Subcategory::where('category_id', $id)->exists()) {
-            $Subcategory = Subcategory::where('category_id', $id)->get();
-            return view('frontend.subCategoryView', compact('Subcategory', 'category'));
+            // $Subcategory = Subcategory::where('category_id', $id)->get();
+            $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
+            return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
         } else {
 
             return redirect('/')->with('error', 'No subcategories found for this category.');
@@ -37,18 +40,28 @@ class FrontendController extends Controller
         $category  = Category::all();
         if (Product::where('subcategory_id', $sub_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-            return view('frontend.productsView', compact('category', 'Product'));
-        } else {
 
+            foreach ($Product as $item) {
+
+                $productImage = Product_images::where('product_id', $item->id)->first();
+            }
+            return view('frontend.productsView', compact('category', 'Product', 'productImage'));
+        } else {
             return redirect('/')->with('error', 'No products found for this category.');
         }
     }
+    
     public function product_details($sub_id, $prod_id)
     {
         $category  = Category::all();
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
-            return view('frontend.productDetails', compact('category', 'Product'));
+
+            if ($Product) {
+                $productImage = Product_images::where('product_id', $Product->id)->first();
+                $productImages = Product_images::where('product_id', $Product->id)->get();
+            }
+            return view('frontend.productDetails', compact('category', 'Product', 'productImage', 'productImages'));
         } else {
 
             return redirect('/')->with('error', 'No products found for this category.');
