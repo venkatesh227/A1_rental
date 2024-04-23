@@ -44,11 +44,12 @@
                                     <th>Image</th>
                                     <th>Date</th>
                                     <th scope="col" class="not-export-column">Action</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
-                                
+
                                 @foreach ($subcategories as $item)
                                     <tr>
                                         <td>{{ $i++ }}</td>
@@ -56,14 +57,22 @@
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             @if ($item->image)
-                                                <img src="{{ asset('images/subcategories/' . $item->image) }}" alt="Product Image"
-                                                    width="100" height="100">
+                                                <img src="{{ asset('images/subcategories/' . $item->image) }}"
+                                                    alt="Product Image" width="100" height="100">
                                             @endif
                                         </td>
                                         <td>{{ date('d-m-y h:i:s A', strtotime($item->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('edit-subcategory/' . $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
+                                        </td>
+
+                                        <td>
+                                            <input class="status-toggle" type="checkbox" data-user-id="{{ $item->id }}"
+                                                data-status="{{ $item->status }}"
+                                                @if ($item->status == 1) checked @endif data-onstyle="primary"
+                                                data-offstyle="danger" data-toggle="toggle" data-on="Active"
+                                                data-off="Inactive">
                                         </td>
                                     </tr>
                                 @endforeach
@@ -85,5 +94,43 @@
 <script>
     $(document).ready(function() {
         $('#subcategorytable').DataTable();
+    });
+
+
+    $(document).ready(function() {
+        $('.status-toggle').click(function() {
+            var userId = $(this).data('user-id');
+
+            var currentStatus = $(this).prop('checked') === true ? 1 : 0;
+        //  console.log(currentStatus);
+         
+            // Passing 2 parameters in ajax url in Laravel route
+            $.ajax({
+                url: "{{ route('subcategory-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"
+                    .replace(':userId', userId)
+                    .replace(':currentStatus', currentStatus),
+
+
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    user_id: userId,
+                    status: currentStatus
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        location.reload();
+                    } else {
+                        alert('Failed to update status.');
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr.responseText);
+                    alert('Error occurred while updating status.');
+                }
+            });
+        });
     });
 </script>

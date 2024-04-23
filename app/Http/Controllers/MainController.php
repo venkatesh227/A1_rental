@@ -28,6 +28,8 @@ class MainController extends Controller
     }
     public function login_check(Request $request)
     {
+        $category = Category::all();
+        
         $request->validate([
             'name' => 'required',
             'password' => 'required|max:12'
@@ -38,11 +40,13 @@ class MainController extends Controller
 
         if ($userInfo) {
             $request->session()->put('adminId', $userInfo->id);
-            return view('admin.index');
+            
+            // return view('admin.index');
+         
+            return view('admin.category.view', compact('category'));
         } else {
             return back()->with('fail', 'Please enter valid details');
         }
-
     }
 
     public function dashboard()
@@ -61,6 +65,7 @@ class MainController extends Controller
     {
         return view('auth.userLogin');
     }
+
     public function user_login_check(Request $request)
     {
         $request->validate([
@@ -85,5 +90,53 @@ class MainController extends Controller
             session()->pull('userId');
             return redirect('/');
         }
+    }
+
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+
+    public function add_register(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|regex:/^[A-Za-z\s]+$/',
+            'last_name' => 'required|regex:/^[A-Za-z\s]+$/',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+        ], [
+            'first_name.required' => 'First Name is Required',
+            'first_name.regex' => 'Only spaces and letters are allowed for First Name',
+            'last_name.required' => 'Last Name is Required',
+            'last_name.regex' => 'Only spaces and letters are allowed for Last Name',
+            'phone.required' => 'Phone Number is Required',
+            'email.required' => 'Email Id is Required',
+            'email.email' => 'Enter a Valid Email Id',
+            'password.required' => 'Password is Required',
+            'password.min' => 'Password should be at least :min characters long',
+            'gender.required' => 'Gender is Required',
+            'address.required' => 'Address is Required',
+        ]);
+
+        $register = new userRegister;
+
+        $register->first_name = $request->input('first_name');
+        $register->last_name = $request->input('last_name');
+        $register->phone = $request->input('phone');
+        $register->email = $request->input('email');
+
+        $passwordHash = md5($request->input('password'));
+        $register->password = $passwordHash;
+        $register->gender = $request->input('gender');
+        $register->address = $request->input('address');
+        
+        $register->created_by = session('adminId');
+        $register->save();
+        return redirect('user-login')->with('status', "Login Successfully");
     }
 }

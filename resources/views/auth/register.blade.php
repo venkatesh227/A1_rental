@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>A1 Rental</title>
-    <link rel=icon href="{{ asset('fronted/img/favicon.png') }}" sizes="20x20" type="image/png">
+    <link rel=icon href="assets/img/favicon.png" sizes="20x20" type="image/png">
+
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
     <style>
+        <style>
+
         /* Custom styles for the vertical menu */
         .vertical-menu {
             width: 200px;
@@ -78,7 +81,7 @@
                     </button>
                 </div>
                 <div class="logo">
-                    <a href="home.html"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
+                    <a href="home.html"><img src="assets/img/logo1.png" alt="img"></a>
                 </div>
                 <div class="nav-right-part nav-right-part-mobile">
                     <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
@@ -98,7 +101,7 @@
                                 <li><a href="#">Chairs</a></li>
                                 <li><a href="#">Liners</a></li>
                                 <li><a href="#">Tents</a></li>
-                                <li><a href="#">Floorin</a></li>
+                                <li><a href="#">Flooring</a></li>
                                 <li><a href="#">Carpet</a></li>
                                 <li><a href="#">Centerpiece</a></li>
                                 <li><a href="#">Lighting</a></li>
@@ -127,10 +130,10 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
                         <div class="section-title text-center mb-0">
-                            <h1 class="page-title">Login or Register User</h1>
+                            <h1 class="page-title">Register</h1>
                             <ul class="page-list">
                                 <li><a href="#">HOME</a></li>
-                                <li>Login or Register</li>
+                                <li>Register</li>
                             </ul>
                         </div>
                     </div>
@@ -144,53 +147,91 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="checkout-inner pd-bottom-50">
-                        <h3 class="mb-3">Login</h3>
-                        <form action="{{ url('user-login-check') }}" method="POST">
-                            @csrf
-                            <div class="form-body">
-                                @if (Session::get('fail'))
-                                    <div class="alert alert-danger">
-                                        {{ Session::get('fail') }}
-                                    </div>
-                                @endif
-                                <div class="row">
-
-                                    <div class="col-lg-12">
-                                        <div class="single-input-inner style-bg">
-                                            <input type="text" placeholder="User Name" name="phone">
-                                        </div>
-                                        <span class="text-danger mt-1">
-                                            @error('phone')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single-input-inner style-bg">
-                                            <input type="text" placeholder="Password" name="password">
-                                        </div>
-                                        <span class="text-danger mt-1 ">
-                                            @error('password')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <button type="submit" class="btn btn-title">
-                                            Login
-                                        </button>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <a class="text-right pull-right" href="#">Forgot Password?</a>
-                                    </div>
-                                    <div class="col-lg-12 mt-3">
-                                        <a href="{{ url('register') }}">Dont have an account? Register here</a>
+                    <form action="{{ url('add_register') }}" method="POST">
+                        @csrf
+                        <div class="checkout-inner pd-bottom-50">
+                            <h3 class="mb-3">Register Here</h3>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <input type="text" placeholder="Frist Name" name="first_name" value="{{ old('first_name') }}">
+                                        @error('first_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                        </form>
-                    </div>
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <input type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}">
+                                        @error('last_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <input type="text" placeholder="Phone Number" name="phone" value="{{ old('phone') }}">
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <input type="text" placeholder="Email id" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <input type="text" placeholder="Password" name="password" value="{{ old('password') }}">
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="">
+                                        <label>
+                                            <input type="radio" name="gender" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}> Male
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="gender" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}> Female
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="gender" value="other" {{ old('gender') == 'other' ? 'checked' : '' }}> Other
+                                        </label>
+                                        @error('gender')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-lg-12">
+                                    <div class="single-input-inner style-bg">
+                                        <textarea placeholder="Address" name="address">{{ old('address') }}</textarea>
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <input type="submit" value="Register" class="btn btn-title">
+                                </div>
+
+                                <div class="col-lg-12 mt-3">
+                                    <a href="login.html">Already have an account? Login here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

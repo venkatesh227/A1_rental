@@ -1,3 +1,4 @@
+
 @extends('layouts.front')
 @section('content')
     <!-- Banner Starts -->
@@ -9,7 +10,7 @@
                         <div class="section-title text-center mb-0">
                             <h1 class="page-title">Products</h1>
                             <ul class="page-list">
-                                <li><a href="#">HOME</a></li>
+                                <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>PRODUCTS</li>
                                 <li>TABLES</li>
                             </ul>
@@ -43,7 +44,7 @@
 
                                     <div class="single-product-item">
                                         <div class="single-product-image">
-                                            <img class="image-item-01" src="{{ asset('images/products/' . $prod->image) }}"
+                                            <img class="image-item-01" src="{{ asset('images/products/' . $productImage->image) }}"
                                                 alt="img">
                                         </div>
 

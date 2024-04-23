@@ -41,7 +41,11 @@
                                 <div class="product-thumbnail-wrapper">
                                     <div class="single-thumbnail-slider-2">
                                         <div class="slider-item">
-                                            <img src="{{ asset('images/products/' . $Product->image) }}" alt="item">
+                                            @if (!empty($productImage))
+                                            <img src="{{ asset('images/products/' . $productImage->image) }}"
+                                            alt="item">
+                                            @endif
+                                           
                                         </div>
 
                                     </div>
@@ -75,8 +79,8 @@
                                             <input type="hidden" name="" value="{{ $Product->id }}"
                                                 class="prod_id">
                                             <input type="button" value="-" class="minus decrement-btn">
-                                            <input type="number"  step="1" min="1"
-                                                max="10000" name="quantity" class="input-qty" value="1">
+                                            <input type="number" step="1" min="1" max="10000"
+                                                name="quantity" class="input-qty" value="1">
                                             <input type="button" value="+" class="plus increment-btn">
                                         </div>
                                         <button type="submit" class="btn btn-title addToCartBtn">Add to wishlist <i
@@ -133,9 +137,10 @@
                                         </div>
                                         <div class="tab-pane fade describe-tab" id="profile" role="tabpanel"
                                             aria-labelledby="profile-tab">
-                                            <p>Special specifications in any here</p>
+                                            <p> <p>{{ $Product->additional_info }}</p></p>
                                         </div>
-                                        <div class="tab-pane review-tab fade" id="review" role="tabpanel"
+
+                                        {{-- <div class="tab-pane review-tab fade" id="review" role="tabpanel"
                                             aria-labelledby="review-tab">
                                             <div class="row">
                                                 <div class="col-lg-4">
@@ -147,18 +152,36 @@
                                                 <div class="col-lg-4">
                                                     <img src="assets/img/category/cat-1.png" class="img-fluid" />
                                                 </div>
+                                                @php
+                                                    echo '<pre>';
+                                                    print_r($productImage);
+                                                
+                                                @endphp
+                                            </div>
+                                        </div> --}}
+
+                                        {{-- foreach ($productImage as $image) {
+                                            echo "<pre>";
+                                            print_r($image);
+                                            exit;
+                                        } --}}
+                                        <div class="tab-pane review-tab fade" id="review" role="tabpanel"
+                                            aria-labelledby="review-tab">
+                                            <div class="row">
+                                                @foreach ($productImages as $image)
+                                                    @php
+                                                    @endphp
+                                                    <div class="col-lg-4">
+                                                        <img src="{{ asset('images/products/' . $image->image) }}"
+                                                            class="img-fluid"/>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                         <div class="tab-pane fade delivery-tab" id="delivery" role="tabpanel"
                                             aria-labelledby="delivery-tab">
                                             <div class="row">
-
-                                                <p>This product is for delivery only and cannot be picked up by the
-                                                    customer.
-
-                                                </p>
-
-
+                                                <p>{{ $Product->shipping_delivery }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -166,14 +189,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
 
                 </div>
 

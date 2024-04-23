@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class userRegister extends Model
 {
-    use HasFactory;
+    protected $table = 'user_register';
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'password',
+        'gender',
+        'address',
+        'created_by',
+        'updated_by'
+    ];
 }

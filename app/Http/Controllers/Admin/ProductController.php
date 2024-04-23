@@ -99,7 +99,7 @@ class ProductController extends Controller
         $Product->price = $request->input('price');
         $Product->qty = $request->input('qty');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
-        $Product->created_by = session('userId');
+        $Product->created_by = session('adminId');
         $Product->save();
         $insertedId = $Product->id;
 
@@ -108,10 +108,11 @@ class ProductController extends Controller
         $counter = 1;
         if ($request->hasFile('image')) {
             if ($files = $request->file('image')) {
+                
                 foreach ($files as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'image_' . $counter . '.' . $extension;
-
+                    
                     // Check if the filename already exists, if so, increment the counter
                     while (file_exists(public_path('images/products/' . $filename))) {
                         $counter++;
@@ -132,10 +133,11 @@ class ProductController extends Controller
                 'product_id' => $insertedId,
                 'image' => $image,
                 'created_at' => now(),
-                'created_by' => session('userId'),
+                'created_by' => session('adminId'),
             ];
         }
-
+        
+    
         Product_images::insert($imageData);
 
         return redirect('products')->with('status', "Added Product Successfully");
@@ -229,6 +231,7 @@ class ProductController extends Controller
             }
 
             if ($files = $request->file('image')) {
+
                 foreach ($files as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'image_' . $counter . '.' . $extension;
@@ -251,21 +254,9 @@ class ProductController extends Controller
                 ->update([
                     'image' => $image,
                     'updated_at' => now(),
-                    'updated_by' => session('userId'),
+                    'updated_by' => session('adminId'),
                 ]);
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         return redirect('products')->with('status', "Product Updated Successfully");
     }
