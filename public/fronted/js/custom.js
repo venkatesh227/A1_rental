@@ -66,41 +66,45 @@ $(document).ready(function() {
             },
         
             success: function (response) {
-                
-                swal("",response.status,"success");
                 window.location.reload();
+                swal("",response.status,"success");
+               
                 
             }
         });
-        $('.changeqty').click(function (e) { 
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-    
-            var prod_id = $(this).closest('.product_data').find('.prod_id').val();
-            var product_qty = $(this).closest('.product_data').find('.input-qty ').val();
-            alert(product_qty);
-    
-            $.ajax({
-                method: "POST",
-                url: "update-cart",
-                data: {
-                    'prod_id': prod_id,
-                    'product_qty' : product_qty
-         
-                },
-                dataType: "dataType",
-                success: function (response) {
-                    window.location.reload();
-    
-                    
-                }
-            });
-            
-        });
-        
     });
+
+    $('.changeqty').click(function (e) { 
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    
+        var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+        var product_qty = $(this).closest('.product_data').find('.input-qty').val();
+    
+        $.ajax({
+            method: "POST",
+            url: "update-cart", 
+            data: {
+                'prod_id': prod_id,
+                'product_qty': product_qty
+            },
+            dataType: "json",
+            success: function (response) {
+                swal(response.status, function(){
+                    window.location.reload(true); 
+                });
+            },
+            error: function(xhr, status, error) {
+                swal("Error occurred: " + error); 
+            }
+        });
+    });
+    
+    
+        
+    
 });

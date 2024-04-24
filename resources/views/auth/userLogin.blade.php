@@ -1,4 +1,3 @@
-
 @extends('layouts.front')
 @section('content')
     <!-- Banner Starts -->
@@ -10,7 +9,7 @@
                         <div class="section-title text-center mb-0">
                             <h1 class="page-title">Login or Register User</h1>
                             <ul class="page-list">
-                                <li><a href="#">HOME</a></li>
+                                <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>Login or Register</li>
                             </ul>
                         </div>
@@ -77,7 +76,4 @@
         </div>
     </section>
     <!-- about area start -->
-    @endsection
-
-
-
+@endsection

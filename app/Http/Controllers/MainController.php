@@ -133,6 +133,6 @@ class MainController extends Controller
         $register->gender = $request->input('gender');
         $register->address = $request->input('address');
         $register->save();
-        return redirect('user-login')->with('status', "Login Successfully");
+        return redirect('user-login')->with('status', "Registered Successfully");
     }
 }

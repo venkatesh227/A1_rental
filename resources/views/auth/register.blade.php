@@ -1,4 +1,3 @@
-
 @extends('layouts.front')
 @section('content')
     <!-- Banner Starts -->
@@ -10,7 +9,7 @@
                         <div class="section-title text-center mb-0">
                             <h1 class="page-title">Register</h1>
                             <ul class="page-list">
-                                <li><a href="#">HOME</a></li>
+                                <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>Register</li>
                             </ul>
                         </div>
@@ -32,7 +31,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Frist Name" name="first_name" value="{{ old('first_name') }}">
+                                        <input type="text" placeholder="Frist Name" name="first_name"
+                                            value="{{ old('first_name') }}">
                                         @error('first_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -40,7 +40,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}">
+                                        <input type="text" placeholder="Last Name" name="last_name"
+                                            value="{{ old('last_name') }}">
                                         @error('last_name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -49,7 +50,8 @@
 
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Phone Number" name="phone" value="{{ old('phone') }}">
+                                        <input type="text" placeholder="Phone Number" name="phone"
+                                            value="{{ old('phone') }}">
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -57,7 +59,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Email id" name="email" value="{{ old('email') }}">
+                                        <input type="text" placeholder="Email id" name="email"
+                                            value="{{ old('email') }}">
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -65,7 +68,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Password" name="password" value="{{ old('password') }}">
+                                        <input type="text" placeholder="Password" name="password"
+                                            value="{{ old('password') }}">
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -75,20 +79,23 @@
                                 <div class="col-lg-12">
                                     <div class="">
                                         <label>
-                                            <input type="radio" name="gender" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}> Male
+                                            <input type="radio" name="gender" value="male"
+                                                {{ old('gender') == 'male' ? 'checked' : '' }}> Male
                                         </label>
                                         <label>
-                                            <input type="radio" name="gender" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}> Female
+                                            <input type="radio" name="gender" value="female"
+                                                {{ old('gender') == 'female' ? 'checked' : '' }}> Female
                                         </label>
                                         <label>
-                                            <input type="radio" name="gender" value="other" {{ old('gender') == 'other' ? 'checked' : '' }}> Other
+                                            <input type="radio" name="gender" value="other"
+                                                {{ old('gender') == 'other' ? 'checked' : '' }}> Other
                                         </label>
                                         @error('gender')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
@@ -105,7 +112,7 @@
                                 </div>
 
                                 <div class="col-lg-12 mt-3">
-                                    <a href="login.html">Already have an account? Login here</a>
+                                    <a href="{{ url('user-login') }}">Already have an account? Login here</a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +122,4 @@
         </div>
     </section>
     <!-- about area start -->
-    @endsection
-
-
- 
+@endsection

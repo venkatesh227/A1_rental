@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
 
+
 </head>
 
 <body>
@@ -69,6 +70,7 @@
     <script src="{{ asset('fronted/js/main.js') }}"></script>
     <script src="{{ asset('fronted/js/custom.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     @if (session('status'))
         <script>
             swal("{{ session('status') }}");
