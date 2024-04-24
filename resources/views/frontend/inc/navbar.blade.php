@@ -46,7 +46,7 @@
 
                 <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
 
-                <a class="cart-btn" href="#"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
+                <a class="cart-btn" href="{{url('cart')}}"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
             </div>
         </div>
     </nav>

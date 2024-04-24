@@ -43,10 +43,10 @@
                                     <div class="single-thumbnail-slider-2">
                                         <div class="slider-item">
                                             @if (!empty($productImage))
-                                            <img src="{{ asset('images/products/' . $productImage->image) }}"
-                                            alt="item">
+                                                <img src="{{ asset('images/products/' . $productImage->image) }}"
+                                                    alt="item">
                                             @endif
-                                           
+
                                         </div>
 
                                     </div>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-7">
-                                <div class="product-item-details">
+                                <div class="product-item-details product_data">
                                     <h4 class="entry-title">{{ $Product->name }}</h4>
                                     <p>{{ $Product->small_description }}</p>
 
@@ -130,7 +130,9 @@
                                         </div>
                                         <div class="tab-pane fade describe-tab" id="profile" role="tabpanel"
                                             aria-labelledby="profile-tab">
-                                            <p> <p>{{ $Product->additional_info }}</p></p>
+                                            <p>
+                                            <p>{{ $Product->additional_info }}</p>
+                                            </p>
                                         </div>
 
                                        
@@ -142,7 +144,7 @@
                                                     @endphp
                                                     <div class="col-lg-4">
                                                         <img src="{{ asset('images/products/' . $image->image) }}"
-                                                            class="img-fluid"/>
+                                                            class="img-fluid" />
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -175,65 +177,4 @@
 
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.increment-btn').click(function(e) {
-                e.preventDefault();
-                var inc_value = $('.input-qty').val();
-                // var inc_value = $(this).closest('.product_data').find('.input-qty').val();
-
-
-                var value = parseInt(inc_value, 10);
-                value = isNaN(value) ? 0 : value;
-
-                value++;
-                $('.input-qty').val(value);
-                // $(this).closest('.product_data').find('.input-qty').val(value)
-
-            });
-            $('.decrement-btn').click(function(e) {
-                e.preventDefault();
-                var inc_value = $('.input-qty').val();
-                // var dec_value = $(this).closest('.product_data').find('.input-qty').val();
-                var value = parseInt(dec_value, 10);
-                value = isNaN(value) ? 0 : value;
-                if (value > 1) {
-                    value--;
-                    // $(this).closest('.product_data').find('.input-qty').val(value);
-                    var inc_value = $('.input-qty').val(value);
-
-                }
-
-            });
-            $('.addToCartBtn').click(function(e) {
-                e.preventDefault();
-                var product_qty = $('.input-qty').val();
-                var product_id = $('.prod_id').val();
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-
-
-                $.ajax({
-                    method: "POST",
-                    url: "/add-to-cart",
-                    data: {
-                        'product_id': product_id,
-                        'product_qty': product_qty,
-                    },
-
-                    success: function(response) {
-                        swal(response.status);
-                    }
-                });
-
-            });
-        });
-    </script>
 @endsection
