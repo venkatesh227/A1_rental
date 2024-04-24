@@ -165,16 +165,6 @@
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
 @endsection

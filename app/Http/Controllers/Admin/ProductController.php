@@ -9,6 +9,7 @@ use App\Models\Subcategory;
 use App\Models\Product;
 use App\Models\Product_images;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -64,6 +65,8 @@ class ProductController extends Controller
             'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
+            'selling_price' => 'required',
+
             // 'image.*' => 'required|mimes:jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is Required',
@@ -71,7 +74,8 @@ class ProductController extends Controller
             'name.required' => 'Product is Required',
             'name.unique' => 'Product is Already Exists',
             'slug.required' => 'Slug is Required',
-            'price.required' => 'Price is Required',
+            'price.required' => 'Original Price is Required',
+            'selling_price.required' => 'Selling Price is Required',
             'qty.required' => 'Quantity is Required',
             'description.required' => 'Large Description is Required',
             'small_description.required' => 'Small Description is Required',
@@ -97,6 +101,7 @@ class ProductController extends Controller
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
         $Product->price = $request->input('price');
+        $Product->selling_price = $request->input('selling_price');
         $Product->qty = $request->input('qty');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
         $Product->created_by = session('adminId');
@@ -108,11 +113,11 @@ class ProductController extends Controller
         $counter = 1;
         if ($request->hasFile('image')) {
             if ($files = $request->file('image')) {
-                
+
                 foreach ($files as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'image_' . $counter . '.' . $extension;
-                    
+
                     // Check if the filename already exists, if so, increment the counter
                     while (file_exists(public_path('images/products/' . $filename))) {
                         $counter++;
@@ -136,8 +141,8 @@ class ProductController extends Controller
                 'created_by' => session('adminId'),
             ];
         }
-        
-    
+
+
         Product_images::insert($imageData);
 
         return redirect('products')->with('status', "Added Product Successfully");
@@ -172,6 +177,8 @@ class ProductController extends Controller
             'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
+            'selling_price' => 'required',
+
             // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
         ], [
             'category_id.required' => 'Category is Required',
@@ -181,7 +188,7 @@ class ProductController extends Controller
             'slug.required' => 'Slug is Required',
             'price.required' => 'Price is Required',
             'qty.required' => 'Quantity is Required',
-
+            'selling_price.required' => 'Selling Price is Required',
             'image.required' => 'Image is Required',
             'small_description.required' => 'Small Description is Required',
             'title.required' => 'Title is Required',
@@ -200,7 +207,7 @@ class ProductController extends Controller
 
         $Product->slug = $request->input('slug');
 
-
+        $Product->selling_price = $request->input('selling_price');
         $Product->title = $request->input('title');
 
         $Product->additional_info = $request->input('additional_info');
@@ -214,21 +221,24 @@ class ProductController extends Controller
 
         $Product->updated_by = session('userId');
         $Product->updated_at = now();
-        $oldImages = $Product->images;
-        $Product->update();
 
+        $Product->update();
         $images = [];
         $counter = 1;
-        if ($request->hasFile('image')) {
-            if (!empty($oldImages)) {
-                $oldImagePaths = explode(",", $oldImages);
-                foreach ($oldImagePaths as $oldImagePath) {
-                    $oldImagePath = public_path('images/products/' . $oldImagePath);
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
+        $productImages = Product_images::find($id);
+
+        if ($productImages) {
+            $imagePaths = explode(",", $productImages->image);
+
+            foreach ($imagePaths as $imagePath) {
+                $fullImagePath = public_path('images/products/' . $imagePath);
+                if (File::exists($fullImagePath)) {
+                    File::delete($fullImagePath);
                 }
             }
+        }
+
+        if ($request->hasFile('image')) {
 
             if ($files = $request->file('image')) {
 
@@ -238,6 +248,7 @@ class ProductController extends Controller
 
                     // Check if the filename already exists, if so, increment the counter
                     while (file_exists(public_path('images/products/' . $filename))) {
+
                         $counter++;
                         $filename = 'image_' . $counter . '.' . $extension;
                     }
@@ -249,20 +260,25 @@ class ProductController extends Controller
             }
         }
 
-        foreach ($images as $image) {
-            Product_images::where('product_id', $id)
-                ->update([
+
+        foreach ($images as $key => $image) {
+
+            $productImage = Product_images::where('product_id', $id)->skip($key)->first();
+
+            if ($productImage) {
+                $productImage->update([
                     'image' => $image,
                     'updated_at' => now(),
                     'updated_by' => session('adminId'),
                 ]);
+            }
         }
 
         return redirect('products')->with('status', "Product Updated Successfully");
     }
 
 
-  
+
 
     public function product_status($product_id, $currentStatus)
     {
@@ -273,7 +289,4 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         return response()->json(['status' => 'success', 'user' => $product]);
     }
-
-
-
 }
