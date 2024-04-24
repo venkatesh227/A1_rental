@@ -39,7 +39,7 @@
 
                                     <div class="col-lg-12">
                                         <div class="single-input-inner style-bg">
-                                            <input type="text" placeholder="User Name" name="phone">
+                                            <input type="text" placeholder="Phone Number" name="phone">
                                         </div>
                                         <span class="text-danger mt-1">
                                             @error('phone')
