@@ -52,19 +52,13 @@
                                     <option value=""><b>Select a SubCategory</b></option>
 
                                     @foreach ($subcategories as $subcategory)
-                                        {{-- @php
-                                            echo '<pre>';
-                                            print_r($subcategory->category->id);
-                                            exit();
-                                        @endphp --}}
-
-                                        @if ($subcategory->category_id == $subcategory->category->id)
+                                    @if ($subcategory->category_id == $Products->subcategory->category_id)
                                         <option value="{{ $subcategory->id }}"
                                             {{ $Products->subcategory->id == $subcategory->id ? 'selected' : '' }}>
                                             {{ $subcategory->name }}
                                         </option>
                                     @endif
-                                    @endforeach
+                                @endforeach
 
                                 </select>
                                 @error('subcategory_id')

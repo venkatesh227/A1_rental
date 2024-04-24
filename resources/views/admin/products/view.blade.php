@@ -38,10 +38,10 @@
                                     <th>Shipping & Delivery</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
-                                    <th>status</th>
                                     <th>image</th>
+                                
                                     <th>Created At</th>
-
+                                    <th>status</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                 </tr>
                             </thead>
@@ -69,7 +69,7 @@
                                         <td>{{ $item->shipping_delivery }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->qty }}</td>
-                                        <td>{{ $item->status }}</td>
+                                
                                         <td>
                                             @if (!empty($option_name->image))
                                                 <img src="{{ asset('images/products/' . $option_name->image) }}"
@@ -78,10 +78,20 @@
 
                                         </td>
                                         <td>{{ date('d-m-y', strtotime($item->created_at)) }}</td>
+                                        {{-- <td>{{ $item->status }}</td> --}}
+                                        <td>
+                                            <input class="status-toggle" type="checkbox" data-user-id="{{ $item->id }}"
+                                                data-status="{{ $item->status }}"
+                                                @if ($item->status == 1) checked @endif data-onstyle="primary"
+                                                data-offstyle="danger" data-toggle="toggle" data-on="Active"
+                                                data-off="Inactive">
+                                        </td>
                                         <td>
                                             <a href="{{ url('edit-product/' . $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
                                         </td>
+
+                      
                                     </tr>
                                 @endforeach
 
@@ -100,5 +110,44 @@
 <script>
     $(document).ready(function() {
         $('#categorytable').DataTable();
+    });
+
+
+    
+    $(document).ready(function() {
+        $('.status-toggle').click(function() {
+            var userId = $(this).data('user-id');
+
+            var currentStatus = $(this).prop('checked') === true ? 1 : 0;
+        //  console.log(currentStatus);
+         
+            // Passing 2 parameters in ajax url in Laravel route
+            $.ajax({
+                url: "{{ route('product-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"
+                    .replace(':userId', userId)
+                    .replace(':currentStatus', currentStatus),
+
+
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    user_id: userId,
+                    status: currentStatus
+                },
+                success: function(response) {
+                    if (response.status == 'success') {
+                        location.reload();
+                    } else {
+                        alert('Failed to update status.');
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr.responseText);
+                    alert('Error occurred while updating status.');
+                }
+            });
+        });
     });
 </script>

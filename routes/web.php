@@ -52,6 +52,7 @@ Route::post('add_register', [MainController::class, 'add_register']);
     Route::post('category-status/{userId}/{currentStatus}', [CategoryController::class, 'category_status'])
     ->name('category-status');
 
+    // 
 
     Route::get('subcategories', [SubcategoryController::class, 'index']);
     Route::post('insert-subcategory', [SubcategoryController::class, 'insert_subcategory']);
@@ -73,7 +74,10 @@ Route::post('add_register', [MainController::class, 'add_register']);
     Route::post('insert-product', [ProductController::class, 'insert_product']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit_product']);
     Route::post('update-Products/{id}', [ProductController::class, 'update_products']);
-
+    
+    Route::post('product-status/{userId}/{currentStatus}', [ProductController::class, 'product_status'])
+    ->name('product-status');
+    
 
     // Clients
 
