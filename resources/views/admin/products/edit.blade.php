@@ -120,7 +120,7 @@
 
 
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">Price</label>
+                                <label for="price" class="col-form-label">Original Price</label>
                                 <input type="text" class="form-control" id="price" name="price"
                                     value="{{ $Products->price }}">
                                 @error('price')
@@ -129,7 +129,16 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="slug" class="col-form-label">Quantity</label>
+                                <label for="selling_price" class="col-form-label">Selling Price</label>
+                                <input type="text" class="form-control" id="selling_price" name="selling_price"
+                                value="{{ $Products->price }}">
+                                @error('selling_price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="qty" class="col-form-label">Quantity</label>
                                 <input type="number" class="form-control" id="qty" name="qty"
                                     value="{{ $Products->qty }}">
                                 @error('qty')
@@ -157,19 +166,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-
-                            <div class="col-md-6">
-                                <label for="name" class="col-form-label">Price</label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    value="{{ $Products->price }}">
-                                @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                         
 
                             <div class="col-md-6">
                                 <div class="form-check">

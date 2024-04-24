@@ -59,52 +59,50 @@
                                 </div>
                             @endif
                         @endforeach
-                    @else
-                        <!-- Check if there is an error message -->
-                        @if (session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
-                        <div class="alert alert-danger text-center">No subcategories found for this </div>
                     @endif
 
 
                     <div class="row">
                         <div class="col-12 text-center">
                             <ul class="pagination">
-                                @if (!empty($Subcategory))
-                                    @if ($Subcategory->onFirstPage())
-                                        <li class="page-item disabled"><span class="page-link">&lt;</span></li>
-                                    @else
-                                        <li class="page-item"><a class="page-link"
-                                                href="{{ $Subcategory->previousPageUrl() }}">&lt;</a></li>
-                                    @endif
+                                @if (!empty($Subcategory[0]->status))
 
-                                    @for ($i = 1; $i <= $Subcategory->lastPage(); $i++)
-                                        @if ($i == $Subcategory->currentPage())
-                                            <li class="page-item active"><span class="page-link">{{ $i }}</span>
-                                            </li>
+
+                                    @if (!empty($Subcategory))
+                                        @if ($Subcategory->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link">&lt;</span></li>
                                         @else
                                             <li class="page-item"><a class="page-link"
-                                                    href="{{ $Subcategory->url($i) }}">{{ $i }}</a></li>
+                                                    href="{{ $Subcategory->previousPageUrl() }}">&lt;</a></li>
                                         @endif
-                                    @endfor
 
-                                    @if ($Subcategory->hasMorePages())
-                                        <li class="page-item"><a class="page-link"
-                                                href="{{ $Subcategory->nextPageUrl() }}">&gt;</a></li>
-                                    @else
-                                        <li class="page-item disabled"><span class="page-link">&gt;</span></li>
+                                        @for ($i = 1; $i <= $Subcategory->lastPage(); $i++)
+                                            @if ($i == $Subcategory->currentPage())
+                                                <li class="page-item active"><span
+                                                        class="page-link">{{ $i }}</span>
+                                                </li>
+                                            @else
+                                                <li class="page-item"><a class="page-link"
+                                                        href="{{ $Subcategory->url($i) }}">{{ $i }}</a></li>
+                                            @endif
+                                        @endfor
+
+                                        @if ($Subcategory->hasMorePages())
+                                            <li class="page-item"><a class="page-link"
+                                                    href="{{ $Subcategory->nextPageUrl() }}">&gt;</a></li>
+                                        @else
+                                            <li class="page-item disabled"><span class="page-link">&gt;</span></li>
+                                        @endif
                                     @endif
+                                @else
+                                    <!-- Check if there is an error message -->
+
+                                    <div class="alert alert-danger text-center">No subcategories found for this </div>
+
                                 @endif
                             </ul>
                         </div>
                     </div>
-
-
-
-
-
-
 
                 </div>
             </div>

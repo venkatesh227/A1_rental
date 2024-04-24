@@ -44,10 +44,11 @@ class FrontendController extends Controller
         $category_name = Category::find($id);
 
         if (Subcategory::where('category_id', $id)->exists()) {
+           
             $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
-
             return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
         } else {
+             
             return view('frontend.subCategoryView', compact('category', 'category_name'))->with('error', 'No subcategories found for this category');
         }
     }
@@ -155,14 +156,14 @@ class FrontendController extends Controller
             }
         }
     }
-    
+
     public function updatecart(Request $request)
     {
         if (session('userId')) {
             $prod_id = $request->input('prod_id');
             $product_qty = $request->input('product_qty');
-            if (Cart::where('prod_id', $prod_id)->where('user_id',session('userId') )->exists()) {
-                $cartqty = Cart::where('prod_id', $prod_id)->where('user_id',session('userId'))->first();
+            if (Cart::where('prod_id', $prod_id)->where('user_id', session('userId'))->exists()) {
+                $cartqty = Cart::where('prod_id', $prod_id)->where('user_id', session('userId'))->first();
                 $cartqty->prod_qty = $product_qty;
                 $cartqty->update();
                 return response()->json(['status' =>  "Quantity updated"]);
