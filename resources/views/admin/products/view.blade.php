@@ -36,7 +36,8 @@
                                     <th>Large Description</th>
                                     <th>Additional Info</th>
                                     <th>Shipping & Delivery</th>
-                                    <th>Price</th>
+                                    <th>Original Price</th>
+                                    <th>Selling Price</th>
                                     <th>Quantity</th>
                                     <th>image</th>
                                 
@@ -68,6 +69,7 @@
                                         <td>{{ $item->additional_info }}</td>
                                         <td>{{ $item->shipping_delivery }}</td>
                                         <td>{{ $item->price }}</td>
+                                        <td>{{ $item->selling_price }}</td>
                                         <td>{{ $item->qty }}</td>
                                 
                                         <td>

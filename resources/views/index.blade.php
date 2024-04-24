@@ -1,50 +1,5 @@
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>A1 Rental</title>
-    <link rel=icon href="assets/img/favicon.png" sizes="20x20" type="image/png">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/vendor.css">
-    <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
-    <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
-
-</head>
-
-<body>
-
-    <!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
-
-    <!-- search popup start-->
-    <div class="td-search-popup" id="td-search-popup">
-        <form action="#" class="search-form">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search.....">
-            </div>
-            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-    <!-- search popup end-->
-    <div class="body-overlay" id="body-overlay"></div>
-
-    <!-- navbar start -->
-    @include('frontend.inc.navbar')
-    <!-- navbar end -->
-
+@extends('layouts.front')
+@section('content')
     <!-- Banner Starts -->
     <section class="banner-area-2">
         <div class="container">
@@ -86,8 +41,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="right-img">
-                                            <img class="mb-5"
-                                                src="{{ asset('fronted/img/home-2/banner/slide-1.2.png') }}"
+                                            <img class="mb-5" src="{{ asset('fronted/img/home-2/banner/slide-1.2.png') }}"
                                                 alt="">
                                             <img src="{{ asset('fronted/img/home-2/banner/slide-1.3.png') }}"
                                                 alt="">
@@ -299,117 +253,26 @@
                         <h2 class="title">Categories</h2>
                     </div>
                     <div class="category-slider owl-carousel">
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
+                        @foreach ($category as $item)
+                            @if (!empty($item->status))
+                                <div class="item">
+                                    <div class="single-cat-item">
+                                        <div class="thumb">
+                                            <img class="image-item-01"
+                                                src="{{ asset('images/categories/' . $item->image) }}"
+                                                alt="{{ $item->name }}">
+                                        </div>
+                                        <div class="single-cat-content">
+                                            <h4><a href="#">{{ $item->name }}</a></h4>
 
-                                    <img src="{{ asset('fronted/img/category/cat-1.png') }}" alt="img">
+                                            <a class="read-more-text"
+                                                href="{{ url('view-subCategory/' . $item->id) }}">Explore
+                                                Collection</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Tables</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-2.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Chairs</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-3.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Tents</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-4.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Liners</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fronted/img/category/cat-5.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Flooring</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-6.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Carpets</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-7.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Centerpiece</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-                                    <img src="{{ asset('fronted/img/category/cat-8.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Lighting</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="single-cat-item">
-                                <div class="thumb">
-
-                                    <img src="{{ asset('fronted/img/category/cat-9.png') }}" alt="img">
-                                </div>
-                                <div class="single-cat-content">
-                                    <h4><a href="#">Others</a></h4>
-                                    <a class="read-more-text" href="#">Explore Collection </a>
-                                </div>
-                            </div>
-                        </div>
-
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -551,24 +414,4 @@
         </div>
     </div>
     <!-- testimonial area end -->
-
-
-    <!-- Footer Starts -->
-    @include('frontend.inc.footer')
-    <!-- Footer End -->
-
-    <!-- back to top area start -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fa fa-angle-up"></i></span>
-    </div>
-    <!-- back to top area end -->
-
-
-    <!-- all plugins here -->
-    <script src="{{ asset('fronted/js/vendor.js') }}"></script>
-
-    <!-- main js  -->
-    <script src="{{ asset('fronted/js/main.js') }}"></script>
-</body>
-
-</html>
+@endsection

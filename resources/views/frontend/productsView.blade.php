@@ -69,10 +69,7 @@
                         @endforeach
                         @else
                         <!-- Check if there is an error message -->
-                     
-                        @if (session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+
                         <div class="alert alert-danger text-center">No Products found for this </div>
                     @endif
                     </div>
