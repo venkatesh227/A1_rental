@@ -1,3 +1,5 @@
+<?php use App\Models\Cart;
+?>
 <div class="navbar-area">
     <nav class="navbar navbar-area-2 navbar-area navbar-expand-lg">
         <div class="container-fluid nav-container">
@@ -19,19 +21,19 @@
             <div class="collapse navbar-collapse" id="st_main_menu">
                 <ul class="navbar-nav menu-open">
                     <li class="menu-item-has-children current-item-has-children">
-                        <a href="#">Home</a>
+                        <a href="{{url('/')}}">Home</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="#">Products</a>
                         <ul class="sub-menu">
                             @if (!empty($category))
 
-                            @foreach ($category as $item)
-                                @if (!empty($item->status))
-                                    <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
-                                    </li>
-                                @endif
-                            @endforeach
+                                @foreach ($category as $item)
+                                    @if (!empty($item->status))
+                                        <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
                             @endif
 
                         </ul>
@@ -46,7 +48,10 @@
 
                 <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
 
-                <a class="cart-btn" href="{{url('cart')}}"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
+                <a class="cart-btn" href="{{ url('cart') }}">
+                    <span class="cart-count">{{ Cart::where('user_id', session('userId'))->count() }}</span>
+                    <i class="lnr lnr-cart"></i>
+                </a>
             </div>
         </div>
     </nav>

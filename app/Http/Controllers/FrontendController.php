@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\OrderDetail;
 use App\Models\Subcategory;
-use App\Models\Product_images;
 use Illuminate\Http\Request;
+use App\Models\Product_images;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -44,11 +46,11 @@ class FrontendController extends Controller
         $category_name = Category::find($id);
 
         if (Subcategory::where('category_id', $id)->exists()) {
-           
+
             $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
             return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
         } else {
-             
+
             return view('frontend.subCategoryView', compact('category', 'category_name'))->with('error', 'No subcategories found for this category');
         }
     }
@@ -169,7 +171,38 @@ class FrontendController extends Controller
                 return response()->json(['status' =>  "Quantity updated"]);
             }
         } else {
-            return response()->json(['status' => "login to continue"]);
+            return response()->json(['status' => "Login to continue"]);
         }
+    }
+    public function place_order(Request $request)
+    {
+        $order = new Order();
+        $order->order_no = rand(1111, 9999);
+        $order->user_id = session('userId');
+        $order->no_of_products = $request->input('no_of_products');
+        $order->grand_total = $request->input('grand_total');
+        $order->created_by = session('userId');;
+        $order->save();
+        $cartitems = Cart::where('user_id', session('userId'))->get();
+
+        foreach ($cartitems as $item) {
+
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $item->prod_id,
+                'qty' => $item->prod_qty,
+                'subtotal' => $item->products->price * $item->prod_qty,
+                'single_price' => $item->products->price,
+                'created_by' => session('userId'),
+
+            ]);
+            $prod = Product::where('id', $item->prod_id)->first();
+            $prod->qty = $prod->qty - $item->prod_qty;
+            $prod->update();
+        }
+        $cartitems = Cart::where('user_id', session('userId'))->get();
+        Cart::destroy($cartitems);
+
+        return redirect('/')->with('status', 'order placed successfully');
     }
 }

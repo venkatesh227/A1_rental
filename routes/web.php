@@ -30,23 +30,25 @@ Route::get('logout', [MainController::class, 'logout']);
 Route::get('user-login', [MainController::class, 'user_login'])->name('user-login');
 Route::post('user-login-check', [MainController::class, 'user_login_check']);
 Route::get('user-logout', [MainController::class, 'user_logout']);
+Route::get('register',  [MainController::class, 'register']);
+Route::post('add_register', [MainController::class, 'add_register']);
+
 Route::get('view-subCategory/{id}', [FrontendController::class, 'view_subCategory']);
 Route::get('view-products/{sub_id}', [FrontendController::class, 'view_products']);
 Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'product_details']);
 Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
+Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
+Route::post('update-cart', [FrontendController::class, 'updatecart']);
 
-// Route::group(['middleware' => ['UserAuthCheck']], function () {
+Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::get('cart', [FrontendController::class, 'view_cart']);
-    Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
-    Route::post('update-cart', [FrontendController::class, 'updatecart']);
-
-// });
-Route::get('register',  [MainController::class, 'register']);
-Route::post('add_register', [MainController::class, 'add_register']);
-// 
+    Route::post('place-order', [FrontendController::class, 'place_order']);
+});
 
 
- Route::group(['middleware' => ['AuthCheck']], function () {
+
+
+Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('add-category', [CategoryController::class, 'add_category']);
     Route::post('insert-category', [CategoryController::class, 'insert_category']);
@@ -54,7 +56,7 @@ Route::post('add_register', [MainController::class, 'add_register']);
     Route::post('upadate-category/{id}', [CategoryController::class, 'upadate_category']);
 
     Route::post('category-status/{userId}/{currentStatus}', [CategoryController::class, 'category_status'])
-    ->name('category-status');
+        ->name('category-status');
 
     // 
 
@@ -67,7 +69,7 @@ Route::post('add_register', [MainController::class, 'add_register']);
     Route::post('upadate-subcategory/{id}', [SubcategoryController::class, 'upadate_subcategory']);
 
     Route::post('subcategory-status/{userId}/{currentStatus}', [subcategoryController::class, 'subcategory_status'])
-    ->name('subcategory-status');
+        ->name('subcategory-status');
 
     // 
     // Products
@@ -78,10 +80,10 @@ Route::post('add_register', [MainController::class, 'add_register']);
     Route::post('insert-product', [ProductController::class, 'insert_product']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit_product']);
     Route::post('update-Products/{id}', [ProductController::class, 'update_products']);
-    
+
     Route::post('product-status/{userId}/{currentStatus}', [ProductController::class, 'product_status'])
-    ->name('product-status');
-    
+        ->name('product-status');
+
 
     // Clients
 
@@ -90,7 +92,7 @@ Route::post('add_register', [MainController::class, 'add_register']);
 
     Route::get('edit-client/{id}', [ClientsController::class, 'edit_client']);
     Route::post('update-status/{userId}/{currentStatus}', [ClientsController::class, 'update_status'])
-    ->name('update-status');
+        ->name('update-status');
 
     // 
 
