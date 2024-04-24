@@ -89,7 +89,6 @@ class FrontendController extends Controller
         }
     }
 
-
     public function product_details($sub_id, $prod_id)
     {
         $category  = Category::all();
@@ -124,6 +123,49 @@ class FrontendController extends Controller
                 $cartitem->created_by = $user_id;
                 $cartitem->save();
                 return response()->json(['status' =>  "Added To Cart"]);
+            }
+        } else {
+            return response()->json(['status' => "login to continue"]);
+        }
+    }
+    public function view_cart()
+    {
+        $category = Category::all();
+        $cartitems = Cart::where('user_id', session('userId'))->get();
+        $productImages = [];
+
+        foreach ($cartitems as $item) {
+            $images = Product_images::where('product_id', $item->prod_id)->first();
+            $productImages[$item->id] = $images;
+        }
+
+        return view('frontend.cart', compact('category', 'cartitems', 'productImages'));
+    }
+    public function delete_cart_item(Request $request)
+    {
+        if (session('userId')) {
+            $prod_id = $request->input('prod_id');
+            $user_id = session('userId');
+            if (Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->exists()) {
+                $cartitem = Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->first();
+                $cartitem->delete();
+                return response()->json(['status' =>  "Product deleted successfully"]);
+            } else {
+                return response()->json(['status' => "login to continue"]);
+            }
+        }
+    }
+    
+    public function updatecart(Request $request)
+    {
+        if (session('userId')) {
+            $prod_id = $request->input('prod_id');
+            $product_qty = $request->input('product_qty');
+            if (Cart::where('prod_id', $prod_id)->where('user_id',session('userId') )->exists()) {
+                $cartqty = Cart::where('prod_id', $prod_id)->where('user_id',session('userId'))->first();
+                $cartqty->prod_qty = $product_qty;
+                $cartqty->update();
+                return response()->json(['status' =>  "Quantity updated"]);
             }
         } else {
             return response()->json(['status' => "login to continue"]);

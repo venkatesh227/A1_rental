@@ -12,16 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class MainController extends Controller
 
 {
-    protected function authenticated()
-    {
-        if (Auth::User()->role_as == '1') //1 = Admin Login
-        {
-            return redirect('admin.dashboard')->with('status', 'Welcome to your dashboard');
-        } elseif (Auth::User()->role_as == '0') // Normal or Default User Login
-        {
-            return redirect('/')->with('status', 'Logged in successfully');
-        }
-    }
+
     public function login()
     {
         return view('auth.login');
@@ -141,7 +132,6 @@ class MainController extends Controller
         $register->password = $passwordHash;
         $register->gender = $request->input('gender');
         $register->address = $request->input('address');
-
         $register->save();
         return redirect('user-login')->with('status', "Login Successfully");
     }

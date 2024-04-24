@@ -33,10 +33,14 @@ Route::get('user-logout', [MainController::class, 'user_logout']);
 Route::get('view-subCategory/{id}', [FrontendController::class, 'view_subCategory']);
 Route::get('view-products/{sub_id}', [FrontendController::class, 'view_products']);
 Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'product_details']);
+Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
 
-Route::group(['middleware' => ['UserAuthCheck']], function () {
-    Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
-});
+// Route::group(['middleware' => ['UserAuthCheck']], function () {
+    Route::get('cart', [FrontendController::class, 'view_cart']);
+    Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
+    Route::post('update-cart', [FrontendController::class, 'updatecart']);
+
+// });
 Route::get('register',  [MainController::class, 'register']);
 Route::post('add_register', [MainController::class, 'add_register']);
 // 
