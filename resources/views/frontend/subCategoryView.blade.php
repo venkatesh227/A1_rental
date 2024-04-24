@@ -35,51 +35,66 @@
                 </div>
             </div>
 
-
             <div class="col-md-9">
                 <div class="row gy-5 justify-content-center">
-                    @foreach ($Subcategory as $item)
-                        <div class="col-lg-3 col-md-6"> <!-- Added mb-4 for margin bottom -->
-                            <a href="{{ url('view-products/' . $item->id) }}" class="text-decoration-none">
-                                <div class="single-product-item">
-                                    <div class="single-product-image">
-                                        <img class="image-item-01" src="{{ asset('images/subcategories/' . $item->image) }}"
-                                            alt="{{ $item->name }}"> <!-- Added alt attribute for accessibility -->
-                                    </div>
-                                    <div class="single-cart-content">
-                                        <div class="cart-content-left">
-                                            <h5>{{ $item->name }}</h5>
+                    @if (!empty($Subcategory))
+                        @foreach ($Subcategory as $item)
+                            @if (!empty($item->status))
+                                <div class="col-lg-3 col-md-6"> <!-- Added mb-4 for margin bottom -->
+                                    <a href="{{ url('view-products/' . $item->id) }}" class="text-decoration-none">
+                                        <div class="single-product-item">
+                                            <div class="single-product-image">
+                                                <img class="image-item-01"
+                                                    src="{{ asset('images/subcategories/' . $item->image) }}"
+                                                    alt="{{ $item->name }}">
+                                                <!-- Added alt attribute for accessibility -->
+                                            </div>
+                                            <div class="single-cart-content">
+                                                <div class="cart-content-left">
+                                                    <h5>{{ $item->name }}</h5>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @else
+                        <!-- Check if there is an error message -->
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+                        <div class="alert alert-danger text-center">No subcategories found for this </div>
+                    @endif
+
 
                     <div class="row">
                         <div class="col-12 text-center">
                             <ul class="pagination">
-                                @if ($Subcategory->onFirstPage())
-                                    <li class="page-item disabled"><span class="page-link">&lt;</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $Subcategory->previousPageUrl() }}">&lt;</a></li>
-                                @endif
-
-                                @for ($i = 1; $i <= $Subcategory->lastPage(); $i++)
-                                    @if ($i == $Subcategory->currentPage())
-                                        <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+                                @if (!empty($Subcategory))
+                                    @if ($Subcategory->onFirstPage())
+                                        <li class="page-item disabled"><span class="page-link">&lt;</span></li>
                                     @else
                                         <li class="page-item"><a class="page-link"
-                                                href="{{ $Subcategory->url($i) }}">{{ $i }}</a></li>
+                                                href="{{ $Subcategory->previousPageUrl() }}">&lt;</a></li>
                                     @endif
-                                @endfor
 
-                                @if ($Subcategory->hasMorePages())
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $Subcategory->nextPageUrl() }}">&gt;</a></li>
-                                @else
-                                    <li class="page-item disabled"><span class="page-link">&gt;</span></li>
+                                    @for ($i = 1; $i <= $Subcategory->lastPage(); $i++)
+                                        @if ($i == $Subcategory->currentPage())
+                                            <li class="page-item active"><span class="page-link">{{ $i }}</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item"><a class="page-link"
+                                                    href="{{ $Subcategory->url($i) }}">{{ $i }}</a></li>
+                                        @endif
+                                    @endfor
+
+                                    @if ($Subcategory->hasMorePages())
+                                        <li class="page-item"><a class="page-link"
+                                                href="{{ $Subcategory->nextPageUrl() }}">&gt;</a></li>
+                                    @else
+                                        <li class="page-item disabled"><span class="page-link">&gt;</span></li>
+                                    @endif
                                 @endif
                             </ul>
                         </div>

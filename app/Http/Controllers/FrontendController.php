@@ -22,35 +22,74 @@ class FrontendController extends Controller
 
         return view('auth.userLogin');
     }
+    // public function view_subCategory($id)
+    // {
+
+    //     $category  = Category::all();
+    //     $category_name  = Category::find($id);
+    //     if (Subcategory::where('category_id', $id)->exists()) {
+    //         // $Subcategory = Subcategory::where('category_id', $id)->get();
+    //         $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
+    //         return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
+    //     } else {
+
+    //         //  return view('frontend.subCategoryView');
+    //         return redirect('/')->with('error', 'No subcategories found for this category.');
+    //     }
+    // }
+
     public function view_subCategory($id)
     {
-        $category  = Category::all();
-        $category_name  = Category::find($id);
+        $category = Category::all();
+        $category_name = Category::find($id);
+
         if (Subcategory::where('category_id', $id)->exists()) {
-            // $Subcategory = Subcategory::where('category_id', $id)->get();
             $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
+
             return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
         } else {
-
-            return redirect('/')->with('error', 'No subcategories found for this category.');
+            return view('frontend.subCategoryView', compact('category', 'category_name'))->with('error', 'No subcategories found for this category');
         }
     }
+
+
+
+
+
+    // public function view_products($sub_id)
+    // {
+    //     $category  = Category::all();
+    //     if (Product::where('subcategory_id', $sub_id)->exists()) {
+    //         $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
+    //         foreach ($Product as $item) {
+    //             $productImage = Product_images::where('product_id', $item->id)->first();
+    //         }
+    //         return view('frontend.productsView', compact('category', 'Product', 'productImage'));
+    //     } else {
+    //         return redirect('/')->with('error', 'No products found for this category.');
+    //     }
+    // }
+
+
+
     public function view_products($sub_id)
     {
         $category  = Category::all();
-        if (Product::where('subcategory_id', $sub_id)->exists()) {
+        if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
+
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-
             foreach ($Product as $item) {
-
                 $productImage = Product_images::where('product_id', $item->id)->first();
             }
+
             return view('frontend.productsView', compact('category', 'Product', 'productImage'));
         } else {
-            return redirect('/')->with('error', 'No products found for this category.');
+            // return redirect('/')->with('error', 'No products found for this category.');
+            return view('frontend.productsView', compact('category'));
         }
     }
-    
+
+
     public function product_details($sub_id, $prod_id)
     {
         $category  = Category::all();

@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $product_images = Product_images::all();
-        // dd($products[0]->Product_images);
+        // dd($products[0]->status);
         return view('admin.products.view', compact('products', 'product_images'));
     }
 
@@ -260,4 +260,20 @@ class ProductController extends Controller
 
         return redirect('products')->with('status', "Product Updated Successfully");
     }
+
+
+  
+
+    public function product_status($product_id, $currentStatus)
+    {
+        $product_status = Product::find($product_id);
+        $product_status->status = $currentStatus;
+        $product_status->update();
+
+        $product = Product::find($product_id);
+        return response()->json(['status' => 'success', 'user' => $product]);
+    }
+
+
+
 }

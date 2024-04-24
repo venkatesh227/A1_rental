@@ -1,3 +1,4 @@
+
 @extends('layouts.front')
 @section('content')
     <div class="breadcrumb-area" style="background-image:url('{{ asset('fronted/img/banner/b1.jpg') }}')">
@@ -49,23 +50,15 @@
                                         </div>
 
                                     </div>
-                                    {{-- <div class="product-thumbnail-carousel-2">
-                                        <div class="single-thumbnail-item">
-                                            <img src="assets/img/product-slider/1s.png" alt="item">
-                                        </div>
-                                        <div class="single-thumbnail-item">
-                                            <img src="assets/img/product-slider/2s.png" alt="item">
-                                        </div>
-                                        <div class="single-thumbnail-item">
-                                            <img src="assets/img/product-slider/3s.png" alt="item">
-                                        </div>
-                                        <div class="single-thumbnail-item">
-                                            <img src="assets/img/product-slider/1s.png" alt="item">
-                                        </div>
-                                        <div class="single-thumbnail-item">
-                                            <img src="assets/img/product-slider/2s.png" alt="item">
-                                        </div>
-                                    </div> --}}
+
+                                    <div class="product-thumbnail-carousel-2">
+                                        @foreach ($productImages as $image)
+                                            <div class="single-thumbnail-item">
+                                                <img src="{{ asset('images/products/' . $image->image) }}" alt="item">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -140,31 +133,7 @@
                                             <p> <p>{{ $Product->additional_info }}</p></p>
                                         </div>
 
-                                        {{-- <div class="tab-pane review-tab fade" id="review" role="tabpanel"
-                                            aria-labelledby="review-tab">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <img src="assets/img/category/cat-1.png" class="img-fluid" />
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <img src="assets/img/category/cat-1.png" class="img-fluid" />
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <img src="assets/img/category/cat-1.png" class="img-fluid" />
-                                                </div>
-                                                @php
-                                                    echo '<pre>';
-                                                    print_r($productImage);
-                                                
-                                                @endphp
-                                            </div>
-                                        </div> --}}
-
-                                        {{-- foreach ($productImage as $image) {
-                                            echo "<pre>";
-                                            print_r($image);
-                                            exit;
-                                        } --}}
+                                       
                                         <div class="tab-pane review-tab fade" id="review" role="tabpanel"
                                             aria-labelledby="review-tab">
                                             <div class="row">

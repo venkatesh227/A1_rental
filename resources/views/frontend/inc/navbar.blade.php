@@ -24,9 +24,15 @@
                     <li class="menu-item-has-children">
                         <a href="#">Products</a>
                         <ul class="sub-menu">
+                            @if (!empty($category))
+
                             @foreach ($category as $item)
-                                <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a></li>
+                                @if (!empty($item->status))
+                                    <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
+                                    </li>
+                                @endif
                             @endforeach
+                            @endif
 
                         </ul>
                     </li>
@@ -38,7 +44,7 @@
             <div class="nav-right-part nav-right-part-desktop">
                 <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
 
-                <a class="user-btn" href="{{url('user-login')}}"><i class="lnr lnr-user"></i></a>
+                <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
 
                 <a class="cart-btn" href="#"><span class="cart-count">2</span><i class="lnr lnr-cart"></i></a>
             </div>
