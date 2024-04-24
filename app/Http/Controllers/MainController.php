@@ -29,7 +29,7 @@ class MainController extends Controller
     public function login_check(Request $request)
     {
         $category = Category::all();
-        
+
         $request->validate([
             'name' => 'required',
             'password' => 'required|max:12'
@@ -40,9 +40,9 @@ class MainController extends Controller
 
         if ($userInfo) {
             $request->session()->put('adminId', $userInfo->id);
-            
+
             // return view('admin.index');
-         
+
             return view('admin.category.view', compact('category'));
         } else {
             return back()->with('fail', 'Please enter valid details');
@@ -63,17 +63,21 @@ class MainController extends Controller
     }
     public function user_login()
     {
-        return view('auth.userLogin');
+        $category = Category::all();
+        // return view('auth.userLogin');
+        return view('auth.userLogin', compact( 'category'));
     }
 
     public function user_login_check(Request $request)
     {
+        $status = 1;
         $request->validate([
             'phone' => 'required|digits:10|numeric',
             'password' => 'required|max:12'
         ]);
         $userInfo = userRegister::where('phone', '=', $request->phone)
             ->where('password', '=', md5($request->password))
+            ->where('status', '=', $status)
             ->first();
 
         if ($userInfo) {
@@ -95,7 +99,10 @@ class MainController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $category = Category::all();
+        //         return view('auth.register')
+        return view('auth.register', compact( 'category'));
+;
     }
 
 
@@ -134,8 +141,7 @@ class MainController extends Controller
         $register->password = $passwordHash;
         $register->gender = $request->input('gender');
         $register->address = $request->input('address');
-        
-        $register->created_by = session('adminId');
+
         $register->save();
         return redirect('user-login')->with('status', "Login Successfully");
     }

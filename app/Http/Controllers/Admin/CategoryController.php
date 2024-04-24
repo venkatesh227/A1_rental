@@ -13,6 +13,7 @@ class CategoryController extends Controller
         $category = Category::all();
         return view('admin.category.view', compact('category'));
     }
+    
     public function add_category()
     {
         return view('admin.category.add');

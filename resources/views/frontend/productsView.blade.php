@@ -12,7 +12,9 @@
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>PRODUCTS</li>
-                                <li>TABLES</li>
+                                @if (!empty($Product ))
+                                <li>{{strtoupper($Product[0]->name)}}</li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -38,14 +40,18 @@
 
                 <div class="col-md-9">
                     <div class="row gy-5 justify-content-center">
+                       @if (!empty($Product ))
                         @foreach ($Product as $prod)
                             <div class="col-lg-3 col-md-6">
                                 <a href="{{ url('product-details/'.$prod->subcategory_id . '/' . $prod->id) }}" class="text-decoration-none">
 
                                     <div class="single-product-item">
                                         <div class="single-product-image">
-                                            <img class="image-item-01" src="{{ asset('images/products/' . $productImage->image) }}"
-                                                alt="img">
+                                           @if (!empty($productImage))
+                                           <img class="image-item-01" src="{{ asset('images/products/' . $productImage->image) }}"
+                                           alt="img">
+                                           @endif
+                                           
                                         </div>
 
                                         <div class="single-cart-content">
@@ -61,20 +67,18 @@
                                 </a>
                             </div>
                         @endforeach
+                        @else
+                        <!-- Check if there is an error message -->
+                     
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+                        <div class="alert alert-danger text-center">No Products found for this </div>
+                    @endif
                     </div>
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-
-
 
         </div>
     </div>
