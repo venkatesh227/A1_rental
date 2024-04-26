@@ -22,7 +22,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet" />
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css"
+        integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>A1</title>
 </head>
 
@@ -59,14 +61,21 @@
 
 
 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        @if (session('status'))
+            <script>
+                swal("{{ session('status') }}");
+            </script>
+        @endif
 
 
-
-        <script>
+        {{-- <script>
             $(document).ready(function() {
                 $('#example').DataTable();
             });
         </script>
+
         <script>
             $(document).ready(function() {
                 var table = $('#example2').DataTable({
@@ -77,7 +86,7 @@
                 table.buttons().container()
                     .appendTo('#example2_wrapper .col-md-6:eq(0)');
             });
-        </script>
+        </script> --}}
 </body>
 
 </html>
