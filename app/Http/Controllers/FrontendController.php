@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Product_images;
 use App\Models\userRegister;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -25,21 +26,62 @@ class FrontendController extends Controller
 
         return view('auth.userLogin');
     }
-    // public function view_subCategory($id)
-    // {
+    public function product_listajax()
+    {
+        $products = Product::select('name')->where('status', '1')->get();
 
-    //     $category  = Category::all();
-    //     $category_name  = Category::find($id);
-    //     if (Subcategory::where('category_id', $id)->exists()) {
-    //         // $Subcategory = Subcategory::where('category_id', $id)->get();
-    //         $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
-    //         return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
-    //     } else {
+        $data = [];
+        foreach ($products as $item) {
+            $data[] = $item['name'];
+        }
+        return response()->json($data);
+    }
+    public function search_product(Request $request)
+    {
+        $search_product = $request->input('product-name');
 
-    //         //  return view('frontend.subCategoryView');
-    //         return redirect('/')->with('error', 'No subcategories found for this category.');
-    //     }
-    // }
+        if ($search_product !== "") {
+            $product = Product::where('name', 'LIKE', '%' . $search_product . '%')->first();
+            if ($product) {
+                return redirect('product-details/' . $product->subcategory_id . '/' . $product->id);
+            } else {
+                return redirect()->back()->with('status', 'No products matched');
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
+    public function view_email()
+    {
+        $category = Category::all();
+        return view('frontend.email', compact('category'));
+    }
+    public function send_mail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'subject' => 'required',
+            'name' => 'required',
+            'content' => 'required',
+        ]);
+
+        $data = [
+            'subject' => $request->input('subject'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'content' => $request->input('content'),
+        ];
+
+
+        Mail::send('frontend.emailData', $data, function ($message) use ($data) {
+            $message->to('meranna60@gmail.com')
+                ->subject($data['subject']);
+        });
+
+
+
+        return redirect('/')->with('status', 'Email successfully sent!');
+    }
 
     public function view_subCategory($id)
     {
@@ -55,26 +97,6 @@ class FrontendController extends Controller
             return view('frontend.subCategoryView', compact('category', 'category_name'))->with('error', 'No subcategories found for this category');
         }
     }
-
-
-
-
-
-    // public function view_products($sub_id)
-    // {
-    //     $category  = Category::all();
-    //     if (Product::where('subcategory_id', $sub_id)->exists()) {
-    //         $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-    //         foreach ($Product as $item) {
-    //             $productImage = Product_images::where('product_id', $item->id)->first();
-    //         }
-    //         return view('frontend.productsView', compact('category', 'Product', 'productImage'));
-    //     } else {
-    //         return redirect('/')->with('error', 'No products found for this category.');
-    //     }
-    // }
-
-
 
     public function view_products($sub_id)
     {
@@ -199,7 +221,7 @@ class FrontendController extends Controller
         $cartitems = Cart::where('user_id', session('userId'))->get();
         Cart::destroy($cartitems);
 
-        return redirect('/')->with('status', 'order placed successfully');
+        return redirect('cart')->with('status', 'order placed successfully');
     }
 
     public function  myorders()

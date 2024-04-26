@@ -34,9 +34,14 @@ Route::get('user-logout', [MainController::class, 'user_logout']);
 Route::get('register',  [MainController::class, 'register']);
 Route::post('add_register', [MainController::class, 'add_register']);
 
+
+Route::get('product-list', [FrontendController::class, 'product_listajax']);
+Route::post('search-product', [FrontendController::class, 'search_product']);
 Route::get('view-subCategory/{id}', [FrontendController::class, 'view_subCategory']);
 Route::get('view-products/{sub_id}', [FrontendController::class, 'view_products']);
 Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'product_details']);
+Route::get('email', [FrontendController::class, 'view_email']);
+Route::post('send-mail', [FrontendController::class, 'send_mail']);
 Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
 Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
 Route::post('update-cart', [FrontendController::class, 'updatecart']);
