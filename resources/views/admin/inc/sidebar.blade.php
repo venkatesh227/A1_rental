@@ -37,6 +37,14 @@
                </a>
            </li>
 
+           
+           <li>
+            <a href="{{ url('orders') }}">
+                <div class="parent-icon"><i class="bx bx-cookie"></i>
+                </div>
+                <div class="menu-title">Orders</div>
+            </a>
+        </li>
 
            <li>
             <a href="{{ url('clients') }}">

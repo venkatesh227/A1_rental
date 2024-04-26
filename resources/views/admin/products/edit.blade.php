@@ -52,13 +52,13 @@
                                     <option value=""><b>Select a SubCategory</b></option>
 
                                     @foreach ($subcategories as $subcategory)
-                                    @if ($subcategory->category_id == $Products->subcategory->category_id)
-                                        <option value="{{ $subcategory->id }}"
-                                            {{ $Products->subcategory->id == $subcategory->id ? 'selected' : '' }}>
-                                            {{ $subcategory->name }}
-                                        </option>
-                                    @endif
-                                @endforeach
+                                        @if ($subcategory->category_id == $Products->subcategory->category_id)
+                                            <option value="{{ $subcategory->id }}"
+                                                {{ $Products->subcategory->id == $subcategory->id ? 'selected' : '' }}>
+                                                {{ $subcategory->name }}
+                                            </option>
+                                        @endif
+                                    @endforeach
 
                                 </select>
                                 @error('subcategory_id')
@@ -113,7 +113,7 @@
 
                                 <textarea class="form-control" id="description" name="description">{{ $Products->description }}</textarea>
 
-                                @error('slug')
+                                @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -131,7 +131,7 @@
                             <div class="col-md-6">
                                 <label for="selling_price" class="col-form-label">Selling Price</label>
                                 <input type="text" class="form-control" id="selling_price" name="selling_price"
-                                value="{{ $Products->price }}">
+                                    value="{{ $Products->price }}">
                                 @error('selling_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -186,13 +186,6 @@
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Image</label>
                                 <input type="file" class="form-control" id="image" name="image[]" multiple>
-
-
-                                @if ($Products->image)
-                                    <img src="{{ asset('images/products/' . $Products->image) }}" height="100px"
-                                        width="100px">
-                                @endif
-
                                 @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

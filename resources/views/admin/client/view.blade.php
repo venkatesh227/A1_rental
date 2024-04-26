@@ -33,9 +33,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $i=1;
+                                @endphp
                                 @foreach ($users as $value)
                                     <tr>
-                                        <td>{{ $value->id }}</td>
+                                        <td>{{ $i++; }}</td>
                                         <td>{{ $value->first_name }}</td>
                                         <td>{{ $value->last_name }}</td>
                                         <td>{{ $value->phone }}</td>

@@ -82,11 +82,7 @@
                                                 </div>
                                             </div>
                                              <br>
-                                            {{-- <div class="col-12 mt-2"> --}}
-                                                <a href="{{ url('register') }}" >
-                                                    Customer Register
-                                                </a>
-                                            {{-- </div> --}}
+                                         
 
                                         </div>
                                     </form>
