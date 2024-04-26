@@ -1,3 +1,5 @@
+<?php use App\Models\Cart;
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -9,11 +11,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>A1 Rental</title>
     <link rel=icon href="assets/img/favicon.png" sizes="20x20" type="image/png">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/vendor.css">
     <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
+    <style>
+        /* CSS to style search form */
+        .search-form {
+            margin-top: 10px;
+            /* Adjust as needed */
+        }
+
+        /* CSS to style search input and icon */
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+
+        .form-control {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .input-group-append {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .submit-btn {
+            background-color: #fff;
+            border: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    </style>
 
 
 </head>
@@ -31,16 +68,7 @@
     </div>
     <!-- preloader area end -->
 
-    <!-- search popup start-->
-    <div class="td-search-popup" id="td-search-popup">
-        <form action="#" class="search-form">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search.....">
-            </div>
-            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-    <!-- search popup end-->
+
     <div class="body-overlay" id="body-overlay"></div>
 
     <!-- navbar start -->
@@ -69,6 +97,31 @@
     <!-- main js  -->
     <script src="{{ asset('fronted/js/main.js') }}"></script>
     <script src="{{ asset('fronted/js/custom.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        var availableTags = [];
+        $.ajax({
+            type: "GET",
+            url: "/product-list",
+            success: function(response) {
+                console.log(response);
+                availableTags = response; // Store response in availableTags array
+                startAutoComplete(); // Call startAutoComplete function after getting the response
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    
+        function startAutoComplete() {
+            $("#search-product").autocomplete({
+                source: availableTags
+            });
+        }
+    </script>
+    
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @if (session('status'))
