@@ -32,9 +32,7 @@ class Product extends Model
     }
 
 
-    // public function Product_images()
-    // {
-    //     return $this->belongsTo(Product_images::class, 'product_id', 'id');
-    // }
-    
+
+   
+
 }

@@ -34,9 +34,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $i=1;
+                                @endphp
                                 @foreach ($category as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $i++; }}</td>
                                         <td>{{ $item->name }}</td>
 
                                         <td>
@@ -85,9 +88,7 @@
             var userId = $(this).data('user-id');
 
             var currentStatus = $(this).prop('checked') === true ? 1 : 0;
-        //  console.log(currentStatus);
-         
-            // Passing 2 parameters in ajax url in Laravel route
+    
             $.ajax({
                 url: "{{ route('category-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"
                     .replace(':userId', userId)

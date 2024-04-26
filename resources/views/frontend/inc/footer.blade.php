@@ -7,7 +7,7 @@
                         <h5 class="widget-title">help & information</h5>
                         <ul>
                             <li><a href="#">help</a></li>
-                            <li><a href="#">track order</a></li>
+                            <li><a href="{{url('myorders')}}">track order</a></li>
                             <li><a href="#">delivery & returns</a></li>
                             <li><a href="#">10% student discount</a></li>
                         </ul>

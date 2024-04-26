@@ -192,7 +192,7 @@
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Images</label>
                                 <input type="file" class="form-control" id="image" name="image[]" multiple value="{{ old('image') }}">
-                                     @error('image')
+                                @error('image.*')
                                      <span class="text-danger">{{ $message }}</span>
                                  @enderror
                             </div>

@@ -53,6 +53,7 @@ class ProductController extends Controller
 
     public function insert_product(Request $request)
     {
+
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
@@ -172,6 +173,7 @@ class ProductController extends Controller
             'name' => 'required',
             'slug' => 'required',
             'small_description' => 'required',
+            'description' => 'required',
             'price' => 'required',
             'qty' => 'required',
             'title' => 'required',
@@ -191,10 +193,11 @@ class ProductController extends Controller
             'selling_price.required' => 'Selling Price is Required',
             'image.required' => 'Image is Required',
             'small_description.required' => 'Small Description is Required',
+            'description.required' => 'Large Description is Required',
             'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
-            // 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+            'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
 
 
@@ -225,18 +228,30 @@ class ProductController extends Controller
         $Product->update();
         $images = [];
         $counter = 1;
-        $productImages = Product_images::find($id);
+
+
+        $unlinkimages = array();
+        $productImages = Product_images::where('product_id', $id)->get();
+
+
 
         if ($productImages) {
-            $imagePaths = explode(",", $productImages->image);
+            foreach ($productImages as $value) {
+                //  print_r($value); // output is 111
+                if ($value && isset($value->image)) {
+                    $unlinkimages[] = $value->image;
+                }
+            }
 
-            foreach ($imagePaths as $imagePath) {
-                $fullImagePath = public_path('images/products/' . $imagePath);
-                if (File::exists($fullImagePath)) {
-                    File::delete($fullImagePath);
+            foreach ($unlinkimages as $imagePath) {
+                $fullImagePath = public_path('images/products/' . trim($imagePath)); // Trim to remove any whitespace
+                
+                if (file_exists($fullImagePath)) {
+                    unlink($fullImagePath); // Delete the file
                 }
             }
         }
+
 
         if ($request->hasFile('image')) {
 

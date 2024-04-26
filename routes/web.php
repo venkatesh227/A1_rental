@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ClientsController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,11 @@ Route::get('product-details/{sub_id}/{prod_id}', [FrontendController::class, 'pr
 Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
 Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
 Route::post('update-cart', [FrontendController::class, 'updatecart']);
-
+Route::get('view_my_order/{id}/{user_id}', [FrontendController::class, 'view_my_order']);
 Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::get('cart', [FrontendController::class, 'view_cart']);
     Route::post('place-order', [FrontendController::class, 'place_order']);
+    Route::get('myorders', [FrontendController::class,'myorders']);
 });
 
 
@@ -96,5 +98,12 @@ Route::group(['middleware' => ['AuthCheck']], function () {
 
     // 
 
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('view_order/{id}/{user_id}', [OrderController::class, 'view_order']);
+
+    Route::post('update_order_status/{id}/', [OrderController::class, 'update_order_status']);
+  
     // 
+
+   
 });

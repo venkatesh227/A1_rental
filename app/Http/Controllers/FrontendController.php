@@ -10,6 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\Product_images;
+use App\Models\userRegister;
 use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
@@ -81,13 +82,8 @@ class FrontendController extends Controller
         if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
 
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-            foreach ($Product as $item) {
-                $productImage = Product_images::where('product_id', $item->id)->first();
-            }
-
-            return view('frontend.productsView', compact('category', 'Product', 'productImage'));
+            return view('frontend.productsView', compact('category', 'Product'));
         } else {
-            // return redirect('/')->with('error', 'No products found for this category.');
             return view('frontend.productsView', compact('category'));
         }
     }
@@ -204,5 +200,19 @@ class FrontendController extends Controller
         Cart::destroy($cartitems);
 
         return redirect('/')->with('status', 'order placed successfully');
+    }
+
+    public function  myorders()
+    {
+        $orders = Order::where('user_id', session('userId'))->get();
+        return view('frontend.orders.myorder', compact('orders'));
+    }
+
+    public function view_my_order($id,$user_id)
+    {
+        $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
+        $userDetails =  userRegister::find($user_id);
+         
+        return view('frontend.orders.view', compact('orderDetails', 'userDetails'));
     }
 }
