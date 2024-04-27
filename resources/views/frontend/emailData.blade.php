@@ -22,6 +22,7 @@
                             <td><strong>Message:</strong></td>
                             <td>{{ $content }}</td>
                         </tr>
+
                     </table>
                 </div>
             </div>

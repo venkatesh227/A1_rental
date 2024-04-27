@@ -10,7 +10,8 @@
                             <h1 class="page-title">Orders View</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
+                                <li>MY ORDERS</li>
+                                <li>DETAILS</li>
 
                             </ul>
                         </div>
@@ -27,10 +28,10 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="vertical-menu">
-                            <a href="#" class="active">Home</a>
+                            <a href="{{ url('/') }}" class="active">Home</a>
                             <a href="#">About</a>
                             <a href="#">Services</a>
-                            <a href="#">Contact</a>
+                            <a href="{{ url('email') }}">Contact</a>
                         </div>
                     </div>
 

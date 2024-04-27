@@ -54,7 +54,7 @@ class FrontendController extends Controller
     public function view_email()
     {
         $category = Category::all();
-        return view('frontend.email', compact('category'));
+        return view('frontend.email');
     }
     public function send_mail(Request $request)
     {
@@ -85,34 +85,34 @@ class FrontendController extends Controller
 
     public function view_subCategory($id)
     {
-        $category = Category::all();
+
         $category_name = Category::find($id);
 
         if (Subcategory::where('category_id', $id)->exists()) {
 
             $Subcategory = Subcategory::where('category_id', $id)->paginate(8);
-            return view('frontend.subCategoryView', compact('Subcategory', 'category', 'category_name'));
+            return view('frontend.subCategoryView', compact('Subcategory', 'category_name'));
         } else {
 
-            return view('frontend.subCategoryView', compact('category', 'category_name'))->with('error', 'No subcategories found for this category');
+            return view('frontend.subCategoryView', compact('category_name'))->with('error', 'No subcategories found for this category');
         }
     }
 
     public function view_products($sub_id)
     {
-        $category  = Category::all();
+    
         if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
 
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-            return view('frontend.productsView', compact('category', 'Product'));
+            return view('frontend.productsView', compact('Product'));
         } else {
-            return view('frontend.productsView', compact('category'));
+            return view('frontend.productsView');
         }
     }
 
     public function product_details($sub_id, $prod_id)
     {
-        $category  = Category::all();
+    
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
 
@@ -120,7 +120,7 @@ class FrontendController extends Controller
                 $productImage = Product_images::where('product_id', $Product->id)->first();
                 $productImages = Product_images::where('product_id', $Product->id)->get();
             }
-            return view('frontend.productDetails', compact('category', 'Product', 'productImage', 'productImages'));
+            return view('frontend.productDetails', compact('Product', 'productImage', 'productImages'));
         } else {
 
             return redirect('/')->with('error', 'No products found for this category.');
@@ -151,7 +151,6 @@ class FrontendController extends Controller
     }
     public function view_cart()
     {
-        $category = Category::all();
         $cartitems = Cart::where('user_id', session('userId'))->get();
         $productImages = [];
 
@@ -160,7 +159,7 @@ class FrontendController extends Controller
             $productImages[$item->id] = $images;
         }
 
-        return view('frontend.cart', compact('category', 'cartitems', 'productImages'));
+        return view('frontend.cart', compact('cartitems', 'productImages'));
     }
     public function delete_cart_item(Request $request)
     {
@@ -170,7 +169,7 @@ class FrontendController extends Controller
             if (Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->exists()) {
                 $cartitem = Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->first();
                 $cartitem->delete();
-                return response()->json(['status' =>  "Product deleted successfully"]);
+                return response()->json(['status' =>  "Product deleted "]);
             } else {
                 return response()->json(['status' => "login to continue"]);
             }
@@ -230,11 +229,11 @@ class FrontendController extends Controller
         return view('frontend.orders.myorder', compact('orders'));
     }
 
-    public function view_my_order($id,$user_id)
+    public function view_my_order($id, $user_id)
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
         $userDetails =  userRegister::find($user_id);
-         
+
         return view('frontend.orders.view', compact('orderDetails', 'userDetails'));
     }
 }

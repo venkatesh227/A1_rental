@@ -10,10 +10,9 @@
                             <h1 class="page-title">Products</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
+                                <li>SUBCATEGORY</li>
                                 <li>PRODUCTS</li>
-                                @if (!empty($Product))
-                                    <li>{{ strtoupper($Product[0]->name) }}</li>
-                                @endif
+
                             </ul>
                         </div>
                     </div>
@@ -29,16 +28,16 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="vertical-menu">
-                        <a href="#" class="active">Home</a>
+                        <a href="{{url('/')}}" class="active">Home</a>
                         <a href="#">About</a>
                         <a href="#">Services</a>
-                        <a href="#">Contact</a>
+                        <a href="{{url('email')}}">Contact</a>
                     </div>
                 </div>
 
 
                 <div class="col-md-9">
-                    <div class="row gy-5 justify-content-center">
+                    <div class="row gy-5 justify-content-center product_data">
                         @if (!empty($Product))
                             @foreach ($Product as $prod)
                                 @php
@@ -56,7 +55,8 @@
                                             <div class="single-product-image">
                                                 <td>
                                                     @if (!empty($option_name->image))
-                                                        <img  class="image-item-01" src="{{ asset('images/products/' . $option_name->image) }}"
+                                                        <img class="image-item-01"
+                                                            src="{{ asset('images/products/' . $option_name->image) }}"
                                                             alt="Product Image" width="100" height="100">
                                                     @endif
                                                 </td>
@@ -69,7 +69,12 @@
                                             </div>
 
                                             <div class="single-cart-button">
-                                                <a href="#" class="btn btn-title">Add to Wishlist</a>
+                                                <input type="hidden" name="" value="{{ $product_id }}"
+                                                    class="prod_id">
+                                                <input type="hidden" step="1" min="1" max="10000"
+                                                    name="quantity" class="input-qty" value="1">
+                                                <button type="submit" class="btn btn-title addToCartBtn">Add to wishlist <i
+                                                        class="fa fa-shopping-basket ms-2"></i></button>
                                             </div>
                                         </div>
                                     </a>
