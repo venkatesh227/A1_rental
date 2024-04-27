@@ -10,14 +10,12 @@ $(document).ready(function() {
     
     $('.decrement-btn').click(function(e) {
         e.preventDefault();
-        // var inc_value = $('.input-qty').val();
         var dec_value = $(this).closest('.product_data').find('.input-qty').val();
         var value = parseInt(dec_value, 10);
         value = isNaN(value) ? 0 : value;
         if (value > 1) {
             value--;
             $(this).closest('.product_data').find('.input-qty').val(value);
-            // var inc_value = $('.input-qty').val(value);
 
         }
 
@@ -44,8 +42,11 @@ $(document).ready(function() {
             },
 
             success: function(response) {
-                swal(response.status);
+                swal(response.status).then(function() {
+                    window.location.reload();
+                });
             }
+            
         });
 
     });
@@ -65,11 +66,10 @@ $(document).ready(function() {
                 'prod_id' : prod_id,
             },
         
-            success: function (response) {
-                window.location.reload();
-                swal("",response.status,"success");
-               
-                
+            success: function(response) {
+                swal(response.status).then(function() {
+                    window.location.reload();
+                });
             }
         });
     });
@@ -93,11 +93,11 @@ $(document).ready(function() {
                 'product_qty': product_qty
             },
             dataType: "json",
-            success: function (response) {
-                swal(response.status, function(){
-                    window.location.reload(true); 
-                });
+            success: function(response) {
+                window.location.reload();
             },
+            
+            
             error: function(xhr, status, error) {
                 swal("Error occurred: " + error); 
             }

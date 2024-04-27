@@ -27,10 +27,10 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="vertical-menu">
-                            <a href="#" class="active">Home</a>
+                            <a href="{{url('/')}}" class="active">Home</a>
                             <a href="#">About</a>
                             <a href="#">Services</a>
-                            <a href="#">Contact</a>
+                            <a href="{{url('email')}}">Contact</a>
                         </div>
                     </div>
 

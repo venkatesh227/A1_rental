@@ -1,4 +1,3 @@
-
 @extends('layouts.front')
 @section('content')
     <div class="breadcrumb-area" style="background-image:url('{{ asset('fronted/img/banner/b1.jpg') }}')">
@@ -11,7 +10,7 @@
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>PRODUCTS</li>
-                                <li>Details</li>
+                                <li>DETAILS</li>
                             </ul>
                         </div>
                     </div>
@@ -27,10 +26,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="vertical-menu">
-                        <a href="#" class="active">Home</a>
+                        <a href="{{url('/')}}" class="active">Home</a>
                         <a href="#">About</a>
                         <a href="#">Services</a>
-                        <a href="#">Contact</a>
+                        <a href="{{url('email')}}">Contact</a>
                     </div>
                 </div>
 
@@ -58,7 +57,7 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                
+
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -66,7 +65,8 @@
                                     <h4 class="entry-title">{{ $Product->name }}</h4>
                                     <p>{{ $Product->small_description }}</p>
 
-                                    <div class="price">{{ '$'.$Product->selling_price }}<del>{{ '$'.$Product->original_price }}</del></div>
+                                    <div class="price">
+                                        {{ '$' . $Product->selling_price }}<del>{{ '$' . $Product->original_price }}</del></div>
                                     <form>
                                         <div class="quantity buttons_added">
                                             <input type="hidden" name="" value="{{ $Product->id }}"
@@ -108,7 +108,8 @@
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="review-tab" data-bs-toggle="tab"
                                                 data-bs-target="#review" type="button" role="tab"
-                                                aria-controls="review" aria-selected="false" tabindex="-1">Gallery</button>
+                                                aria-controls="review" aria-selected="false"
+                                                tabindex="-1">Gallery</button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="delivery-tab" data-bs-toggle="tab"
@@ -135,7 +136,7 @@
                                             </p>
                                         </div>
 
-                                       
+
                                         <div class="tab-pane review-tab fade" id="review" role="tabpanel"
                                             aria-labelledby="review-tab">
                                             <div class="row">
