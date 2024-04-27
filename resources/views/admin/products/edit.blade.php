@@ -118,20 +118,20 @@
                                 @enderror
                             </div>
 
-
                             <div class="col-md-6">
-                                <label for="price" class="col-form-label">Original Price</label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    value="{{ $Products->price }}">
-                                @error('price')
+                                <label for="original_price" class="col-form-label">Original Price</label>
+                                <input type="text" class="form-control" id="original_price" name="original_price"
+                                    value="{{ $Products->original_price }}">
+                                @error('original_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            
 
                             <div class="col-md-6">
                                 <label for="selling_price" class="col-form-label">Selling Price</label>
                                 <input type="text" class="form-control" id="selling_price" name="selling_price"
-                                    value="{{ $Products->price }}">
+                                    value="{{ $Products->selling_price }}">
                                 @error('selling_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

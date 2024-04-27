@@ -40,7 +40,7 @@
                                     <th>Selling Price</th>
                                     <th>Quantity</th>
                                     <th>image</th>
-                                
+
                                     <th>Created At</th>
                                     <th>status</th>
                                     <th scope="col" class="not-export-column">Action</th>
@@ -68,10 +68,9 @@
                                         <td>{{ $item->description }}</td>
                                         <td>{{ $item->additional_info }}</td>
                                         <td>{{ $item->shipping_delivery }}</td>
-                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->original_price }}</td>
                                         <td>{{ $item->selling_price }}</td>
                                         <td>{{ $item->qty }}</td>
-                                
                                         <td>
                                             @if (!empty($option_name->image))
                                                 <img src="{{ asset('images/products/' . $option_name->image) }}"
@@ -80,7 +79,7 @@
 
                                         </td>
                                         <td>{{ date('d-m-y', strtotime($item->created_at)) }}</td>
-                                        {{-- <td>{{ $item->status }}</td> --}}
+                                    
                                         <td>
                                             <input class="status-toggle" type="checkbox" data-user-id="{{ $item->id }}"
                                                 data-status="{{ $item->status }}"
@@ -93,7 +92,7 @@
                                                 class="btn btn-primary">Edit</a>
                                         </td>
 
-                      
+
                                     </tr>
                                 @endforeach
 
@@ -115,14 +114,14 @@
     });
 
 
-    
+
     $(document).ready(function() {
         $('.status-toggle').click(function() {
             var userId = $(this).data('user-id');
 
             var currentStatus = $(this).prop('checked') === true ? 1 : 0;
-        //  console.log(currentStatus);
-         
+            //  console.log(currentStatus);
+
             // Passing 2 parameters in ajax url in Laravel route
             $.ajax({
                 url: "{{ route('product-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"

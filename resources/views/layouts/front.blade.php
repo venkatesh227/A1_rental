@@ -105,7 +105,7 @@
             type: "GET",
             url: "/product-list",
             success: function(response) {
-                console.log(response);
+               
                 availableTags = response; // Store response in availableTags array
                 startAutoComplete(); // Call startAutoComplete function after getting the response
             },

@@ -209,8 +209,8 @@ class FrontendController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $item->prod_id,
                 'qty' => $item->prod_qty,
-                'subtotal' => $item->products->price * $item->prod_qty,
-                'single_price' => $item->products->price,
+                'subtotal' => $item->products->selling_price * $item->prod_qty,
+                'single_price' => $item->products->selling_price,
                 'created_by' => session('userId'),
 
             ]);
