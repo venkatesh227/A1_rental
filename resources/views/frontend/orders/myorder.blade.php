@@ -10,7 +10,7 @@
                             <h1 class="page-title">My Orders</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
+                                <li>MY ORDERS</li>
 
                             </ul>
                         </div>

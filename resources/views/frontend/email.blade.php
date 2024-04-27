@@ -10,8 +10,7 @@
                             <h1 class="page-title">Contact Us</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
-                                <li>Details</li>
+                                <li>CONTACT US</li>
                             </ul>
                         </div>
                     </div>
@@ -25,10 +24,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="vertical-menu">
-                        <a href="{{url('/')}}" class="active">Home</a>
+                        <a href="{{ url('/') }}" class="active">Home</a>
                         <a href="#">About</a>
                         <a href="#">Services</a>
-                        <a href="{{url('email')}}">Contact</a>
+                        <a href="{{ url('email') }}">Contact</a>
                     </div>
                 </div>
                 <div class="col-md-9">
