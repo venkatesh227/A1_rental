@@ -66,7 +66,7 @@
                                     <h4 class="entry-title">{{ $Product->name }}</h4>
                                     <p>{{ $Product->small_description }}</p>
 
-                                    <div class="price">{{ '$'.$Product->price }}<del>$35.50</del></div>
+                                    <div class="price">{{ '$'.$Product->selling_price }}<del>{{ '$'.$Product->original_price }}</del></div>
                                     <form>
                                         <div class="quantity buttons_added">
                                             <input type="hidden" name="" value="{{ $Product->id }}"

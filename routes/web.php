@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\OrderController;
 
 Route::get('/', [FrontendController::class, 'index']);
 
+
 Route::get('login', [MainController::class, 'login'])->name('login');
 
 Route::post('login_check', [MainController::class, 'login_check']);

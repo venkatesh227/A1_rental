@@ -61,12 +61,12 @@ class ProductController extends Controller
             'slug' => 'required',
             'description' => 'required',
             'small_description' => 'required',
-            'price' => 'required',
+            'selling_price' => 'required|numeric',
             'qty' => 'required',
             'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
-            'selling_price' => 'required',
+            'original_price' => 'required|numeric',
 
             // 'image.*' => 'required|mimes:jpeg,png,gif',
         ], [
@@ -75,8 +75,10 @@ class ProductController extends Controller
             'name.required' => 'Product is Required',
             'name.unique' => 'Product is Already Exists',
             'slug.required' => 'Slug is Required',
-            'price.required' => 'Original Price is Required',
-            'selling_price.required' => 'Selling Price is Required',
+            'selling_price.required' => 'Original Price is Required',
+            'original_price.required' => 'Selling Price is Required',
+            'selling_price.numeric' => 'Selling Price Must be a Numeric Value',
+            'original_price.numeric' => 'Original Price Must be a Numeric Value',
             'qty.required' => 'Quantity is Required',
             'description.required' => 'Large Description is Required',
             'small_description.required' => 'Small Description is Required',
@@ -101,8 +103,8 @@ class ProductController extends Controller
 
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
-        $Product->price = $request->input('price');
         $Product->selling_price = $request->input('selling_price');
+        $Product->original_price = $request->input('original_price');
         $Product->qty = $request->input('qty');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
         $Product->created_by = session('adminId');
@@ -165,8 +167,6 @@ class ProductController extends Controller
 
     public function update_products(Request $request, $id)
     {
-
-
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
@@ -174,12 +174,12 @@ class ProductController extends Controller
             'slug' => 'required',
             'small_description' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'selling_price' => 'required',
             'qty' => 'required',
             'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
-            'selling_price' => 'required',
+            'original_price' => 'required',
 
             // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
         ], [
@@ -188,9 +188,9 @@ class ProductController extends Controller
             'name.required' => 'Product is Required',
             'name.unique' => 'Product is Already Exists',
             'slug.required' => 'Slug is Required',
-            'price.required' => 'Price is Required',
-            'qty.required' => 'Quantity is Required',
             'selling_price.required' => 'Selling Price is Required',
+            'qty.required' => 'Quantity is Required',
+            'original_price.required' => 'Selling Price is Required',
             'image.required' => 'Image is Required',
             'small_description.required' => 'Small Description is Required',
             'description.required' => 'Large Description is Required',
@@ -210,7 +210,7 @@ class ProductController extends Controller
 
         $Product->slug = $request->input('slug');
 
-        $Product->selling_price = $request->input('selling_price');
+        $Product->original_price = $request->input('original_price');
         $Product->title = $request->input('title');
 
         $Product->additional_info = $request->input('additional_info');
@@ -219,7 +219,7 @@ class ProductController extends Controller
 
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
-        $Product->price = $request->input('price');
+        $Product->selling_price = $request->input('selling_price');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
 
         $Product->updated_by = session('userId');
@@ -231,29 +231,28 @@ class ProductController extends Controller
 
 
         $unlinkimages = array();
-        $productImages = Product_images::where('product_id', $id)->get();
 
 
 
-        if ($productImages) {
-            foreach ($productImages as $value) {
-                //  print_r($value); // output is 111
-                if ($value && isset($value->image)) {
-                    $unlinkimages[] = $value->image;
+        if (!empty($request->hasFile('image'))) {
+
+            $productImages = Product_images::where('product_id', $id)->get();
+
+            if ($productImages) {
+                foreach ($productImages as $value) {
+                    if ($value && isset($value->image)) {
+                        $unlinkimages[] = $value->image;
+                    }
+                }
+
+                foreach ($unlinkimages as $imagePath) {
+                    $fullImagePath = public_path('images/products/' . trim($imagePath)); // Trim to remove any whitespace
+
+                    if (file_exists($fullImagePath)) {
+                        unlink($fullImagePath); // Delete the file
+                    }
                 }
             }
-
-            foreach ($unlinkimages as $imagePath) {
-                $fullImagePath = public_path('images/products/' . trim($imagePath)); // Trim to remove any whitespace
-                
-                if (file_exists($fullImagePath)) {
-                    unlink($fullImagePath); // Delete the file
-                }
-            }
-        }
-
-
-        if ($request->hasFile('image')) {
 
             if ($files = $request->file('image')) {
 
@@ -273,24 +272,26 @@ class ProductController extends Controller
                     $counter++; // Increment the counter for the next file
                 }
             }
-        }
 
+            foreach ($images as $key => $image) {
 
-        foreach ($images as $key => $image) {
+                $productImage = Product_images::where('product_id', $id)->skip($key)->first();
 
-            $productImage = Product_images::where('product_id', $id)->skip($key)->first();
-
-            if ($productImage) {
-                $productImage->update([
-                    'image' => $image,
-                    'updated_at' => now(),
-                    'updated_by' => session('adminId'),
-                ]);
+                if ($productImage) {
+                    $productImage->update([
+                        'image' => $image,
+                        'updated_at' => now(),
+                        'updated_by' => session('adminId'),
+                    ]);
+                }
             }
         }
 
         return redirect('products')->with('status', "Product Updated Successfully");
     }
+
+    
+
 
 
 

@@ -52,7 +52,7 @@
                                                     @endif
                                                 </th>
                                                 <td class="item-name"><a href="#">{{ $item->products->name }}</a></td>
-                                                <td class="price">${{ number_format($item->products->price, 2) }}</td>
+                                                <td class="price">${{ number_format($item->products->selling_price, 2) }}</td>
                                                 <td class="table-quantity">
                                                     <form>
                                                         <div class="quantity buttons_added">
@@ -69,14 +69,14 @@
                                                     </form>
                                                 </td>
 
-                                                <td>${{ number_format((float) $item->products->price * (int) $item->prod_qty, 2) }}
+                                                <td>${{ number_format((float) $item->products->selling_price * (int) $item->prod_qty, 2) }}
                                                 </td>
 
 
                                                 <td><button class="delete-cart-item"><i class="fa fa-close"></i></button>
                                                 </td>
                                             </tr>
-                                            @php $total += (float)$item->products->price * (int)$item->prod_qty; @endphp
+                                            @php $total += (float)$item->products->selling_price * (int)$item->prod_qty; @endphp
                                         @endforeach
                                     </tbody>
                                 </table>
