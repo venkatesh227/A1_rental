@@ -1,16 +1,4 @@
-<head>
-    <style>
-        /* b {
-            color: black;
-            background: 20px;
 
-            font-size: 25px;
-            /* Set the font size here */
-        }
-
-        */
-    </style>
-</head>
 @extends('admin.index')
 
 @section('content')
@@ -100,10 +88,8 @@
     $(document).ready(function() {
         $('.status-toggle').click(function() {
             var userId = $(this).data('user-id');
-
             var currentStatus = $(this).prop('checked') === true ? 1 : 0;
-        //  console.log(currentStatus);
-         
+            //  console.log(currentStatus);
             // Passing 2 parameters in ajax url in Laravel route
             $.ajax({
                 url: "{{ route('subcategory-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"

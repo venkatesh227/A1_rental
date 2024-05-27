@@ -66,15 +66,18 @@
                                     <h4 class="entry-title">{{ $Product->name }}</h4>
                                     <p>{{ $Product->small_description }}</p>
 
-                                    <div class="price">{{ '$'.$Product->selling_price }}<del>{{ '$'.$Product->original_price }}</del></div>
+                                    <div class="price">{{ '$'.$Product->selling_price }} <del>{{ '$'.$Product->original_price }}</del></div>
                                     <form>
                                         <div class="quantity buttons_added">
                                             <input type="hidden" name="" value="{{ $Product->id }}"
                                                 class="prod_id">
-                                            <input type="button" value="-" class="minus decrement-btn">
+                                                <input type="button" value="-"
+                                                class="minus  decrement-btn">
                                             <input type="number" step="1" min="1" max="10000"
                                                 name="quantity" class="input-qty" value="1">
-                                            <input type="button" value="+" class="plus increment-btn">
+                                            <input type="button" value="+"
+                                                class="plus  increment-btn ">
+
                                         </div>
                                         <button type="submit" class="btn btn-title addToCartBtn">Add to wishlist <i
                                                 class="fa fa-shopping-basket ms-2"></i></button>

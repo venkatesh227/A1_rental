@@ -45,7 +45,8 @@ Route::get('email', [FrontendController::class, 'view_email']);
 Route::post('send-mail', [FrontendController::class, 'send_mail']);
 Route::post('/add-to-cart', [FrontendController::class, 'add_to_cart']);
 Route::post('delete-cart-item', [FrontendController::class, 'delete_cart_item']);
-Route::post('update-cart', [FrontendController::class, 'updatecart']);
+// Route::post('/update-cart', [FrontendController::class, 'updatecart']);
+Route::post('update-cart', [FrontendController::class, 'updateCart'])->name('update-cart');
 Route::get('view_my_order/{id}/{user_id}', [FrontendController::class, 'view_my_order']);
 Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::get('cart', [FrontendController::class, 'view_cart']);

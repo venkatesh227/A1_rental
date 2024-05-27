@@ -59,15 +59,15 @@ class CategoryController extends Controller
     public function upadate_category(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,' . $id,
+            'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:categories,name,' . $id,
             'image' => 'nullable|mimes:jpeg,png,gif',
         ], [
             'name.required' => 'Category Name is Required',
+            'name.regex' => 'Spaces and Letters should be Allowed.',
             'name.unique' => 'Category Name Already Exists',
             'image.required' => 'Image is Required',
             'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
-
 
         $category = Category::find($id);
         $category->name = $request->input('name');

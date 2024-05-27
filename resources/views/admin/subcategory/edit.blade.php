@@ -29,7 +29,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row align-items-center">
-                                <label class="col-md-12 col-form-label">Category</label>
+                                <label class="col-md-12 col-form-label">Category<span style="color: red;">*</span></label>
                                 <div class="col-md-12">
                                     <select class="form-select" id="category_id" name="category_id">
                                         <option value=""><b>Select a Category</b></option>
@@ -47,7 +47,7 @@
 
 
 
-                                <label class="col-md-12 mt-2">Subcategory</label>
+                                <label class="col-md-12 mt-2">Subcategory<span style="color: red;">*</span></label>
                                 <div class="col-md-12 mt-2">
                                     <input type="text" class="form-control" name="name"
                                         value="{{ $subcategory->name }}">
@@ -58,7 +58,7 @@
 
 
                                 <div class="col-md-12">
-                                    <label for="image" class="col-form-label">Image</label>
+                                    <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
                                     <input type="file" class="form-control" id="image" name="image" value="">
 
                                     @if ($subcategory->image)

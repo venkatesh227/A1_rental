@@ -22,14 +22,14 @@ class OrderController extends Controller
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
         $userDetails = userRegister::find($user_id);
-         
+
         return view('admin.order.order_details', compact('orderDetails', 'userDetails'));
     }
 
     public function update_order_status(Request $request, $id)
     {
         $orders = Order::find($id);
-        $orders->status=$request->input('order_status');
+        $orders->status = $request->input('order_status');
         $orders->update();
 
         return redirect('orders')->with('status', "Order Updated Successfully");

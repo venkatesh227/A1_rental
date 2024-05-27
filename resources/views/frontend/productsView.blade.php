@@ -12,7 +12,7 @@
                                 <li><a href="{{ url('/') }}">HOME</a></li>
                                 <li>PRODUCTS</li>
                                 @if (!empty($Product))
-                                    <li>{{ strtoupper($Product[0]->name) }}</li>
+                                    <li>{{ strtoupper($Product[0]->Subcategory->name) }}</li>
                                 @endif
                             </ul>
                         </div>
@@ -56,7 +56,8 @@
                                             <div class="single-product-image">
                                                 <td>
                                                     @if (!empty($option_name->image))
-                                                        <img  class="image-item-01" src="{{ asset('images/products/' . $option_name->image) }}"
+                                                        <img class="image-item-01"
+                                                            src="{{ asset('images/products/' . $option_name->image) }}"
                                                             alt="Product Image" width="100" height="100">
                                                     @endif
                                                 </td>
@@ -67,24 +68,41 @@
                                                     <h5>{{ $prod->name }}</h5>
                                                 </div>
                                             </div>
-
+                                    </a>
+                                    {{-- 
                                             <div class="single-cart-button">
                                                 <a href="#" class="btn btn-title">Add to Wishlist</a>
-                                            </div>
-                                        </div>
-                                    </a>
+                                            </div> --}}
+
+
+                                    <div class="quantity buttons_added">
+                                        <input type="hidden" name="" value="{{ $prod->id }}" class="prod_id">
+                                        <input type="hidden" value="-" class="minus decrement-btn">
+                                        <input type="hidden" step="1" min="1" max="10000" name="quantity"
+                                            class="input-qty" value="1">
+                                        <input type="hidden" value="+" class="plus increment-btn">
+                                    </div>
+                                    <button type="submit" class="btn btn-title"
+                                        onclick="addToCartBtn({{ $prod->id }})">Add to wishlist <i
+                                            class="fa fa-shopping-basket ms-2"></i></button>
+
+
+
+
                                 </div>
-                            @endforeach
-                        @else
-                            <!-- Check if there is an error message -->
 
-                            <div class="alert alert-danger text-center">No Products found for this </div>
-                        @endif
                     </div>
-                </div>
+                    @endforeach
+                @else
+                    <!-- Check if there is an error message -->
 
+                    <div class="alert alert-danger text-center">No Products found for this </div>
+                    @endif
+                </div>
             </div>
 
         </div>
+
+    </div>
     </div>
 @endsection

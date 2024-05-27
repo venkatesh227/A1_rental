@@ -25,17 +25,18 @@ class SubcategoryController extends Controller
     }
 
 
-    
+
     public  function insert_subcategory(Request $request)
     {
         $request->validate([
             'category_id' => 'required',
-            'name' => 'required|unique:sub_categories',
+            'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:sub_categories',
             'image' => 'required|mimes:jpeg,png,gif',
         ], [
-            'category_id.required' => 'Category is required.',
-            'name.required' => 'Subcategory name is required.',
-            'name.unique' => 'Subcategory name already exists.',
+            'category_id.required' => 'Category is Required.',
+            'name.required' => 'Subcategory Name is Required.',
+            'name.regex' => 'Spaces and Letters Should be Allowed.',
+            'name.unique' => 'Subcategory Name Already Exists.',
             'image.required' => 'Image is Required',
             'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
@@ -74,21 +75,19 @@ class SubcategoryController extends Controller
 
 
     public function upadate_subcategory(Request $request, $id)
-    {  
-
+    {
         $request->validate([
             'category_id' => 'required',
-            'name' => 'required|unique:sub_categories,name,'.$id,
-            'image' => 'required|mimes:jpeg,png,gif',
+            'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:sub_categories,name,' . $id,
+            'image' => 'nullable|mimes:jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is required.',
             'name.required' => 'Subcategory name is required.',
+            'name.regex' => 'Spaces and Letters should be Allowed.',
             'name.unique' => 'Subcategory name already exists.',
             'image.required' => 'Image is Required',
             'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
-
-
         $subcategory = Subcategory::find($id);
         $subcategory->category_id = $request->input('category_id');
         $subcategory->name = $request->input('name');
@@ -102,20 +101,20 @@ class SubcategoryController extends Controller
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only JPG, PNG, and GIF Images are Allowed',
             ]);
-        
+
             // Delete old image if it exists
             if ($subcategory->image && file_exists(public_path('images/subcategories/' . $subcategory->image))) {
                 unlink(public_path('images/subcategories/' . $subcategory->image));
             }
-        
+
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            
+
             // Make sure the 'subcategories' folder exists inside the 'images' folder
             $image->move(public_path('images/subcategories/'), $filename);
             $subcategory->image = $filename;
         }
-        
+
 
 
         $subcategory->updated_at = now();
@@ -124,7 +123,7 @@ class SubcategoryController extends Controller
     }
 
 
-    
+
 
     public function subcategory_status($subcategory_id, $currentStatus)
     {
@@ -136,6 +135,4 @@ class SubcategoryController extends Controller
 
         return response()->json(['status' => 'success', 'user' => $updatesubCategory]);
     }
-
-
 }

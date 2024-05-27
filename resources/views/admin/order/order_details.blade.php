@@ -1,11 +1,10 @@
--@extends('admin.index')
+@extends('admin.index')
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card mx-5">
-
                     <div class="card-header bg-primary">
                         <span class="text-white fs-4"> View Order</span>
                         <a href="{{ url('orders') }}" class="btn btn-warning float-end"> <i class="fa fa-reply"></i>Back</a>
@@ -15,7 +14,7 @@
                             <div class="col-md-6">
                                 <h4 class="mb-4">Delivery Details</h4>
                                 <hr>
-                                <div class="container">
+                                <div class="container col-md-9">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
@@ -114,4 +113,6 @@
             </div>
         </div>
     </div>
+
+    
 @endsection

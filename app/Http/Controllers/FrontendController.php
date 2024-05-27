@@ -104,6 +104,7 @@ class FrontendController extends Controller
         if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
 
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
+
             return view('frontend.productsView', compact('category', 'Product'));
         } else {
             return view('frontend.productsView', compact('category'));
@@ -115,7 +116,6 @@ class FrontendController extends Controller
         $category  = Category::all();
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
-
             if ($Product) {
                 $productImage = Product_images::where('product_id', $Product->id)->first();
                 $productImages = Product_images::where('product_id', $Product->id)->get();
@@ -146,9 +146,10 @@ class FrontendController extends Controller
                 return response()->json(['status' =>  "Added To Cart"]);
             }
         } else {
-            return response()->json(['status' => "login to continue"]);
+            return response()->json(['status' => "Login to continue", 'redirect' => true]);
         }
     }
+
     public function view_cart()
     {
         $category = Category::all();
@@ -177,7 +178,7 @@ class FrontendController extends Controller
         }
     }
 
-    public function updatecart(Request $request)
+    public function updateCart(Request $request)
     {
         if (session('userId')) {
             $prod_id = $request->input('prod_id');
@@ -192,6 +193,8 @@ class FrontendController extends Controller
             return response()->json(['status' => "Login to continue"]);
         }
     }
+
+
     public function place_order(Request $request)
     {
         $order = new Order();
@@ -230,11 +233,11 @@ class FrontendController extends Controller
         return view('frontend.orders.myorder', compact('orders'));
     }
 
-    public function view_my_order($id,$user_id)
+    public function view_my_order($id, $user_id)
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
         $userDetails =  userRegister::find($user_id);
-         
+
         return view('frontend.orders.view', compact('orderDetails', 'userDetails'));
     }
 }

@@ -52,26 +52,28 @@
                                                     @endif
                                                 </th>
                                                 <td class="item-name"><a href="#">{{ $item->products->name }}</a></td>
-                                                <td class="price">${{ number_format($item->products->selling_price, 2) }}</td>
+                                                <td class="price">${{ number_format($item->products->selling_price, 2) }}
+                                                </td>
                                                 <td class="table-quantity">
-                                                    <form>
-                                                        <div class="quantity buttons_added">
-                                                            <input type="hidden" name=""
-                                                                value="{{ $item->prod_id }}" class="prod_id">
-                                                            <input type="button" value="-"
-                                                                class="minus changeqty decrement-btn">
-                                                            <input type="number" step="1" min="1"
-                                                                max="10000" name="quantity" class="input-qty"
-                                                                value="{{ $item->prod_qty }}">
-                                                            <input type="button" value="+"
-                                                                class="plus changeqty increment-btn ">
-                                                        </div>
-                                                    </form>
+                                                    {{-- <form> --}}
+                                                    <div class="quantity buttons_added">
+                                                        <input type="hidden" name="" value="{{ $item->prod_id }}"
+                                                            class="prod_id">
+                                                        <input type="button" value="-"
+                                                            class="minus changeqty decrement-btn">
+                                                        <input type="number" step="1" min="1" max="10000"
+                                                            name="quantity" class="input-qty" value="{{ $item->prod_qty }}">
+                                                        <input type="button" value="+"
+                                                            class="plus changeqty increment-btn ">
+                                                    </div>
+                                                    {{-- </form> --}}
                                                 </td>
 
-                                                <td>${{ number_format((float) $item->products->selling_price * (int) $item->prod_qty, 2) }}
+                                                {{-- <td>${{ number_format((float) $item->products->selling_price * (int) $item->prod_qty, 2) }}
+                                                </td> --}}
+                                                <td class="total-price">
+                                                    ${{ number_format((float) $item->products->selling_price * (int) $item->prod_qty, 2) }}
                                                 </td>
-
 
                                                 <td><button class="delete-cart-item"><i class="fa fa-close"></i></button>
                                                 </td>

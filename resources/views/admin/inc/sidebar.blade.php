@@ -5,14 +5,15 @@
        </div>
        <!--navigation-->
        <ul class="metismenu" id="menu">
-           <li>
+        
+           {{-- <li>
                <a href="">
                    <div class="parent-icon"><i class="bx bx-home-alt"></i>
                    </div>
                    <div class="menu-title">Dashboard</div>
                </a>
 
-           </li>
+           </li> --}}
 
            <li>
                <a href="{{ url('categories') }}">

@@ -40,7 +40,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-6">
-                            <label for="input1" class="form-label">Category Name</label>
+                            <label for="input1" class="form-label">Category Name<span style="color: red;">*</span></label>
                             <input type="text" name="name" class="form-control" placeholder="Category Name"
                                 value="{{ $category->name }}">
                             @error('name')
@@ -50,7 +50,7 @@
 
 
                         <div class="col-md-6">
-                            <label for="image" class="col-form-label">Image</label>
+                            <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
                             <input type="file" class="form-control" id="image" name="image" value="">
 
                             @if ($category->image)

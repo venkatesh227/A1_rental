@@ -30,7 +30,7 @@
                     <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-6">
-                            <label for="input1" class="form-label">Category Name</label>
+                            <label for="input1" class="form-label">Category Name</label><span style="color: red;">*</span>
                             <input type="text" name="name" class="form-control" placeholder="Category Name"
                                 value="{{ old('name') }}">
                             @error('name')
@@ -41,7 +41,7 @@
 
 
                         <div class="col-md-6">
-                            <label for="image" class="col-form-label">Image</label>
+                            <label for="image" class="col-form-label">Image</label><span style="color: red;">*</span>
                             <input type="file" class="form-control" id="image" name="image"
                                 value="{{ old('image') }}">
                             @error('image')

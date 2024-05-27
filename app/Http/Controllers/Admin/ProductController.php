@@ -67,8 +67,7 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required|numeric',
-
-            // 'image.*' => 'required|mimes:jpeg,png,gif',
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',
@@ -82,12 +81,11 @@ class ProductController extends Controller
             'qty.required' => 'Quantity is Required',
             'description.required' => 'Large Description is Required',
             'small_description.required' => 'Small Description is Required',
-
             'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
-            // 'image.*.required' => 'Image is required.',
-            // 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+            'image.required' => 'Image is Required',
+            'image.image' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
 
 
@@ -95,12 +93,9 @@ class ProductController extends Controller
         $Product->subcategory_id = $request->input('subcategory_id');
         $Product->name = $request->input('name');
         $Product->slug = $request->input('slug');
-
         $Product->title = $request->input('title');
-
         $Product->additional_info = $request->input('additional_info');
         $Product->shipping_delivery = $request->input('shipping_delivery');
-
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
         $Product->selling_price = $request->input('selling_price');
@@ -180,7 +175,7 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required',
-
+            'image' => ['image', 'mimes:jpeg,png,jpg'],
             // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
         ], [
             'category_id.required' => 'Category is Required',
@@ -190,41 +185,32 @@ class ProductController extends Controller
             'slug.required' => 'Slug is Required',
             'selling_price.required' => 'Selling Price is Required',
             'qty.required' => 'Quantity is Required',
-            'original_price.required' => 'Selling Price is Required',
+            'original_price.required' => 'Original Price is Required',
             'image.required' => 'Image is Required',
             'small_description.required' => 'Small Description is Required',
             'description.required' => 'Large Description is Required',
             'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
-            'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+            'image.image' => 'Only PNG, GIF, and JPG files are accepted',
         ]);
 
 
         $Product = Product::find($id);
         $Product->subcategory->category->category_id = $request->input('category_id');
-
         $Product->subcategory_id = $request->input('subcategory_id');
-
         $Product->name = $request->input('name');
-
         $Product->slug = $request->input('slug');
-
         $Product->original_price = $request->input('original_price');
         $Product->title = $request->input('title');
-
         $Product->additional_info = $request->input('additional_info');
         $Product->shipping_delivery = $request->input('shipping_delivery');
-
-
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
         $Product->selling_price = $request->input('selling_price');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
-
         $Product->updated_by = session('userId');
         $Product->updated_at = now();
-
         $Product->update();
         $images = [];
         $counter = 1;
@@ -290,7 +276,7 @@ class ProductController extends Controller
         return redirect('products')->with('status', "Product Updated Successfully");
     }
 
-    
+
 
 
 

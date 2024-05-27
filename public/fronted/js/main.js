@@ -424,6 +424,12 @@
         /*---------------------------------------
             Quantity
         ---------------------------------------*/
+
+        Number.prototype.getDecimals = function() {
+            if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
+            return this.toString().split(".")[1].length || 0;
+        };
+        
         function wcqib_refresh_quantity_increments() {
             jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
                 var c = jQuery(b);
