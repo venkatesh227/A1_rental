@@ -22,17 +22,16 @@ use App\Http\Controllers\Admin\OrderController;
 
 Route::get('/', [FrontendController::class, 'index']);
 
-
 Route::get('login', [MainController::class, 'login'])->name('login');
 
 Route::post('login_check', [MainController::class, 'login_check']);
 
-Route::get('dashboard',  [MainController::class, 'dashboard']);
+Route::get('dashboard', [MainController::class, 'dashboard']);
 Route::get('logout', [MainController::class, 'logout']);
 Route::get('user-login', [MainController::class, 'user_login'])->name('user-login');
 Route::post('user-login-check', [MainController::class, 'user_login_check']);
 Route::get('user-logout', [MainController::class, 'user_logout']);
-Route::get('register',  [MainController::class, 'register']);
+Route::get('register', [MainController::class, 'register']);
 Route::post('add_register', [MainController::class, 'add_register']);
 
 
@@ -51,11 +50,10 @@ Route::get('view_my_order/{id}/{user_id}', [FrontendController::class, 'view_my_
 Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::get('cart', [FrontendController::class, 'view_cart']);
     Route::post('place-order', [FrontendController::class, 'place_order']);
-    Route::get('myorders', [FrontendController::class,'myorders']);
+    Route::get('myorders', [FrontendController::class, 'myorders']);
 });
 
-
-
+Route::get('captcha', [FrontendController::class, 'showCaptcha']);
 
 Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('categories', [CategoryController::class, 'index']);
@@ -109,8 +107,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('view_order/{id}/{user_id}', [OrderController::class, 'view_order']);
 
     Route::post('update_order_status/{id}/', [OrderController::class, 'update_order_status']);
-  
+
     // 
 
-   
+
 });

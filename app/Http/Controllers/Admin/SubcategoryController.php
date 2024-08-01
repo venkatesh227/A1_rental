@@ -31,7 +31,7 @@ class SubcategoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:sub_categories',
-            'image' => 'required|mimes:jpeg,png,gif',
+            'image' => 'required|mimes:jpeg,jpg,png,gif',
         ], [
             'category_id.required' => 'Category is Required.',
             'name.required' => 'Subcategory Name is Required.',
@@ -79,7 +79,7 @@ class SubcategoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:sub_categories,name,' . $id,
-            'image' => 'nullable|mimes:jpeg,png,gif',
+            'image' => 'nullable|mimes:jpeg,jpg,png,gif',
         ], [
             'category_id.required' => 'Category is required.',
             'name.required' => 'Subcategory name is required.',
@@ -96,7 +96,7 @@ class SubcategoryController extends Controller
 
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'required|mimes:jpeg,png,gif',
+                'image' => 'required|mimes:jpeg,jpg,png,gif',
             ], [
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only JPG, PNG, and GIF Images are Allowed',

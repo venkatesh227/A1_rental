@@ -1,19 +1,37 @@
 $(document).ready(function () {
+    // $('.increment-btn').click(function (e) {
+    //     e.preventDefault();
+    //     var inc_value = parseInt($(this).closest('.product_data').find('.input-qty').val(), 10);
+    //     console.log(inc_value);
+    //     // return;
+    //     inc_value = isNaN(inc_value) ? 0 : inc_value;
+
+    //     inc_value++;
+    //     $(this).closest('.product_data').find('.input-qty').val(inc_value);
+    // });
+
     $('.increment-btn').click(function (e) {
         e.preventDefault();
-        var inc_value = parseInt($(this).closest('.product_data').find('.input-qty').val(), 10);
-        // console.log(inc_value);
-        // return;
-        inc_value = isNaN(inc_value) ? 0 : inc_value;
 
-        inc_value++;
-        $(this).closest('.product_data').find('.input-qty').val(inc_value);
+        var $productData = $(this).closest('.product_data');
+        var inc_value = parseInt($productData.find('.input-qty').val(), 10);
+        var maxValue = parseInt($productData.find('.input-qty').attr('max'), 10);
+
+        inc_value = isNaN(inc_value) ? 0 : inc_value;
+        maxValue = isNaN(maxValue) ? 0 : maxValue;
+
+        // Increment only if current value is less than max value
+        if (maxValue != 0 && inc_value < maxValue) {
+            inc_value++;
+            $(this).closest('.product_data').find('.input-qty').val(inc_value);
+        }
     });
 
     $('.decrement-btn').click(function (e) {
         e.preventDefault();
         // var inc_value = $('.input-qty').val();
         var dec_value = $(this).closest('.product_data').find('.input-qty').val();
+        console.log(dec_value);
         var value = parseInt(dec_value, 10);
         value = isNaN(value) ? 0 : value;
         if (value > 1) {
@@ -28,7 +46,7 @@ $(document).ready(function () {
     // add to cart
     $('.addToCartBtn').click(function (e) {
         e.preventDefault();
-        var product_qty = $('.input-qty').val();
+        var product_qty = $(this).closest('.product_data').find('.input-qty').val();
         var product_id = $('.prod_id').val();
         $.ajaxSetup({
             headers: {

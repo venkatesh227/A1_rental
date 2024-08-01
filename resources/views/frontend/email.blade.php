@@ -1,109 +1,137 @@
 @extends('layouts.front')
 @section('content')
-    <!-- Banner Starts -->
-    <div class="breadcrumb-area" style="background-image:url('{{ asset('fronted/img/banner/b1.jpg') }}')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-inner">
-                        <div class="section-title text-center mb-0">
-                            <h1 class="page-title">Cart Details</h1>
-                            <ul class="page-list">
-                                <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
-                                <li>Details</li>
-                            </ul>
-                        </div>
+<!-- Banner Starts -->
+<div class="breadcrumb-area" style="background-image:url('{{ asset('fronted/img/banner/b1.jpg') }}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-inner">
+                    <div class="section-title text-center mb-0">
+                        <h1 class="page-title">CONTACT US</h1>
+                        <ul class="page-list">
+                            <li><a href="{{ url('/') }}">HOME</a></li>
+                            <li>CONTACT US</li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+</div>
+<!-- Banner End -->
 
-    <div class="product-area">
-        <div class="pt-5"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="vertical-menu">
-                        <a href="#" class="active">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Services</a>
-                        <a href="#">Contact</a>
-                    </div>
+<div class="product-area">
+    <div class="pt-5"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="vertical-menu">
+                    <a href="{{url('/')}}" class="active">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Contact</a>
                 </div>
-
-
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <span class="contact100-form-title">
-                                Contact Form
-                            </span>
-                            <form action="{{ url('send-mail') }}" method="POST">
-                                @csrf
-                                @if (session()->has('message'))
-                                    <div class="alert alert-success">
-                                        {{ session()->get('message') }}
-                                    </div>
-                                @endif
-
-                                <div class="mt-2">
-                                    <input class="input100" type="text" name="name" placeholder="Name">
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                    </span>
-                                    @error('name')
-                                        <span class="text-danger"> {{ $message }} </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-2">
-                                    <input type="text" name="email" placeholder="Email">
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    </span>
-                                    @error('email')
-                                        <span class="text-danger"> {{ $message }} </span>
-                                    @enderror
-                                </div>
-                                <div class="mt-2">
-                                    <input class="input100" type="text" name="subject" placeholder="Subject">
-                                    <span class="focus-input100"></span>
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    </span>
-                                    @error('subject')
-                                        <span class="text-danger"> {{ $message }} </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-2">
-                                    <textarea name="content" placeholder="Message"></textarea>
-                                    <span class="focus-input100"></span>
-                                    @error('content')
-                                        <span class="text-danger"> {{ $message }} </span>
-                                    @enderror
-                                </div>
-
-                                <div class="container-contact100-form-btn mt-2">
-                                    <button type="submit" class="contact100-form-btn">
-                                        Send
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
 
-        </div>
-    </div>
 
-    <!-- about area start -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="contact100-form-title">
+                            Contact Form
+                        </span>
+                        <form action="{{ url('send-mail') }}" method="POST">
+                            @csrf
+                            @if (session()->has('message'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
+
+                            <div class="mt-2">
+                                <input class="col-md-7 input100" type="text" name="name" placeholder="Name *"
+                                    value="{{ old('name') }}">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span>
+                                @error('name')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <input type="text" class="col-md-7" name="email" placeholder="Email *"
+                                    value="{{ old('email') }}">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                                @error('email')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                            </div>
+                            <div class="mt-2">
+                                <input class="col-md-7 input100" type="text" name="subject" placeholder="Subject *"
+                                    value="{{ old('subject') }}">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </span>
+                                @error('subject')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <textarea class="col-md-7" name="content"
+                                    placeholder="Message *">{{ old('content') }}</textarea>
+                                <span class="focus-input100"></span>
+                                @error('content')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <img id="captchaImage" src="{{ url('captcha') }}" alt="CAPTCHA Image"
+                                    style="border: 1px solid #000; padding: 5px;">
+
+                                <button type="button" onclick="refreshCaptcha()">
+                                    <img src="{{ asset('fronted/img/captcha/captcha.png') }}" style="border-radius:20%"
+                                        width="30px" height="30px">
+                                </button>
+
+                                <input type="text" class="col-md-4" name="captcha" placeholder="Enter CAPTCHA *">
+                                <span class="focus-input100"></span>
+                                @error('captcha')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="container-contact100-form-btn mt-2">
+                                <button type="submit" class="contact100-form-btn">
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!-- about area start -->
 @endsection
+
+<script>
+    function refreshCaptcha() {
+        var captchaImage = document.getElementById('captchaImage');
+        captchaImage.src = '{{ url('captcha') }}' + '?t=' + new Date().getTime();
+    }
+</script>

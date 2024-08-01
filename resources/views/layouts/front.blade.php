@@ -5,7 +5,8 @@
 
 <head>
     <meta charset="UTF-8">
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+    {{--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,45 +15,35 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/vendor.css">
     <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
     <style>
-        /* CSS to style search form */
-        .search-form {
-            margin-top: 10px;
-            /* Adjust as needed */
+        /* Custom styles for the vertical menu */
+        .vertical-menu {
+            width: 200px;
+            /* Set a width for the menu */
         }
 
-        /* CSS to style search input and icon */
-        .input-group {
-            position: relative;
-            width: 100%;
+        .vertical-menu a {
+            background-color: #f8f9fa;
+            /* Grey background color */
+            color: #343a40;
+            /* Black text color */
+            display: block;
+            /* Make the links fill the entire width of the container */
+            padding: 12px;
+            /* Add some padding */
+            text-decoration: none;
+            /* Remove underline from links */
+            border-bottom: 1px solid #dee2e6;
+            /* Add a border between links */
         }
 
-        .form-control {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        .input-group-append {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-        }
-
-        .submit-btn {
-            background-color: #fff;
-            border: none;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            padding: 6px 12px;
-            cursor: pointer;
+        .vertical-menu a:hover {
+            background-color: #e9ecef;
+            /* Dark grey background color on hover */
         }
     </style>
-
-
 </head>
 
 <body>
@@ -67,6 +58,16 @@
         </div>
     </div>
     <!-- preloader area end -->
+
+    <!-- search popup start-->
+    <div class="td-search-popup" id="td-search-popup">
+        <form action="#" class="search-form">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search.....">
+            </div>
+            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
 
 
     <div class="body-overlay" id="body-overlay"></div>
@@ -97,39 +98,38 @@
     <!-- main js  -->
     <script src="{{ asset('fronted/js/main.js') }}"></script>
     <script src="{{ asset('fronted/js/custom.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         var availableTags = [];
         $.ajax({
             type: "GET",
             url: "/product-list",
-            success: function(response) {
-               
+            success: function (response) {
+
                 availableTags = response; // Store response in availableTags array
                 startAutoComplete(); // Call startAutoComplete function after getting the response
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
             }
         });
-    
+
         function startAutoComplete() {
             $("#search-product").autocomplete({
                 source: availableTags
             });
         }
     </script>
-    
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+-->
+    <script src="{{ asset('fronted/js/sweetalert.min.js') }}"></script>
 
     @if (session('status'))
         <script>
             swal("{{ session('status') }}");
         </script>
-    @endif
-
+    @endif 
 
     @yield('scripts')
 </body>

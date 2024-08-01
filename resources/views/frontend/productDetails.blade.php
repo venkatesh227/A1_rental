@@ -7,11 +7,10 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
                         <div class="section-title text-center mb-0">
-                            <h1 class="page-title">Product Details</h1>
+                            <h1 class="page-title">PRODUCT DETAILS</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
-                                <li>Details</li>
+                                <li>PRODUCTS DETAILS</li>
                             </ul>
                         </div>
                     </div>
@@ -73,13 +72,13 @@
                                                 class="prod_id">
                                                 <input type="button" value="-"
                                                 class="minus  decrement-btn">
-                                            <input type="number" step="1" min="1" max="10000"
+                                            <input type="number" step="1" min="1" max="{{ $Product->qty }}"
                                                 name="quantity" class="input-qty" value="1">
                                             <input type="button" value="+"
                                                 class="plus  increment-btn ">
 
                                         </div>
-                                        <button type="submit" class="btn btn-title addToCartBtn">Add to wishlist <i
+                                        <button type="submit" class="btn btn-title addToCartBtn">Add to Cart <i
                                                 class="fa fa-shopping-basket ms-2"></i></button>
                                     </form>
 

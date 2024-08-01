@@ -38,7 +38,7 @@
                                 @endphp
                                 @foreach ($users as $value)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $value->first_name }}</td>
                                         <td>{{ $value->last_name }}</td>
                                         <td>{{ $value->phone }}</td>

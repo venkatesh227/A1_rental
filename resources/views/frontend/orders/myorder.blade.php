@@ -7,10 +7,10 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-inner">
                         <div class="section-title text-center mb-0">
-                            <h1 class="page-title">My Orders</h1>
+                            <h1 class="page-title">MY ORDERS</h1>
                             <ul class="page-list">
                                 <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>PRODUCTS</li>
+                                <li>MY ORDERS</li>
                                 
                             </ul>
                         </div>

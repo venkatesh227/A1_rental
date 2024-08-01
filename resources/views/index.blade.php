@@ -253,26 +253,27 @@
                         <h2 class="title">Categories</h2>
                     </div>
                     <div class="category-slider owl-carousel">
-                        @foreach ($category as $item)
-                            @if (!empty($item->status))
-                                <div class="item">
-                                    <div class="single-cat-item">
-                                        <div class="thumb">
-                                            <img class="image-item-01"
-                                                src="{{ asset('images/categories/' . $item->image) }}"
-                                                alt="{{ $item->name }}">
-                                        </div>
-                                        <div class="single-cat-content">
-                                            <h4><a href="#">{{ $item->name }}</a></h4>
+                     @foreach ($category as $item)
+    @if (!empty($item->status))
+        <div class="item">
+            <div class="single-cat-item">
+                <div class="thumb">
+                <img class="image-item-01"
+     src="{{ asset('images/categories/' . $item->image) }}"
+     alt="{{ $item->name }}"
+     style="height: 300px; width: 300px;">
 
-                                            <a class="read-more-text"
-                                                href="{{ url('view-subCategory/' . $item->id) }}">Explore
-                                                Collection</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+                </div>
+                <div class="single-cat-content">
+                    <h4><a href="#">{{ $item->name }}</a></h4>
+                    <a class="read-more-text"
+                        href="{{ url('view-subCategory/' . $item->id) }}">Explore Collection</a>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
+
                     </div>
                 </div>
             </div>

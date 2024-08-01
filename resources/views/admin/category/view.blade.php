@@ -39,7 +39,7 @@
                                 @endphp
                                 @foreach ($category as $item)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $item->name }}</td>
 
                                         <td>

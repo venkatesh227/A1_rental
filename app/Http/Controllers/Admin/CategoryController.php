@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories|regex:/^[A-Za-z\s]+$/',
-            'image' => 'required|mimes:jpeg,png,gif',
+            'image' => 'required|mimes:jpeg,jpg,png,gif',
         ], [
             'name.required' => 'Category Name is Required.',
             'name.unique' => 'Category Name Already Exists',
@@ -60,7 +60,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|regex:/^[A-Za-z\s]+$/|unique:categories,name,' . $id,
-            'image' => 'nullable|mimes:jpeg,png,gif',
+            'image' => 'nullable|mimes:jpeg,jpg,png,gif',
         ], [
             'name.required' => 'Category Name is Required',
             'name.regex' => 'Spaces and Letters should be Allowed.',
@@ -75,7 +75,7 @@ class CategoryController extends Controller
 
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'required|mimes:jpeg,png,gif',
+                'image' => 'required|mimes:jpeg,jpg,png,gif',
             ], [
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',

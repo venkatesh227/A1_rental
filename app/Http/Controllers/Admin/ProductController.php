@@ -67,7 +67,7 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required|numeric',
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+            'image.*' => 'required|mimes:jpg,jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',
@@ -175,8 +175,8 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required',
-            'image' => ['image', 'mimes:jpeg,png,jpg'],
-            // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
+            'image' => ['image', 'mimes:jpeg,jpg,png,gif'],
+            // 'image' => 'nullable|mimes:jpeg,jpg,png,gif', // Updated to allow nullable
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',

@@ -10,9 +10,9 @@
                 </button>
             </div>
             <div class="logo">
-                <a href="home.html"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
+                <a href="{{ url('/') }}"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
             </div>
-            <form action="{{ url('search-product') }}" class="search-form" method="POST">
+            <!-- <form action="{{ url('search-product') }}" class="search-form" method="POST">
                 @csrf
                 <div class="form-group">
                     <div class="input-group">
@@ -24,10 +24,10 @@
 
                     </div>
                 </div>
-            </form>
+            </form> -->
             <div class="collapse navbar-collapse" id="st_main_menu">
                 <ul class="navbar-nav menu-open">
-                    <li class="menu-item-has-children current-item-has-children">
+                    <li>
                         <a href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="menu-item-has-children">
@@ -47,8 +47,27 @@
                     <li><a href="{{url('email')}}">Contact Us</a></li>
                 </ul>
             </div>
+
             <div class="nav-right-part nav-right-part-desktop">
-                <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
+                <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
+
+                <?php  $userLoggedIn = session()->has('userId'); ?>
+
+                @if ($userLoggedIn)
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav menu-open">
+                            <li class="menu-item-has-children">
+                                <a href="#">{{ isset($user) ? $user->first_name : '' }}</a>
+                                <ul class="sub-menu">
+                                    <a href="{{ url('user-logout') }}">Logout</a>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
+                @endif
+
                 <a class="cart-btn" href="{{ url('cart') }}">
                     <span class="cart-count">{{ Cart::where('user_id', session('userId'))->count() }}</span>
                     <i class="lnr lnr-cart"></i>

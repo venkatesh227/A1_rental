@@ -13,12 +13,29 @@ use App\Models\Product_images;
 use App\Models\userRegister;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
-    public function  index()
+    protected $user;
+
+    public function __construct()
     {
-        $category  = Category::all();
+        $this->middleware(function ($request, $next) {
+            if (session()->has('userId')) {
+                $this->user = UserRegister::select('first_name')->find(session('userId'));
+            }
+
+            // Share user data with views
+            view()->share('user', $this->user);
+
+            return $next($request);
+        });
+    }
+
+    public function index()
+    {
+        $category = Category::all();
         return view('index', compact('category'));
     }
     public function login()
@@ -58,12 +75,30 @@ class FrontendController extends Controller
     }
     public function send_mail(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'subject' => 'required',
-            'name' => 'required',
+        $validatedData = $request->validate([
+            'email' => ['required', 'regex:/^[^\s@]+@[^\s@]+\.[^\s@]+$/'],
+            'subject' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+            'name' => ['required', 'regex:/^[A-Za-z\s]+$/'],
             'content' => 'required',
+            'captcha' => 'required|string',
+        ], [
+            'name.required' => 'Name is required',
+            'name.regex' => 'Spaces and Letters are allowed',
+            'email.required' => 'Email is required',
+            'email.regex' => 'Please enter a valid email',
+            'subject.required' => 'Subject is required',
+            'subject.regex' => 'Spaces and Letters are allowed',
+            'content.required' => 'Message is required',
+            'captcha.required' => 'Captcha is required',
+            'captcha.string' => 'Captcha must be a string',
         ]);
+
+        if ($request->input('captcha') !== Session::get('captcha')) {
+            return redirect()->back()->withErrors([
+                'captcha' => 'Captcha doesn\'t match!'
+            ])->withInput();
+        }
+
 
         $data = [
             'subject' => $request->input('subject'),
@@ -72,13 +107,10 @@ class FrontendController extends Controller
             'content' => $request->input('content'),
         ];
 
-
         Mail::send('frontend.emailData', $data, function ($message) use ($data) {
-            $message->to('meranna60@gmail.com')
+            $message->to('satyavathi.tummala01@gmail.com')
                 ->subject($data['subject']);
         });
-
-
 
         return redirect('/')->with('status', 'Email successfully sent!');
     }
@@ -100,7 +132,7 @@ class FrontendController extends Controller
 
     public function view_products($sub_id)
     {
-        $category  = Category::all();
+        $category = Category::all();
         if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
 
             $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
@@ -113,7 +145,7 @@ class FrontendController extends Controller
 
     public function product_details($sub_id, $prod_id)
     {
-        $category  = Category::all();
+        $category = Category::all();
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
             if ($Product) {
@@ -143,7 +175,7 @@ class FrontendController extends Controller
                 $cartitem->prod_qty = $pro_qty;
                 $cartitem->created_by = $user_id;
                 $cartitem->save();
-                return response()->json(['status' =>  "Added To Cart"]);
+                return response()->json(['status' => "Added To Cart"]);
             }
         } else {
             return response()->json(['status' => "Login to continue", 'redirect' => true]);
@@ -171,7 +203,7 @@ class FrontendController extends Controller
             if (Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->exists()) {
                 $cartitem = Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->first();
                 $cartitem->delete();
-                return response()->json(['status' =>  "Product deleted successfully"]);
+                return response()->json(['status' => "Product deleted successfully"]);
             } else {
                 return response()->json(['status' => "login to continue"]);
             }
@@ -187,7 +219,7 @@ class FrontendController extends Controller
                 $cartqty = Cart::where('prod_id', $prod_id)->where('user_id', session('userId'))->first();
                 $cartqty->prod_qty = $product_qty;
                 $cartqty->update();
-                return response()->json(['status' =>  "Quantity updated"]);
+                return response()->json(['status' => "Quantity updated"]);
             }
         } else {
             return response()->json(['status' => "Login to continue"]);
@@ -202,7 +234,8 @@ class FrontendController extends Controller
         $order->user_id = session('userId');
         $order->no_of_products = $request->input('no_of_products');
         $order->grand_total = $request->input('grand_total');
-        $order->created_by = session('userId');;
+        $order->created_by = session('userId');
+        ;
         $order->save();
         $cartitems = Cart::where('user_id', session('userId'))->get();
 
@@ -227,7 +260,7 @@ class FrontendController extends Controller
         return redirect('cart')->with('status', 'order placed successfully');
     }
 
-    public function  myorders()
+    public function myorders()
     {
         $orders = Order::where('user_id', session('userId'))->get();
         return view('frontend.orders.myorder', compact('orders'));
@@ -236,8 +269,61 @@ class FrontendController extends Controller
     public function view_my_order($id, $user_id)
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
-        $userDetails =  userRegister::find($user_id);
+        $userDetails = userRegister::find($user_id);
 
         return view('frontend.orders.view', compact('orderDetails', 'userDetails'));
     }
+
+    public function showCaptcha()
+    {
+        $captcha = $this->generateCaptcha();
+        Session::put('captcha', $captcha['text']);
+
+        return response()->make($captcha['image']);
+    }
+
+    private function generateCaptcha()
+    {
+        $width = 120;
+        $height = 40;
+        $image = imagecreatetruecolor($width, $height);
+
+        // Colors
+        $background = imagecolorallocate($image, 255, 255, 255);
+        $textColor = imagecolorallocate($image, 0, 0, 0);
+        $lineColor = imagecolorallocate($image, 64, 64, 64);
+
+        // Fill background
+        imagefill($image, 0, 0, $background);
+
+        // Add random lines
+        for ($i = 0; $i < 5; $i++) {
+            imageline($image, rand(0, $width), rand(0, $height), rand(0, $width), rand(0, $height), $lineColor);
+        }
+
+        // Generate random text
+        $text = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0, 5);
+
+        // Using GD's built-in font (font size 5 is built-in and doesn't need external file)
+        $fontSize = 5;
+        $textWidth = imagefontwidth($fontSize) * strlen($text);
+        $textHeight = imagefontheight($fontSize);
+
+        // Calculate the position of the text
+        $x = ($width - $textWidth) / 2;
+        $y = ($height - $textHeight) / 2;
+
+        // Add the text to the image
+        imagestring($image, $fontSize, $x, $y, $text, $textColor);
+
+        // Output the image
+        ob_start();
+        imagepng($image);
+        $imageData = ob_get_clean();
+
+        imagedestroy($image);
+
+        return ['image' => $imageData, 'text' => $text];
+    }
+
 }

@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
-
 {
+
 
     public function login()
     {
@@ -54,9 +54,13 @@ class MainController extends Controller
     }
     public function user_login()
     {
-        $category = Category::all();
-        // return view('auth.userLogin');
-        return view('auth.userLogin', compact( 'category'));
+        if (session()->has('userId')) {
+            return back()->with('success', 'You are already logged in');
+        } else {
+            $category = Category::all();
+            // return view('auth.userLogin');
+            return view('auth.userLogin', compact('category'));
+        }
     }
 
     public function user_login_check(Request $request)
@@ -73,8 +77,8 @@ class MainController extends Controller
 
         if ($userInfo) {
             $request->session()->put('userId', $userInfo->id);
-            $category  = Category::all();
-            return view('index', compact('category'));
+            $category = Category::all();
+            return redirect('/');
         } else {
             return back()->with('fail', 'Please enter valid details');
         }
@@ -92,8 +96,8 @@ class MainController extends Controller
     {
         $category = Category::all();
         //         return view('auth.register')
-        return view('auth.register', compact( 'category'));
-;
+        return view('auth.register', compact('category'));
+        ;
     }
 
 
