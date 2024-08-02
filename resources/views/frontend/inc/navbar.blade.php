@@ -1,4 +1,5 @@
 <?php use App\Models\Cart; ?>
+<?php use App\Models\Category; ?>
 <div class="navbar-area">
     <nav class="navbar navbar-area-2 navbar-area navbar-expand-lg">
         <div class="container-fluid nav-container">
@@ -12,7 +13,7 @@
             <div class="logo">
                 <a href="{{ url('/') }}"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
             </div>
-          
+
             <div class="collapse navbar-collapse" id="st_main_menu">
                 <ul class="navbar-nav menu-open">
                     <li>
@@ -21,14 +22,12 @@
                     <li class="menu-item-has-children">
                         <a href="#">Products</a>
                         <ul class="sub-menu">
-                            @if (!empty($category))
-                                @foreach ($category as $item)
-                                    @if (!empty($item->status))
-                                        <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            @endif
+                            @foreach (Category::all() as $item)
+                                @if (!empty($item->status == '1'))
+                                    <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
                         </ul>
                     </li>
                     <li><a href="#">Portfolio</a></li>
@@ -38,7 +37,7 @@
 
             <div class="nav-right-part nav-right-part-desktop">
 
-           
+
                 <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
 
                 <?php  $userLoggedIn = session()->has('userId'); ?>

@@ -1,43 +1,43 @@
 @extends('layouts.front')
 @section('content')
-    <div class="breadcrumb-area" style="background-image: url('{{ asset('fronted/img/banner/b1.jpg') }}')">
+<div class="breadcrumb-area" style="background-image: url('{{ asset('fronted/img/banner/b1.jpg') }}')">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-inner">
-                        <div class="section-title text-center mb-0">
-                            <h1 class="page-title">MY ORDERS</h1>
-                            <ul class="page-list">
-                                <li><a href="{{ url('/') }}">HOME</a></li>
-                                <li>MY ORDERS</li>
-                                
-                            </ul>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-inner">
+                    <div class="section-title text-center mb-0">
+                        <h1 class="page-title">MY ORDERS</h1>
+                        <ul class="page-list">
+                            <li><a href="{{ url('/') }}">HOME</a></li>
+                            <li>MY ORDERS</li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner End -->
+</div>
+<!-- Banner End -->
 
-    <div class="product-area">
-        <div class="pt-5"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="vertical-menu">
-                        <a href="#" class="active">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Services</a>
-                        <a href="#">Contact</a>
-                    </div>
+<div class="product-area">
+    <div class="pt-5"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="vertical-menu">
+                    <a href="{{url('/')}}" class="active">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="{{url('email')}}">Contact</a>
                 </div>
-            
+            </div>
+
 
             <div class="col-md-9">
                 <div class="row gy-5 justify-content-center">
-                    
+
 
                     <div class="card">
                         <div class="card-body">
@@ -78,9 +78,10 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ url('view_my_order/'  . $value->id . '/' . $value->user_id) }}" class="btn btn-title">View</a>
+                                                    <a href="{{ url('view_my_order/' . $value->id . '/' . $value->user_id) }}"
+                                                        class="btn btn-title">View</a>
                                                 </td>
-                    
+
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -94,18 +95,7 @@
         </div>
 
 
-        </div>
-
-
-
-
-
-
-
-
-
-
-
     </div>
-    </div>
+</div>
+</div>
 @endsection
