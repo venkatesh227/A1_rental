@@ -58,11 +58,12 @@ class FrontendController extends Controller
         $search_product = $request->input('product-name');
 
         if ($search_product !== "") {
-            $product = Product::where('name', 'LIKE', '%' . $search_product . '%')->first();
-            if ($product) {
-                return redirect('product-details/' . $product->subcategory_id . '/' . $product->id);
+            $Product = Product::where('name', 'LIKE', '%' . $search_product . '%')->get();
+
+            if ($Product && $Product->isNotEmpty()) {
+                return view('frontend.productsView', compact('Product'));
             } else {
-                return redirect()->back()->with('status', 'No products matched');
+                return redirect('/')->with('status', 'No products matched');
             }
         } else {
             return redirect()->back();

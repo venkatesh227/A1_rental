@@ -12,19 +12,7 @@
             <div class="logo">
                 <a href="{{ url('/') }}"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
             </div>
-            <!-- <form action="{{ url('search-product') }}" class="search-form" method="POST">
-                @csrf
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="search" class="form-control" id="search-product" name="product-name" required
-                            placeholder="Search.....">
-
-                        <button type="submit" class="input-group-text" class="submit-btn"><i
-                                class="fa fa-search"></i></button>
-
-                    </div>
-                </div>
-            </form> -->
+          
             <div class="collapse navbar-collapse" id="st_main_menu">
                 <ul class="navbar-nav menu-open">
                     <li>
@@ -49,6 +37,8 @@
             </div>
 
             <div class="nav-right-part nav-right-part-desktop">
+
+           
                 <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
 
                 <?php  $userLoggedIn = session()->has('userId'); ?>

@@ -1,7 +1,9 @@
 @extends('admin.index')
 
 @section('content')
-    <div class="container-fluid">
+<div class="page-wrapper">
+<div class="page-content">
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card mx-5">
@@ -113,6 +115,7 @@
             </div>
         </div>
     </div>
-
+    </div>
+    </div>
     
 @endsection

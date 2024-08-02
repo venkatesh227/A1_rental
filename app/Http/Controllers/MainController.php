@@ -34,7 +34,8 @@ class MainController extends Controller
 
             // return view('admin.index');
 
-            return view('admin.category.view', compact('category'));
+            // return view('admin.category.view', compact('category'));
+            return redirect('categories');
         } else {
             return back()->with('fail', 'Please enter valid details');
         }

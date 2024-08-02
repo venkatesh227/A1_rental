@@ -61,11 +61,18 @@
 
     <!-- search popup start-->
     <div class="td-search-popup" id="td-search-popup">
-        <form action="#" class="search-form">
+        <form action="{{ url('search-product') }}" class="search-form" method="POST">
+            @csrf
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search.....">
+                <div class="input-group">
+                    <input type="search" class="form-control" id="search-product" name="product-name" required
+                        placeholder="Search.....">
+
+                    <button type="submit" class="input-group-text" class="submit-btn"><i
+                            class="fa fa-search"></i></button>
+
+                </div>
             </div>
-            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
         </form>
     </div>
 
@@ -98,7 +105,7 @@
     <!-- main js  -->
     <script src="{{ asset('fronted/js/main.js') }}"></script>
     <script src="{{ asset('fronted/js/custom.js') }}"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         var availableTags = [];
@@ -122,16 +129,14 @@
         }
     </script>
 
--->
+
     <script src="{{ asset('fronted/js/sweetalert.min.js') }}"></script>
 
     @if (session('status'))
         <script>
             swal("{{ session('status') }}");
         </script>
-    @endif 
-
-    @yield('scripts')
+    @endif     @yield('scripts')
 </body>
 
 </html>

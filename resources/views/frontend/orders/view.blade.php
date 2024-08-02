@@ -121,17 +121,19 @@
                                                 <h4>Order Status</h4>
                                             </label>
                                         </div>
-                                        <div class="col-md-8">
-                                            <input type="text" name="order_status" id="order_status" class="form-control"
-                                                value="@if ($orderDetails[0]->Orders->status == 0) Under Process
-                                              @elseif($orderDetails[0]->Orders->status == 1)
-                                                  Accepted
-                                              @elseif($orderDetails[0]->Orders->status == 2)
-                                                  Completed
-                                              @elseif($orderDetails[0]->Orders->status == 3)
-                                                  Cancelled @endif"
-                                                readonly>
-                                        </div>
+                                        <div class="col-md-8 text-end">
+    @if ($orderDetails[0]->Orders->status == 0)
+        Under Process
+    @elseif ($orderDetails[0]->Orders->status == 1)
+        Accepted
+    @elseif ($orderDetails[0]->Orders->status == 2)
+        Completed
+    @elseif ($orderDetails[0]->Orders->status == 3)
+        Cancelled
+    @endif
+</div>
+
+
                                     </div>
 
                                 </div>
