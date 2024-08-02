@@ -52,7 +52,7 @@
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">User Name</label>
                                                 <input type="text" class="form-control" name="name"
-                                                    value="{{ old('email') }}" id="inputEmailAddress"
+                                                    value="{{ old('name') }}" id="inputEmailAddress"
                                                     placeholder="Enter user name" />
                                                 <span class="text-danger mt-2 ">
                                                     @error('name')
