@@ -21,24 +21,24 @@
                         <table id="client_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;" >Sl. No</th>
-                                    <th style="text-align: center;" >First Name</th>
-                                    <th style="text-align: center;" >Last Name</th>
-                                    <th style="text-align: center;" >Phone</th>
-                                    <th style="text-align: center;" >Email</th>
-                                    <th style="text-align: center;" >Gender</th>
-                                    <th style="text-align: center;" >Address</th>
-                                    <th style="text-align: center;" >Created At</th>
-                                    <th style="text-align: center;" >Status</th>
+                                    <th style="text-align: center;">Sl. No</th>
+                                    <th style="text-align: center;">First Name</th>
+                                    <th style="text-align: center;">Last Name</th>
+                                    <th style="text-align: center;">Phone</th>
+                                    <th style="text-align: center;">Email</th>
+                                    <th style="text-align: center;">Gender</th>
+                                    <th style="text-align: center;">Address</th>
+                                    <th style="text-align: center;">Created At</th>
+                                    <th style="text-align: center;">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
-                                    $i=1;
+                                    $i = 1;
                                 @endphp
                                 @foreach ($users as $value)
                                     <tr>
-                                        <td>{{ $i++; }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $value->first_name }}</td>
                                         <td>{{ $value->last_name }}</td>
                                         <td>{{ $value->phone }}</td>
@@ -66,9 +66,45 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script>
     $(document).ready(function() {
-        $('#client_table').DataTable();
+        var file_name = 'orders_lists';
+        $('#client_table').DataTable({
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            dom: 'lBifrtip',
+            buttons: [{
+                    extend: 'pdf',
+                    filename: file_name,
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+                {
+                    extend: 'excel',
+                    filename: file_name,
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ],
+            language: {
+                infoEmpty: "Showing 0 to 0 of 0 Entries",
+                info: "Showing _START_ to _END_ of _TOTAL_ Entries",
+                lengthMenu: "Show _MENU_ Entries",
+                search: "Search:",
+                paginate: {
+                    first: "First",
+                    last: "Last",
+                    next: "Next",
+                    previous: "Previous"
+                }
+            },
+        });
     });
 
 

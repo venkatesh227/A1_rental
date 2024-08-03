@@ -27,7 +27,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>A1</title>
 </head>
-
+<style>
+    .dataTables_wrapper .dataTables_length {
+      margin-right: 20px;
+      /* margin-bottom: 60px; */
+    }
+  </style>
 <body>
     <!--wrapper-->
     <div class="wrapper">
