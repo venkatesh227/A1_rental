@@ -67,13 +67,16 @@
                                                                         <h5>{{ $prod->name }}</h5>
                                                                     </div>
                                                                 </div>
+                                                                <div class="price">{{ '$' . $prod->selling_price }}
+                                                                    <del>{{ '$' . $prod->original_price }}</del>
+                                                                </div>
                                                         </a>
 
                                                         <div class="quantity buttons_added mb-2">
                                                             <input type="hidden" name="" value="{{ $prod->id }}" class="prod_id">
                                                             <input type="button" value="-" class="minus decrement-btn">
                                                             <input type="number" step="1" min="1" max="{{ $prod->qty }}" name="quantity"
-                                                                class="input-qty" value="1">
+                                                                class="input-qty" value="1" disabled>
                                                             <input type="button" value="+" class="plus increment-btn ">
                                                         </div>
 

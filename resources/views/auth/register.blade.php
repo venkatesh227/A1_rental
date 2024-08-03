@@ -1,4 +1,5 @@
 @extends('layouts.front')
+
 @section('content')
     <!-- Banner Starts -->
     <div class="breadcrumb-area" style="background-image:url('assets/img/banner/b1.jpg')">
@@ -31,7 +32,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Frist Name" name="first_name"
+                                        <input type="text" placeholder="First Name *" name="first_name"
                                             value="{{ old('first_name') }}">
                                         @error('first_name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -40,7 +41,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Last Name" name="last_name"
+                                        <input type="text" placeholder="Last Name *" name="last_name"
                                             value="{{ old('last_name') }}">
                                         @error('last_name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -50,7 +51,7 @@
 
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Phone Number" name="phone"
+                                        <input type="text" placeholder="Phone Number *" name="phone"
                                             value="{{ old('phone') }}">
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
@@ -59,7 +60,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Email id" name="email"
+                                        <input type="text" placeholder="Email id *" name="email"
                                             value="{{ old('email') }}">
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
@@ -67,9 +68,11 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Password" name="password"
+                                    <div class="single-input-inner style-bg password-container">
+                                        <input type="password" placeholder="Password *" name="password" id="password"
                                             value="{{ old('password') }}">
+                                             <i class="fa fa-eye icon-eye toggle-password" onclick="togglePassword()"></i>
+                                   
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -78,6 +81,7 @@
 
                                 <div class="col-lg-12">
                                     <div class="">
+                                        Gender * : 
                                         <label>
                                             <input type="radio" name="gender" value="male"
                                                 {{ old('gender') == 'male' ? 'checked' : '' }}> Male
@@ -90,16 +94,17 @@
                                             <input type="radio" name="gender" value="other"
                                                 {{ old('gender') == 'other' ? 'checked' : '' }}> Other
                                         </label>
-                                        @error('gender')
+                                      
+                                    </div>
+                                    @error('gender')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
-                                    </div>
                                 </div>
 
 
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
-                                        <textarea placeholder="Address" name="address">{{ old('address') }}</textarea>
+                                        <textarea placeholder="Address *" name="address">{{ old('address') }}</textarea>
                                         @error('address')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -122,4 +127,5 @@
         </div>
     </section>
     <!-- about area start -->
+   
 @endsection

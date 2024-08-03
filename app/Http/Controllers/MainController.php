@@ -69,7 +69,7 @@ class MainController extends Controller
     {
         $status = 1;
         $request->validate([
-            'phone' => 'required|digits:10|numeric',
+            'phone' => 'required|numeric',
             'password' => 'required|max:12'
         ]);
         $userInfo = userRegister::where('phone', '=', $request->phone)
@@ -108,24 +108,35 @@ class MainController extends Controller
         $request->validate([
             'first_name' => 'required|regex:/^[A-Za-z\s]+$/',
             'last_name' => 'required|regex:/^[A-Za-z\s]+$/',
-            'phone' => 'required',
-            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$/',
             'password' => 'required',
             'gender' => 'required',
             'address' => 'required',
         ], [
-            'first_name.required' => 'First Name is Required',
+            'first_name.required' => 'First Name is eequired',
             'first_name.regex' => 'Only spaces and letters are allowed for First Name',
-            'last_name.required' => 'Last Name is Required',
+            'last_name.required' => 'Last Name is required',
             'last_name.regex' => 'Only spaces and letters are allowed for Last Name',
-            'phone.required' => 'Phone Number is Required',
-            'email.required' => 'Email Id is Required',
-            'email.email' => 'Enter a Valid Email Id',
-            'password.required' => 'Password is Required',
+            'phone.required' => 'Phone Number is required',
+            'email.required' => 'Email Id is required',
+            'email.email' => 'Enter a valid Email Id',
+            'password.required' => 'Password is required',
             'password.min' => 'Password should be at least :min characters long',
-            'gender.required' => 'Gender is Required',
-            'address.required' => 'Address is Required',
+            'gender.required' => 'Gender is required',
+            'address.required' => 'Address is required',
         ]);
+
+        $phone = $request->input('phone');
+        $email = $request->input('email');
+
+        $userExists = userRegister::where('phone', $phone)
+            ->orWhere('email', $email)
+            ->exists();
+
+        if ($userExists) {
+            return back()->withErrors(['address' => 'User already exists'])->withInput();
+        }
 
         $register = new userRegister;
 

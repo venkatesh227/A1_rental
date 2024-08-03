@@ -86,7 +86,7 @@
                             </div>
                             <div class="table-btn mt-4">
 
-                                <a class="btn btn-border-black ms-auto" href="#">Update Cart</a>
+                                <!-- <a class="btn btn-border-black ms-auto" href="#">Update Cart</a> -->
                             </div>
                             <div class="row">
                                 <div class="col-lg-5">

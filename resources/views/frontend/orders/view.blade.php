@@ -45,7 +45,7 @@
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
-                                                    <th class="fw-bold">Frist Name</th>
+                                                    <th class="fw-bold">First Name</th>
                                                     <td>{{ $userDetails->first_name }}</td>
                                                 </tr>
                                                 <tr>

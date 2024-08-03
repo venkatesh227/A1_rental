@@ -265,7 +265,7 @@
 
                 </div>
                 <div class="single-cat-content">
-                    <h4><a href="#">{{ $item->name }}</a></h4>
+                    <h4><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a></h4>
                     <a class="read-more-text"
                         href="{{ url('view-subCategory/' . $item->id) }}">Explore Collection</a>
                 </div>
