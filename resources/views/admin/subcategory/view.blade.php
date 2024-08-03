@@ -5,10 +5,8 @@
             background: 20px;
 
             font-size: 25px;
-            /* Set the font size here */
-        }
-
-        */
+            /* Set the font size here
+        }*/
     </style>
 </head>
 @extends('admin.index')
@@ -38,13 +36,13 @@
                         <table id="subcategorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
-                                    <th>Category</th>
-                                    <th>SubCategory Name</th>
-                                    <th>Image</th>
-                                    <th>Date</th>
-                                    <th scope="col" class="not-export-column">Action</th>
-                                    <th>Status</th>
+                                    <th style="text-align: center;">Sl. No</th>
+                                    <th style="text-align: center;">Category</th>
+                                    <th style="text-align: center;">SubCategory Name</th>
+                                    <th style="text-align: center;">Image</th>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;" scope="col" class="not-export-column">Action</th>
+                                    <th style="text-align: center;">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,8 +100,8 @@
             var userId = $(this).data('user-id');
 
             var currentStatus = $(this).prop('checked') === true ? 1 : 0;
-        //  console.log(currentStatus);
-         
+            //  console.log(currentStatus);
+
             // Passing 2 parameters in ajax url in Laravel route
             $.ajax({
                 url: "{{ route('subcategory-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"

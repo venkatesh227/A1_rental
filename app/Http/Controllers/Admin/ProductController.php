@@ -15,9 +15,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->get();
         $product_images = Product_images::all();
-        // dd($products[0]->status);
         return view('admin.products.view', compact('products', 'product_images'));
     }
 
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:products',
             'slug' => 'required',
             'description' => 'required',
             'small_description' => 'required',
@@ -67,8 +67,8 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required|numeric',
-
-            // 'image.*' => 'required|mimes:jpeg,png,gif',
+            'original_price' => 'required|numeric|gte:selling_price',
+            'image.*' => 'required|mimes:jpg,jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',
@@ -86,8 +86,9 @@ class ProductController extends Controller
             'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
-            // 'image.*.required' => 'Image is required.',
-            // 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
+            'original_price.gte' => 'Original Price must be greater than or equal to Selling Price',
+            'image.*.required' => 'Image is required.',
+            'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
         ]);
 
 
@@ -170,7 +171,7 @@ class ProductController extends Controller
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:products,name,' . $id,
             'slug' => 'required',
             'small_description' => 'required',
             'description' => 'required',
@@ -180,8 +181,7 @@ class ProductController extends Controller
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required',
-
-            // 'image' => 'nullable|mimes:jpeg,png,gif', // Updated to allow nullable
+            'image.*' => 'nullable|mimes:jpg,jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is Required',
             'subcategory_id.required' => 'Subcategory Name is Required',
@@ -290,7 +290,7 @@ class ProductController extends Controller
         return redirect('products')->with('status', "Product Updated Successfully");
     }
 
-    
+
 
 
 

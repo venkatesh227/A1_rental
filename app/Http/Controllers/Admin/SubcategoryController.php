@@ -11,21 +11,17 @@ class SubcategoryController extends Controller
 {
     public function index()
     {
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
         return view('admin.subcategory.view', compact('subcategories', 'categories'));
     }
 
-    // 
     public function add_subcategory()
     {
         $categories = Category::all();
-
         return view('admin.subcategory.add', compact('categories'));
     }
 
-
-    
     public  function insert_subcategory(Request $request)
     {
         $request->validate([
@@ -56,7 +52,7 @@ class SubcategoryController extends Controller
 
 
         $subcategory->save();
-        return redirect('subcategories')->with('status', "subcategories Added Successfully");
+        return redirect('subcategories')->with('status', "Subcategory  Added Successfully");
     }
 
 
@@ -74,11 +70,11 @@ class SubcategoryController extends Controller
 
 
     public function upadate_subcategory(Request $request, $id)
-    {  
+    {
 
         $request->validate([
             'category_id' => 'required',
-            'name' => 'required|unique:sub_categories,name,'.$id,
+            'name' => 'required|unique:sub_categories,name,' . $id,
             'image' => 'required|mimes:jpeg,png,gif',
         ], [
             'category_id.required' => 'Category is required.',
@@ -102,29 +98,26 @@ class SubcategoryController extends Controller
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only JPG, PNG, and GIF Images are Allowed',
             ]);
-        
+
             // Delete old image if it exists
             if ($subcategory->image && file_exists(public_path('images/subcategories/' . $subcategory->image))) {
                 unlink(public_path('images/subcategories/' . $subcategory->image));
             }
-        
+
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            
+
             // Make sure the 'subcategories' folder exists inside the 'images' folder
             $image->move(public_path('images/subcategories/'), $filename);
             $subcategory->image = $filename;
         }
-        
-
-
         $subcategory->updated_at = now();
         $subcategory->update();
         return redirect('subcategories')->with('status', "SubCategory Updated Successfully");
     }
 
 
-    
+
 
     public function subcategory_status($subcategory_id, $currentStatus)
     {
@@ -136,6 +129,4 @@ class SubcategoryController extends Controller
 
         return response()->json(['status' => 'success', 'user' => $updatesubCategory]);
     }
-
-
 }

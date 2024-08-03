@@ -61,20 +61,20 @@
                                     <label for="image" class="col-form-label">Image</label>
                                     <input type="file" class="form-control" id="image" name="image" value="">
 
-                                    @if ($subcategory->image)
-
-                                
+                                    @if ($subcategory->image)                                
                                     <img src="{{ asset('images/subcategories/' . $subcategory->image) }}" height="100px" width="100px">
-
                                     @endif
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-2">
+                                    <div class="d-md-flex d-grid align-items-center gap-3">
                                     <button type="submit" class="btn btn-primary mt-2"
                                         name="update_subcategory_btn">Submit</button>
+                                        <a href="{{ url('add-subcategory') }}" class="btn btn-light mt-2">Reset</a>
                                 </div>
+                            </div>
                             </div>
                         </form>
                     </div>

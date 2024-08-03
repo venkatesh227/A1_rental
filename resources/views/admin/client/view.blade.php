@@ -21,15 +21,15 @@
                         <table id="client_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Address</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
+                                    <th style="text-align: center;" >Sl. No</th>
+                                    <th style="text-align: center;" >First Name</th>
+                                    <th style="text-align: center;" >Last Name</th>
+                                    <th style="text-align: center;" >Phone</th>
+                                    <th style="text-align: center;" >Email</th>
+                                    <th style="text-align: center;" >Gender</th>
+                                    <th style="text-align: center;" >Address</th>
+                                    <th style="text-align: center;" >Created At</th>
+                                    <th style="text-align: center;" >Status</th>
                                 </tr>
                             </thead>
                             <tbody>

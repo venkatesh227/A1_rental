@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::all();
+        $category = Category::orderBy('created_at', 'desc')->get();
         return view('admin.category.view', compact('category'));
         return view('index', compact('category'));
     }
@@ -105,11 +105,8 @@ class CategoryController extends Controller
     {
         $category_status = Category::find($category_id);
         $category_status->status = $currentStatus;
-
         $category_status->update();
-
         $updateCategory = Category::find($category_id);
-
         return response()->json(['status' => 'success', 'user' => $updateCategory]);
     }
 }

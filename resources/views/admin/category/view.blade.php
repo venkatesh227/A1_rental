@@ -25,12 +25,12 @@
                         <table id="categorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
-                                    <th>Caregory Name</th>
-                                    <th>Image</th>
-                                    <th>Created At</th>
-                                    <th scope="col" class="not-export-column">Action</th>
-                                    <th>Status</th>
+                                    <th style="text-align: center;" >Sl. No</th>
+                                    <th style="text-align: center;" >Category Name</th>
+                                    <th style="text-align: center;" >Image</th>
+                                    <th style="text-align: center;" >Created At</th>
+                                    <th style="text-align: center;"  scope="col" class="not-export-column">Action</th>
+                                    <th style="text-align: center;" >Status</th>
                                 </tr>
                             </thead>
                             <tbody>

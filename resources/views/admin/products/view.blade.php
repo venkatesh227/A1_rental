@@ -26,24 +26,23 @@
                         <table id="categorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
-                                    <th>Category</th>
-                                    <th>SubCategory</th>
-                                    <th>Product Name</th>
-                                    <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Small Description</th>
-                                    <th>Large Description</th>
-                                    <th>Additional Info</th>
-                                    <th>Shipping & Delivery</th>
-                                    <th>Original Price</th>
-                                    <th>Selling Price</th>
-                                    <th>Quantity</th>
-                                    <th>image</th>
-
-                                    <th>Created At</th>
-                                    <th>status</th>
-                                    <th scope="col" class="not-export-column">Action</th>
+                                    <th style="text-align: center;" >S.No</th>
+                                    <th style="text-align: center;" >Category</th>
+                                    <th style="text-align: center;" >SubCategory</th>
+                                    <th style="text-align: center;" >Product Name</th>
+                                    <th style="text-align: center;" >Title</th>
+                                    <th style="text-align: center;" >Slug</th>
+                                    <th style="text-align: center;" >Small Description</th>
+                                    <th style="text-align: center;" >Large Description</th>
+                                    <th style="text-align: center;" >Additional Info</th>
+                                    <th style="text-align: center;" >Shipping & Delivery</th>
+                                    <th style="text-align: center;" >Original Price</th>
+                                    <th style="text-align: center;" >Selling Price</th>
+                                    <th style="text-align: center;" >Quantity</th>
+                                    <th style="text-align: center;" >image</th>
+                                    <th style="text-align: center;" >Created At</th>
+                                    <th style="text-align: center;" >status</th>
+                                    <th style="text-align: center;"  scope="col" class="not-export-column">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

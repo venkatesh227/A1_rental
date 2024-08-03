@@ -76,9 +76,11 @@
 
 
                             <div class="col-md-2">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
                                 <button type="submit" class="btn btn-primary mt-2" name="add_user_btn">Submit</button>
+                                <a href="{{ url('add-subcategory') }}" class="btn btn-light mt-2">Reset</a>
                             </div>
-
+                        </div>
                         </div>
                 </div>
             </div>
