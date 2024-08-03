@@ -67,9 +67,18 @@
                                                                         <h5>{{ $prod->name }}</h5>
                                                                     </div>
                                                                 </div>
-                                                                <div class="price">{{ '$' . $prod->selling_price }}
-                                                                    <del>{{ '$' . $prod->original_price }}</del>
+                                                                <div class="container mt-4">
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        
+                                                                        <div class="d-flex flex-grow-1 justify-content-center">
+                                                                            <span>{{ '$' . $prod->selling_price }}</span>
+                                                                        </div>
+                                                                       
+                                                                        <del>{{ '$' . $prod->original_price }}</del>
+                                                                    </div>
                                                                 </div>
+
+
                                                         </a>
 
                                                         <div class="quantity buttons_added mb-2">
