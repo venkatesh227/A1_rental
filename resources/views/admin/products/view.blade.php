@@ -50,13 +50,7 @@
                                 <?php $i = 1; ?>
 
                                 @foreach ($products as $item)
-                                    {{-- @php
-                                        $product_id = $item->id;
-                                        $option_name = \App\Models\Product_images::Where(
-                                            'product_id',
-                                            $product_id,
-                                        )->first();
-                                    @endphp --}}
+                                    
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $item->subcategory->category->name }}</td>
@@ -71,13 +65,7 @@
                                         <td>{{ $item->original_price }}</td>
                                         <td>{{ $item->selling_price }}</td>
                                         <td>{{ $item->qty }}</td>
-                                        {{-- <td>
-                                            @if (!empty($option_name->image))
-                                                <img src="{{ asset('images/products/' . $option_name->image) }}"
-                                                    alt="Product Image" width="100" height="100">
-                                            @endif
-
-                                        </td> --}}
+                                        
                                         <td>
                                             @if (!empty($item->image))
                                                 <img src="{{ asset('images/products/' . $item->image) }}"

@@ -40,7 +40,7 @@
                                 <label for="image" class="col-form-label">Images<span
                                         style="color: red;">*</span></label>
                                 <input type="file" class="form-control" id="image" name="image[]" multiple="multiple"
-                                    value="{{ old('image') }}" accept="image/jpeg, image/png ,image/jpg">                  
+                                    value="{{ old('image') }}" accept="image/jpeg, image/png ,image/jpg">
                                 @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -62,7 +62,7 @@
                             <tr>
                                 <th>Sl. No</th>
                                 <th>Images</th>
-                                <th>Action</th>
+                                <th class="not-export-column">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,8 +87,51 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script>
+    $(document).ready(function() {
+        var file_name = 'products_images';
+        $('#categorytable').DataTable({
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            dom: 'lBifrtip',
+            buttons: [{
+                    extend: 'pdf',
+                    filename: file_name,
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                },
+                {
+                    extend: 'excel',
+                    filename: file_name,
+                    exportOptions: {
+                        columns: "thead th:not(.noExport)"
+                    }
+                }
+            ],
+            language: {
+                infoEmpty: "Showing 0 to 0 of 0 Entries",
+                info: "Showing _START_ to _END_ of _TOTAL_ Entries",
+                lengthMenu: "Show _MENU_ Entries",
+                search: "Search:",
+                paginate: {
+                    first: "First",
+                    last: "Last",
+                    next: "Next",
+                    previous: "Previous"
+                }
+            },
+        });
+    });
+</script>
