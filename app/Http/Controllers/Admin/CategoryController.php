@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryController extends Controller
         return view('admin.category.view', compact('category'));
         return view('index', compact('category'));
     }
-    
+
     public function add_category()
     {
         return view('admin.category.add');
@@ -32,21 +33,18 @@ class CategoryController extends Controller
             'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
 
         ]);
-
-
-
         $category = new Category;
         $category->name = $request->input('name');
         $category->image = $request->input('image');
-
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/categories'), $filename); // Move the uploaded file to the public/images directory
             $category->image = $filename; // Save the filename to the database
-        }
 
+        }
         $category->created_by = session('adminId');
+        $category->created_at = Carbon::now('Asia/Calcutta');
         $category->save();
         return redirect('categories')->with('status', "Category Added Successfully");
     }
@@ -55,7 +53,6 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('admin.category.edit', compact('category'));
     }
-
     public function upadate_category(Request $request, $id)
     {
         $request->validate([
@@ -71,8 +68,6 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->name = $request->input('name');
-
-
         if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'required|mimes:jpeg,jpg,png,gif',
@@ -80,7 +75,6 @@ class CategoryController extends Controller
                 'image.required' => 'Image is Required',
                 'image.mimes' => 'Only PNG, GIF, and JPG Files are Accepted',
             ]);
-
             // Delete old image if it exists
             if ($category->image && file_exists(public_path('images/categories/' . $category->image))) {
                 unlink(public_path('images/categories/' . $category->image));
@@ -93,10 +87,8 @@ class CategoryController extends Controller
             $image->move(public_path('images/categories/'), $filename);
             $category->image = $filename;
         }
-
-
         $category->updated_by = session('userId');
-        $category->updated_at = now();
+        $category->updated_at = Carbon::now('Asia/Calcutta');
         $category->update();
         return redirect('categories')->with('status', "Category Updated Successfully");
     }

@@ -174,26 +174,13 @@
                                 @enderror
                             </div>
 
-
-
-                            {{-- <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="status" name="status"
-                                        value="1">
-                                    <label class="form-check-label" for="status">Status</label>
-                                </div>
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
-
                         </div>
 
 
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Images<span style="color: red;">*</span></label>
-                                <input type="file" class="form-control" id="image" name="image[]" multiple value="{{ old('image') }}">
+                                <input type="file" class="form-control" id="image" name="image"value="{{ old('image') }}">
                                 @error('image')
                                      <span class="text-danger">{{ $message }}</span>
                                  @enderror

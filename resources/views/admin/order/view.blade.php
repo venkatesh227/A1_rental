@@ -21,12 +21,12 @@
                         <table id="orders_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">Sl. No</th>
-                                    <th style="text-align: center;">Order Date</th>
-                                    <th style="text-align: center;">Tracking Number</th>
-                                    <th style="text-align: center;">Total Price</th>
-                                    <th style="text-align: center;">Status</th>
-                                    <th style="text-align: center;">Action</th>
+                                    <th style="text-align: center;" >Sl. No</th>
+                                    <th style="text-align: center;" >Order Date</th>
+                                    <th style="text-align: center;" >Tracking Number</th>
+                                    <th style="text-align: center;" >Total Price</th>
+                                    <th style="text-align: center;" >Status</th>
+                                    <th style="text-align: center;" >Action</th>
                                 </tr>
                             </thead>
                             <tbody>

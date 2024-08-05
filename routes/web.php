@@ -90,6 +90,11 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('add-product', [ProductController::class, 'add_product']);
     Route::post('fetchSubcategories', [ProductController::class, 'fetchSubcategories'])
         ->name('fetchSubcategories');
+
+    Route::get('viewProductImages/{id}', [ProductController::class, 'viewProductImages']);
+    Route::post('add-product-images/{id}', [ProductController::class, 'addProductImages']);
+    Route::get('edit-product-image/{id}', [ProductController::class, 'editProductImage']);
+    Route::post('update_product_images/{product_id}', [ProductController::class, 'update_product_images']);
     Route::post('insert-product', [ProductController::class, 'insert_product']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit_product']);
     Route::post('update-Products/{id}', [ProductController::class, 'update_products']);

@@ -28,7 +28,7 @@
                                     <th style="text-align: center;">Email</th>
                                     <th style="text-align: center;">Gender</th>
                                     <th style="text-align: center;">Address</th>
-                                    <th style="text-align: center;">Created At</th>
+                                    <th style="text-align: center;">Created Date</th>
                                     <th style="text-align: center;">Status</th>
                                 </tr>
                             </thead>

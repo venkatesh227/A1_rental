@@ -28,14 +28,14 @@
                                     <th>Sl. No</th>
                                     <th>Caregory Name</th>
                                     <th>Image</th>
-                                    <th>Created At</th>
+                                    <th>Created Date</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
-                                    $i=1;
+                                    $i = 1;
                                 @endphp
                                 @foreach ($category as $item)
                                     <tr>
@@ -122,7 +122,7 @@
             var userId = $(this).data('user-id');
 
             var currentStatus = $(this).prop('checked') === true ? 1 : 0;
-    
+
             $.ajax({
                 url: "{{ route('category-status', ['userId' => ':userId', 'currentStatus' => ':currentStatus']) }}"
                     .replace(':userId', userId)

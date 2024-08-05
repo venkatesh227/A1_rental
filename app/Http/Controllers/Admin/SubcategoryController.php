@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
+use Carbon\Carbon;
 
 class SubcategoryController extends Controller
 {
@@ -20,11 +21,8 @@ class SubcategoryController extends Controller
     public function add_subcategory()
     {
         $categories = Category::all();
-
         return view('admin.subcategory.add', compact('categories'));
     }
-
-
 
     public  function insert_subcategory(Request $request)
     {
@@ -46,7 +44,7 @@ class SubcategoryController extends Controller
         $subcategory->category_id = $request->input('category_id');
         $subcategory->name = $request->input('name');
         $subcategory->created_by = session('adminId');
-
+        $subcategory->created_at = Carbon::now('Asia/Calcutta');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -69,10 +67,6 @@ class SubcategoryController extends Controller
 
         return view('admin.subcategory.edit', compact('subcategory', 'categories'));
     }
-
-
-    // 
-
 
     public function upadate_subcategory(Request $request, $id)
     {
@@ -114,10 +108,7 @@ class SubcategoryController extends Controller
             $image->move(public_path('images/subcategories/'), $filename);
             $subcategory->image = $filename;
         }
-
-
-
-        $subcategory->updated_at = now();
+        $subcategory->updated_at = Carbon::now('Asia/Calcutta');
         $subcategory->update();
         return redirect('subcategories')->with('status', "SubCategory Updated Successfully");
     }

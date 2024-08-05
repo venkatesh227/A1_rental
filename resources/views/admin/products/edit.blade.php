@@ -31,7 +31,8 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="category_id" class="col-form-label">Category<span style="color: red;">*</span></label>
+                                <label for="category_id" class="col-form-label">Category<span
+                                        style="color: red;">*</span></label>
                                 <select class="form-select" id="category_id" name="category_id">
                                     <option value=""><b>Select a Category</b></option>
                                     @foreach ($categories as $category)
@@ -47,7 +48,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="subcategory_id" class="col-form-label">SubCategory<span style="color: red;">*</span></label>
+                                <label for="subcategory_id" class="col-form-label">SubCategory<span
+                                        style="color: red;">*</span></label>
                                 <select class="form-select" id="subcategory_id" name="subcategory_id">
                                     <option value=""><b>Select a SubCategory</b></option>
 
@@ -69,7 +71,8 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">Product Name<span style="color: red;">*</span></label>
+                                <label for="name" class="col-form-label">Product Name<span
+                                        style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ $Products->name }}">
                                 @error('name')
@@ -85,10 +88,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-
-
                             <div class="col-md-6">
                                 <label for="title" class="col-form-label">Title<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="title" name="title"
@@ -99,9 +98,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="name" class="col-form-label">Small Description<span style="color: red;">*</span></label>
-
-
+                                <label for="name" class="col-form-label">Small Description<span
+                                        style="color: red;">*</span></label>
                                 <textarea class="form-control" id="small_description" name="small_description">{{ $Products->small_description }}</textarea>
                                 @error('small_description')
                                     <span class="text-danger">{{ $message }}</span>
@@ -109,27 +107,28 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="slug" class="col-form-label">Large Description<span style="color: red;">*</span></label>
-
+                                <label for="slug" class="col-form-label">Large Description<span
+                                        style="color: red;">*</span></label>
                                 <textarea class="form-control" id="description" name="description">{{ $Products->description }}</textarea>
-
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-md-6">
-                                <label for="original_price" class="col-form-label">Original Price<span style="color: red;">*</span></label>
+                                <label for="original_price" class="col-form-label">Original Price<span
+                                        style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="original_price" name="original_price"
                                     value="{{ $Products->original_price }}">
                                 @error('original_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            
+
 
                             <div class="col-md-6">
-                                <label for="selling_price" class="col-form-label">Selling Price<span style="color: red;">*</span></label>
+                                <label for="selling_price" class="col-form-label">Selling Price<span
+                                        style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="selling_price" name="selling_price"
                                     value="{{ $Products->selling_price }}">
                                 @error('selling_price')
@@ -138,7 +137,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="qty" class="col-form-label">Quantity<span style="color: red;">*</span></label>
+                                <label for="qty" class="col-form-label">Quantity<span
+                                        style="color: red;">*</span></label>
                                 <input type="number" class="form-control" id="qty" name="qty"
                                     value="{{ $Products->qty }}">
                                 @error('qty')
@@ -149,7 +149,8 @@
 
 
                             <div class="col-md-6">
-                                <label for="additional_info" class="col-form-label">Additional Info<span style="color: red;">*</span></label>
+                                <label for="additional_info" class="col-form-label">Additional Info<span
+                                        style="color: red;">*</span></label>
                                 <textarea class="form-control" id="additional_info" name="additional_info">{{ $Products->additional_info }}</textarea>
 
                                 @error('additional_info')
@@ -157,28 +158,14 @@
                                 @enderror
                             </div>
 
-
-
                             <div class="col-md-6">
-                                <label for="shipping_delivery" class="col-form-label">Shipping & Delivery<span style="color: red;">*</span></label>
+                                <label for="shipping_delivery" class="col-form-label">Shipping & Delivery<span
+                                        style="color: red;">*</span></label>
                                 <textarea class="form-control" id="shipping_delivery" name="shipping_delivery">{{ $Products->shipping_delivery }}</textarea>
                                 @error('shipping_delivery')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-                            
-                            {{-- <div class="col-md-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="status" name="status"
-                                        {{ $Products->status == 1 ? 'checked' : '' }} value="1">
-                                    <label class="form-check-label" for="status">Status</label>
-                                </div>
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
-
                         </div>
 
 
@@ -186,7 +173,26 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Image</label>
-                                <input type="file" class="form-control" id="image" name="image[]" multiple>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png ,image/jpg">
+
+                                @if (!empty($Products->id))
+                                    @php
+                                        $images = \App\Models\Product::where('id', $Products->id)->get();
+                                    @endphp
+
+                                    @if ($images->isNotEmpty())
+                                        @foreach ($images as $image)
+                                            @if (!empty($image->image))
+                                                <img src="{{ asset('images/products/' . $image->image) }}"
+                                                    alt="Product Image" width="100" height="100">
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <p>No images found for product_id {{ $product_id }}.</p>
+                                    @endif
+                                @endif
+
+
                                 @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

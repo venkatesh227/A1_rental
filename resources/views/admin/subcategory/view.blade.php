@@ -30,7 +30,7 @@
                                     <th>Category</th>
                                     <th>SubCategory Name</th>
                                     <th>Image</th>
-                                    <th>Date</th>
+                                    <th>Created Date</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                     <th>Status</th>
                                 </tr>

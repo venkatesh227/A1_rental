@@ -40,8 +40,8 @@
                                     <th>Selling Price</th>
                                     <th>Quantity</th>
                                     <th>image</th>
-
-                                    <th>Created At</th>
+                                    <th style="width: 150px;">Add Images</th>
+                                    <th>Created Date</th>
                                     <th>status</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                 </tr>
@@ -50,13 +50,13 @@
                                 <?php $i = 1; ?>
 
                                 @foreach ($products as $item)
-                                    @php
+                                    {{-- @php
                                         $product_id = $item->id;
                                         $option_name = \App\Models\Product_images::Where(
                                             'product_id',
                                             $product_id,
                                         )->first();
-                                    @endphp
+                                    @endphp --}}
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $item->subcategory->category->name }}</td>
@@ -71,15 +71,25 @@
                                         <td>{{ $item->original_price }}</td>
                                         <td>{{ $item->selling_price }}</td>
                                         <td>{{ $item->qty }}</td>
-                                        <td>
+                                        {{-- <td>
                                             @if (!empty($option_name->image))
                                                 <img src="{{ asset('images/products/' . $option_name->image) }}"
                                                     alt="Product Image" width="100" height="100">
                                             @endif
 
+                                        </td> --}}
+                                        <td>
+                                            @if (!empty($item->image))
+                                                <img src="{{ asset('images/products/' . $item->image) }}"
+                                                    alt="Product Image" width="100" height="100">
+                                            @endif
+                                        </td>
+                                        <td style="width: 200px;">
+                                            <a href="{{ url('viewProductImages/' . $item->id) }}"
+                                                class="btn btn-primary"  width="100" height="100">Add Images</a>
                                         </td>
                                         <td>{{ date('d-m-y', strtotime($item->created_at)) }}</td>
-                                    
+
                                         <td>
                                             <input class="status-toggle" type="checkbox" data-user-id="{{ $item->id }}"
                                                 data-status="{{ $item->status }}"
@@ -148,7 +158,7 @@
             },
         });
     });
-    
+
 
 
 
