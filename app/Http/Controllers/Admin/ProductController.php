@@ -135,7 +135,7 @@ class ProductController extends Controller
             $imageData[] = [
                 'product_id' => $insertedId,
                 'image' => $image,
-                'created_at' => now(),
+              'created_at' => date('Y-m-d H:i:s'),
                 'created_by' => session('adminId'),
             ];
         }

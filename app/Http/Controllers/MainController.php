@@ -110,7 +110,7 @@ class MainController extends Controller
             'last_name' => 'required|regex:/^[A-Za-z\s]+$/',
             'phone' => 'required|numeric',
             'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$/',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'gender' => 'required',
             'address' => 'required',
         ], [

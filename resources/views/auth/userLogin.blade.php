@@ -50,7 +50,7 @@
                                     <div class="single-input-inner style-bg password-container">
                                         <input type="password" placeholder="Enter Password" name="password" id="password"
                                             value="{{ old('password') }}">
-                                        <i class="fa fa-eye icon-eye toggle-password" onclick="togglePassword()"></i>
+                                        <i class="fa fa-eye icon-eye toggle-password" onclick="togglePassword('password', this)"></i>
 
                                     </div>
                                     <span class="text-danger mt-1 ">
@@ -66,7 +66,7 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-6">
-                                    <a class="text-right pull-right" href="#">Forgot Password?</a>
+                                    <a class="text-right pull-right" href="{{ url('password/reset') }}">Forgot Password?</a>
                                 </div>
                                 <div class="col-lg-12 mt-3">
                                     <a href="{{ url('register') }}">Dont have an account? Register here</a>

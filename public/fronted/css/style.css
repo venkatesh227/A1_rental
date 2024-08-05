@@ -5750,8 +5750,9 @@ ul {
 
 .password-container .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 20px;
+  top: 30%;
   transform: translateY(-50%);
   cursor: pointer;
 }
+

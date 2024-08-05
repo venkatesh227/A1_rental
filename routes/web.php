@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('login', [MainController::class, 'login'])->name('login');
 
 Route::post('login_check', [MainController::class, 'login_check']);
+
+Route::get('password/reset', [PasswordResetController::class, 'showLinkRequestForm'])->name('password.reset');
+Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
 
 Route::get('dashboard', [MainController::class, 'dashboard']);
 Route::get('logout', [MainController::class, 'logout']);
@@ -107,6 +113,8 @@ Route::group(['middleware' => ['AuthCheck']], function () {
     Route::get('view_order/{id}/{user_id}', [OrderController::class, 'view_order']);
 
     Route::post('update_order_status/{id}/', [OrderController::class, 'update_order_status']);
+
+ 
 
     // 
 

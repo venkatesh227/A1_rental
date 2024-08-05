@@ -71,7 +71,7 @@
                                     <div class="single-input-inner style-bg password-container">
                                         <input type="password" placeholder="Password *" name="password" id="password"
                                             value="{{ old('password') }}">
-                                             <i class="fa fa-eye icon-eye toggle-password" onclick="togglePassword()"></i>
+                                             <i class="fa fa-eye icon-eye toggle-password" onclick="togglePassword('password', this)"></i>
                                    
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
