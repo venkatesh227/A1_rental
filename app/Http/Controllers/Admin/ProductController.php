@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Product;
-use App\Models\Product_images;
+use App\Models\ProductImages;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $product_images = Product_images::all();
+        $product_images =ProductImages::all();
         return view('admin.products.view', compact('products', 'product_images'));
     }
 
@@ -110,7 +110,7 @@ class ProductController extends Controller
 
     public function viewProductImages($product_id)
     {
-        $product_images = Product_images::where('product_id', $product_id)->get();
+        $product_images = ProductImages::where('product_id', $product_id)->get();
 
         return view('admin.products.product_view_images', compact('product_images', 'product_id'));
     }
@@ -132,7 +132,7 @@ class ProductController extends Controller
                 $uniqueId = uniqid();
                 $filename = $uniqueId . '.' . $extension;
                 $file->move(public_path('images/product_images'), $filename);
-                $productImage = new Product_images();
+                $productImage = new ProductImages();
                 $productImage->product_id = $id;
                 $productImage->image = $filename;
                 $productImage->created_by = session('adminId');
@@ -146,12 +146,12 @@ class ProductController extends Controller
 
     public function editProductImage($product_id)
     {
-        $product_images = Product_images::where('product_id', $product_id)->get();
+        $product_images = ProductImages::where('product_id', $product_id)->get();
         return view('admin.products.product_edit_images', compact('product_images', 'product_id'));
     }
     public function update_product_images(Request $request, $product_id)
     {
-        $productImage = Product_images::find($product_id);
+        $productImage = ProductImages::find($product_id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();

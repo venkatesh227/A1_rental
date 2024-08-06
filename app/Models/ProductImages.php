@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Product_images extends Model
+class ProductImages extends Model
 {
     public $timestamps = false;
-    protected $table = 'Product_images';
+    protected $table = 'product_images';
     protected $fillable = [
         'id',
         'product_id',

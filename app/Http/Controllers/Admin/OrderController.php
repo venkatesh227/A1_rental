@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\userRegister;
 use App\Models\OrderDetail;
-use App\Models\Product_images;
+use App\Models\ProductImages;
 
 class OrderController extends Controller
 {

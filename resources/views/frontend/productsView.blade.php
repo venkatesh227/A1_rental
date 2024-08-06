@@ -43,7 +43,7 @@
                                     @foreach ($Product as $prod)
                                                     @php
                                                         $product_id = $prod->id;
-                                                        $option_name = \App\Models\Product_images::Where(
+                                                        $option_name = \App\Models\ProductImages::Where(
                                                             'product_id',
                                                             $product_id,
                                                         )->first();

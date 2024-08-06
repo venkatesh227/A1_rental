@@ -40,7 +40,7 @@
                                     value="{{ old('image') }}" accept="image/jpeg, image/png ,image/jpg">
                                 @if (!empty($product_id))
                                     @php
-                                        $product_images = \App\Models\Product_images::where('id', $product_id)->get();
+                                        $product_images = \App\Models\ProductImages::where('id', $product_id)->get();
                                     @endphp
 
                                     @if ($product_images->isNotEmpty())

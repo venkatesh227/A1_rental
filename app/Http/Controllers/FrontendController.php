@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Models\OrderDetail;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
-use App\Models\Product_images;
+use App\Models\ProductImages;
 use App\Models\userRegister;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -150,8 +150,8 @@ class FrontendController extends Controller
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
             if ($Product) {
-                $productImage = Product_images::where('product_id', $Product->id)->first();
-                $productImages = Product_images::where('product_id', $Product->id)->get();
+                $productImage = ProductImages::where('product_id', $Product->id)->first();
+                $productImages = ProductImages::where('product_id', $Product->id)->get();
             }
             return view('frontend.productDetails', compact('category', 'Product', 'productImage', 'productImages'));
         } else {
@@ -190,7 +190,7 @@ class FrontendController extends Controller
         $productImages = [];
 
         foreach ($cartitems as $item) {
-            $images = Product_images::where('product_id', $item->prod_id)->first();
+            $images = ProductImages::where('product_id', $item->prod_id)->first();
             $productImages[$item->id] = $images;
         }
 

@@ -66,7 +66,7 @@
                                         @foreach ($orderDetails as $item)
                                             @php
                                                 $product_id = $item->product_id;
-                                                $option_name = \App\Models\Product_images::Where(
+                                                $option_name = \App\Models\ProductImages::Where(
                                                     'product_id',
                                                     $product_id,
                                                 )->first();
