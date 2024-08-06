@@ -32,7 +32,6 @@ class ProductController extends Controller
 
     public function fetchSubcategories(Request $request)
     {
-
         $category_id = $request->input('category_id');
         $subcategories = Subcategory::where('category_id', $category_id)->get();
         $response = [];
@@ -96,7 +95,6 @@ class ProductController extends Controller
         $Product->selling_price = $request->input('selling_price');
         $Product->original_price = $request->input('original_price');
         $Product->qty = $request->input('qty');
-        $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
         $Product->created_by = session('adminId');
 
         // Handle the single image upload
