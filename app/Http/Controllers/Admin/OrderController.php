@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\userRegister;
+use App\Models\UserRegister;
 use App\Models\OrderDetail;
 use App\Models\ProductImages;
 
@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function view_order($id, $user_id)
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
-        $userDetails = userRegister::find($user_id);
+        $userDetails = UserRegister::find($user_id);
 
         return view('admin.order.order_details', compact('orderDetails', 'userDetails'));
     }

@@ -10,7 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\ProductImages;
-use App\Models\userRegister;
+use App\Models\UserRegister;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -270,7 +270,7 @@ class FrontendController extends Controller
     public function view_my_order($id, $user_id)
     {
         $orderDetails = OrderDetail::with('product')->where('order_id', $id)->get();
-        $userDetails = userRegister::find($user_id);
+        $userDetails = UserRegister::find($user_id);
 
         return view('frontend.orders.view', compact('orderDetails', 'userDetails'));
     }

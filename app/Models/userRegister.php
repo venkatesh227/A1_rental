@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class userRegister extends Model
+class UserRegister extends Model
 {
     protected $table = 'user_register';
     protected $fillable = [

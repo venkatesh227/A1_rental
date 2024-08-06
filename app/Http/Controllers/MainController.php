@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
-use App\Models\userRegister;
+use App\Models\UserRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,7 +72,7 @@ class MainController extends Controller
             'phone' => 'required|numeric',
             'password' => 'required|max:12'
         ]);
-        $userInfo = userRegister::where('phone', '=', $request->phone)
+        $userInfo = UserRegister::where('phone', '=', $request->phone)
             ->where('password', '=', md5($request->password))
             ->where('status', '=', $status)
             ->first();
@@ -130,7 +130,7 @@ class MainController extends Controller
         $phone = $request->input('phone');
         $email = $request->input('email');
 
-        $userExists = userRegister::where('phone', $phone)
+        $userExists = UserRegister::where('phone', $phone)
             ->orWhere('email', $email)
             ->exists();
 
@@ -138,7 +138,7 @@ class MainController extends Controller
             return back()->withErrors(['address' => 'User already exists'])->withInput();
         }
 
-        $register = new userRegister;
+        $register = new UserRegister;
 
         $register->first_name = $request->input('first_name');
         $register->last_name = $request->input('last_name');
