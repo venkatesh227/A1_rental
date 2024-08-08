@@ -22,9 +22,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet" />
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css"
         integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <title>A1</title>
 </head>
 <style>
@@ -49,7 +51,7 @@
         <!-- Bootstrap JS -->
         <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
         <!--plugins-->
-        <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+       
         <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
         <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
         <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>

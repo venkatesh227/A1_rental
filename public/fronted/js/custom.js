@@ -47,7 +47,8 @@ $(document).ready(function () {
     $('.addToCartBtn').click(function (e) {
         e.preventDefault();
         var product_qty = $(this).closest('.product_data').find('.input-qty').val();
-        var product_id = $('.prod_id').val();
+        var product_id = $(this).closest('.product_data').find('.prod_id').val();
+        console.log(product_id);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

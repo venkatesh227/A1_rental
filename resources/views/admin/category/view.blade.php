@@ -25,9 +25,9 @@
                         <table id="categorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
-                                    <th>Caregory Name</th>
-                                    <th>Image</th>
+                                    <th>S.No</th>
+                                    <th>Category Name</th>
+                                    <th class="not-export-column">Image</th>
                                     <th>Created Date</th>
                                     <th scope="col" class="not-export-column">Action</th>
                                     <th>Status</th>
@@ -74,9 +74,7 @@
     </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script>
     $(document).ready(function() {
@@ -86,22 +84,22 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
-            dom: 'lBifrtip',
-            buttons: [{
-                    extend: 'pdf',
-                    filename: file_name,
-                    exportOptions: {
-                        columns: "thead th:not(.noExport)"
-                    }
-                },
-                {
-                    extend: 'excel',
-                    filename: file_name,
-                    exportOptions: {
-                        columns: "thead th:not(.noExport)"
-                    }
-                }
-            ],
+            dom: 'lifrtip',
+            // buttons: [{
+            //         extend: 'pdf',
+            //         filename: file_name,
+            //         exportOptions: {
+            //             columns: "thead th:not(.not-export-column)" 
+            //         }
+            //     },
+            //     {
+            //         extend: 'excel',
+            //         filename: file_name,
+            //         exportOptions: {
+            //             columns: "thead th:not(.not-export-column)" 
+            //         }
+            //     }
+            // ],
             language: {
                 infoEmpty: "Showing 0 to 0 of 0 Entries",
                 info: "Showing _START_ to _END_ of _TOTAL_ Entries",
@@ -139,6 +137,7 @@
                 },
                 success: function(response) {
                     if (response.status == 'success') {
+                        alert('Status Updated');
                         location.reload();
                     } else {
                         alert('Failed to update status.');

@@ -12,7 +12,7 @@ class SubcategoryController extends Controller
 {
     public function index()
     {
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::orderBy('created_at', 'desc')->get();
         $categories = Category::all();
         return view('admin.subcategory.view', compact('subcategories', 'categories'));
     }
@@ -20,7 +20,7 @@ class SubcategoryController extends Controller
     // 
     public function add_subcategory()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('name', 'asc')->get();
         return view('admin.subcategory.add', compact('categories'));
     }
 
@@ -55,7 +55,7 @@ class SubcategoryController extends Controller
 
 
         $subcategory->save();
-        return redirect('subcategories')->with('status', "subcategories Added Successfully");
+        return redirect('subcategories')->with('status', "Sub Category Added Successfully");
     }
 
 
@@ -63,7 +63,7 @@ class SubcategoryController extends Controller
     public function edit_subcategory($id)
     {
         $subcategory = Subcategory::find($id);
-        $categories = Category::all(); // Assuming you have a Category model
+        $categories = Category::orderBy('name', 'asc')->get(); // Assuming you have a Category model
 
         return view('admin.subcategory.edit', compact('subcategory', 'categories'));
     }
@@ -110,7 +110,7 @@ class SubcategoryController extends Controller
         }
         $subcategory->updated_at = Carbon::now('Asia/Calcutta');
         $subcategory->update();
-        return redirect('subcategories')->with('status', "SubCategory Updated Successfully");
+        return redirect('subcategories')->with('status', "Sub Category Updated Successfully");
     }
 
 

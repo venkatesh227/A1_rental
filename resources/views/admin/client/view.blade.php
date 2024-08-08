@@ -21,7 +21,7 @@
                         <table id="client_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">Sl. No</th>
+                                    <th style="text-align: center;">S.No</th>
                                     <th style="text-align: center;">First Name</th>
                                     <th style="text-align: center;">Last Name</th>
                                     <th style="text-align: center;">Phone</th>
@@ -29,7 +29,7 @@
                                     <th style="text-align: center;">Gender</th>
                                     <th style="text-align: center;">Address</th>
                                     <th style="text-align: center;">Created Date</th>
-                                    <th style="text-align: center;">Status</th>
+                                    <th class="not-export-column" style="text-align: center;">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +45,7 @@
                                         <td>{{ $value->email }}</td>
                                         <td>{{ $value->gender }}</td>
                                         <td>{{ $value->address }}</td>
-                                        <td>{{ date('d-m-y', strtotime($value->created_at)) }}</td>
+                                        <td>{{ date('d-m-y h:i:s A', strtotime($value->created_at)) }}</td>
                                         <td>
                                             <input class="status-toggle" type="checkbox" data-user-id="{{ $value->id }}"
                                                 data-status="{{ $value->status }}"
@@ -64,9 +64,7 @@
     </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script>
     $(document).ready(function() {
@@ -76,19 +74,19 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
-            dom: 'lBifrtip',
+            dom: 'lifrBtip',
             buttons: [{
                     extend: 'pdf',
                     filename: file_name,
                     exportOptions: {
-                        columns: "thead th:not(.noExport)"
+                        columns: "thead th:not(.not-export-column)" 
                     }
                 },
                 {
                     extend: 'excel',
                     filename: file_name,
                     exportOptions: {
-                        columns: "thead th:not(.noExport)"
+                        columns: "thead th:not(.not-export-column)" 
                     }
                 }
             ],
@@ -131,6 +129,7 @@
                 },
                 success: function(response) {
                     if (response.status == 'success') {
+                        alert('Status Updated');
                         location.reload();
                     } else {
                         alert('Failed to update status.');

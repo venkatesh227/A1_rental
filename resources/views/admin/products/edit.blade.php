@@ -139,7 +139,7 @@
                             <div class="col-md-6">
                                 <label for="qty" class="col-form-label">Quantity<span
                                         style="color: red;">*</span></label>
-                                <input type="number" class="form-control" id="qty" name="qty"
+                                <input type="number" class="form-control" id="qty" name="qty" min="0"
                                     value="{{ $Products->qty }}">
                                 @error('qty')
                                     <span class="text-danger">{{ $message }}</span>
@@ -172,7 +172,8 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="image" class="col-form-label">Image</label>
+                                <label for="image" class="col-form-label">Image<span
+                                style="color: red;">*</span></label>
                                 <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png ,image/jpg">
 
                                 @if (!empty($Products->id))

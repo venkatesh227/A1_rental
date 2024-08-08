@@ -82,7 +82,7 @@ class MainController extends Controller
             $category = Category::all();
             return redirect('/');
         } else {
-            return back()->with('fail', 'Please enter valid details');
+            return back()->withErrors(['password' => 'Please enter valid details'])->withInput();
         }
     }
     public function user_logout()

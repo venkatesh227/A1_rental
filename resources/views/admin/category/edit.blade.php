@@ -67,7 +67,7 @@
                             <div class="d-md-flex d-grid align-items-center gap-3">
 
                                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                                <a href="{{ url('add-category') }}" class="btn btn-light mt-2">Reset</a>
+                    
                             </div>
                         </div>
                     </form>

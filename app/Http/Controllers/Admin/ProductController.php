@@ -15,16 +15,16 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        $product_images =ProductImages::all();
+        $products = Product::orderBy('created_at', 'desc')->get();
+        $product_images = ProductImages::all();
         return view('admin.products.view', compact('products', 'product_images'));
     }
 
 
     public function add_product()
     {
-        $subcategories = Subcategory::all();
-        $categories = Category::all();
+        $subcategories = Subcategory::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')->get();
         $products = Product::all();
         return view('admin.products.add', compact('subcategories', 'categories', 'products'));
     }
@@ -50,7 +50,18 @@ class ProductController extends Controller
         $request->validate([
             'category_id' => 'required',
             'subcategory_id' => 'required',
-            'name' => 'required',
+            'name' => [
+                'required',
+                function ($attribute, $value, $fail) use ($request) {
+                    $exists = Product::where('name', $value)
+                        ->where('subcategory_id', $request->input('subcategory_id'))
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('The product name already exists in the selected subcategory');
+                    }
+                },
+            ],
             'slug' => 'required',
             'description' => 'required',
             'small_description' => 'required',
@@ -171,8 +182,8 @@ class ProductController extends Controller
     public function edit_product($id)
     {
         $Products = Product::find($id);
-        $subcategories = Subcategory::all();
-        $categories = Category::all();
+        $subcategories = Subcategory::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')->get();
         return view('admin.products.edit', compact('Products', 'subcategories', 'categories'));
     }
 
@@ -187,7 +198,7 @@ class ProductController extends Controller
             'slug' => 'required',
             'small_description' => 'required',
             'description' => 'required',
-            'selling_price' => 'required',
+            'selling_price' => 'required|numeric',
             'qty' => 'required',
             'title' => 'required',
             'additional_info' => 'required',
@@ -201,6 +212,7 @@ class ProductController extends Controller
             'name.unique' => 'Product is Already Exists',
             'slug.required' => 'Slug is Required',
             'selling_price.required' => 'Selling Price is Required',
+            'selling_price.numeric' => 'Selling Price Must be a Numeric Value',
             'qty.required' => 'Quantity is Required',
             'original_price.required' => 'Original Price is Required',
             'original_price.gte' => 'Original Price must be greater than or equal to Selling Price',
@@ -225,6 +237,7 @@ class ProductController extends Controller
         $Product->small_description = $request->input('small_description');
         $Product->description = $request->input('description');
         $Product->selling_price = $request->input('selling_price');
+        $Product->qty = $request->input('qty');
         $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
         $Product->updated_by = session('userId');
         $Product->updated_at = Carbon::now('Asia/Calcutta');

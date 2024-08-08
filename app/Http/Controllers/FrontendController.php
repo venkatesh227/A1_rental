@@ -167,8 +167,9 @@ class FrontendController extends Controller
 
         if (session('userId')) {
             $user_id = session('userId');
+
             if (Cart::where('prod_id', $pro_id)->where('user_id', $user_id)->exists()) {
-                return response()->json(['status' => " Already Added To Cart"]);
+                return response()->json(['status' => "Already Added To Cart"]);
             } else {
                 $cartitem = new Cart();
                 $cartitem->prod_id = $pro_id;

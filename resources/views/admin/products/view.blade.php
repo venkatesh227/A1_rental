@@ -26,7 +26,7 @@
                         <table id="categorytable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Sl. No</th>
+                                    <th>S.No</th>
                                     <th>Category</th>
                                     <th>SubCategory</th>
                                     <th>Product Name</th>
@@ -39,7 +39,7 @@
                                     <th>Original Price</th>
                                     <th>Selling Price</th>
                                     <th>Quantity</th>
-                                    <th>image</th>
+                                    <th class="not-export-column">image</th>
                                     <th style="width: 150px;">Add Images</th>
                                     <th>Created Date</th>
                                     <th>status</th>
@@ -76,7 +76,7 @@
                                             <a href="{{ url('viewProductImages/' . $item->id) }}"
                                                 class="btn btn-primary"  width="100" height="100">Add Images</a>
                                         </td>
-                                        <td>{{ date('d-m-y', strtotime($item->created_at)) }}</td>
+                                        <td>{{ date('d-m-y h:i:s A', strtotime($item->created_at)) }}</td>
 
                                         <td>
                                             <input class="status-toggle" type="checkbox" data-user-id="{{ $item->id }}"
@@ -104,9 +104,7 @@
     </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
 <script>
     $(document).ready(function() {
@@ -116,19 +114,21 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "All"]
             ],
-            dom: 'lBifrtip',
+            dom: 'lifrBtip',
             buttons: [{
                     extend: 'pdf',
                     filename: file_name,
+                    orientation: 'landscape',
+                    pageSize: 'A4',
                     exportOptions: {
-                        columns: "thead th:not(.noExport)"
+                        columns: "thead th:not(.not-export-column)" 
                     }
                 },
                 {
                     extend: 'excel',
                     filename: file_name,
                     exportOptions: {
-                        columns: "thead th:not(.noExport)"
+                        columns: "thead th:not(.not-export-column)" 
                     }
                 }
             ],
@@ -174,6 +174,7 @@
                 },
                 success: function(response) {
                     if (response.status == 'success') {
+                        alert('Status Updated');
                         location.reload();
                     } else {
                         alert('Failed to update status.');

@@ -167,7 +167,7 @@
 
                             <div class="col-md-6">
                                 <label for="qty" class="col-form-label">Quantity<span style="color: red;">*</span></label>
-                                <input type="number" class="form-control" id="qty" name="qty"
+                                <input type="number" class="form-control" id="qty" name="qty" min="0"
                                     value="{{ old('qty') }}">
                                 @error('qty')
                                     <span class="text-danger">{{ $message }}</span>
@@ -179,7 +179,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <label for="image" class="col-form-label">Images<span style="color: red;">*</span></label>
+                                <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
                                 <input type="file" class="form-control" id="image" name="image"value="{{ old('image') }}">
                                 @error('image')
                                      <span class="text-danger">{{ $message }}</span>

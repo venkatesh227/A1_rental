@@ -78,7 +78,7 @@ class PasswordResetController extends Controller
 
         $user = UserRegister::where('email', $request->email)->first();
         if ($user) {
-            $user->password = Hash::make($request->password);
+            $user->password = md5($request->password);
             $user->save();
 
             DB::table('password_resets')->where('email', $request->email)->delete();

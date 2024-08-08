@@ -11,16 +11,16 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::all();
+        $category = Category::orderBy('created_at', 'desc')->get();
+
         return view('admin.category.view', compact('category'));
-        return view('index', compact('category'));
     }
 
     public function add_category()
     {
         return view('admin.category.add');
     }
-    public  function insert_category(Request $request)
+    public function insert_category(Request $request)
     {
         $request->validate([
             'name' => 'required|unique:categories|regex:/^[A-Za-z\s]+$/',
