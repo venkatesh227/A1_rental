@@ -42,7 +42,7 @@
                         <div class="col-md-6">
                             <label for="input1" class="form-label">Category Name</label>
                             <input type="text" name="name" class="form-control" placeholder="Category Name"
-                                value="{{ $category->name }}">
+                            value="{{ old('name', $category->name) }}">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

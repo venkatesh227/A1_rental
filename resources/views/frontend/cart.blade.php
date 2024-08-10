@@ -96,13 +96,10 @@
                                             <span>Subtotal:</span>
                                             <span class="ms-auto">${{ number_format($total, 2) }}</span>
                                         </div>
-                                        <div class="subtotal">
-                                            <span>Shipping Cost:</span>
-                                            <span class="ms-auto">$10.00</span>
-                                        </div>
+                                        
                                         <div class="total">
                                             <span>Total:</span>
-                                            <span class="ms-auto">${{ number_format($total + 10, 2) }}</span>
+                                            <span class="ms-auto">${{ number_format($total, 2) }}</span>
                                         </div>
                                         <input type="hidden" name="no_of_products" value="{{ $cartitems->count() }}">
                                         <input type="hidden" name="grand_total" value="{{ $total }}">
