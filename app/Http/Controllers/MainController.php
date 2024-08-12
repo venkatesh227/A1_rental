@@ -35,7 +35,7 @@ class MainController extends Controller
             // return view('admin.index');
 
             // return view('admin.category.view', compact('category'));
-            return redirect('categories');
+            return redirect('categories')->with('status_alert', "Log In Successfully");
         } else {
             return back()->withErrors(['password' => 'Please enter valid details'])->withInput();
         }
@@ -80,7 +80,7 @@ class MainController extends Controller
         if ($userInfo) {
             $request->session()->put('userId', $userInfo->id);
             $category = Category::all();
-            return redirect('/');
+            return redirect('/')->with('status_alert', "Log In Successfully");
         } else {
             return back()->withErrors(['password' => 'Please enter valid details'])->withInput();
         }
@@ -110,7 +110,15 @@ class MainController extends Controller
             'last_name' => 'required|regex:/^[A-Za-z\s]+$/',
             'phone' => 'required|numeric',
             'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z.-]+\.[a-zA-Z]{2,}$/',
-            'password' => 'required|min:8',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',       // must contain at least one uppercase letter
+                'regex:/[a-z]/',       // must contain at least one lowercase letter
+                'regex:/[0-9]/',       // must contain at least one digit
+                'regex:/[@$!%*#?&]/',  // must contain a special character
+            ],
             'gender' => 'required',
             'address' => 'required',
         ], [
@@ -151,5 +159,10 @@ class MainController extends Controller
         $register->address = $request->input('address');
         $register->save();
         return redirect('user-login')->with('status', "Registered Successfully");
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard');
     }
 }

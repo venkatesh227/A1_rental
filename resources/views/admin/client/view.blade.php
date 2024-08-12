@@ -7,7 +7,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
                             <li class="breadcrumb-item active" aria-current="page"><b>Client Details</b></li>
                         </ol>
                     </nav>
@@ -21,15 +21,15 @@
                         <table id="client_table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">S.No</th>
-                                    <th style="text-align: center;">First Name</th>
-                                    <th style="text-align: center;">Last Name</th>
-                                    <th style="text-align: center;">Phone</th>
-                                    <th style="text-align: center;">Email</th>
-                                    <th style="text-align: center;">Gender</th>
-                                    <th style="text-align: center;">Address</th>
-                                    <th style="text-align: center;">Created Date</th>
-                                    <th class="not-export-column" style="text-align: center;">Status</th>
+                                    <th>S.No</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Created Date</th>
+                                    <th class="not-export-column">Status</th>
                                 </tr>
                             </thead>
                             <tbody>

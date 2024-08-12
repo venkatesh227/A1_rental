@@ -7,7 +7,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
                         <li class="breadcrumb-item active" aria-current="page"><b>Order Details</b></li>
                     </ol>
                 </nav>
@@ -21,12 +21,12 @@
                     <table id="orders_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">S.No</th>
-                                <th style="text-align: center;">Order Date</th>
-                                <th style="text-align: center;">Tracking Number</th>
-                                <th style="text-align: center;">Total Price</th>
-                                <th style="text-align: center;">Status</th>
-                                <th class="not-export-column" style="text-align: center;">Action</th>
+                                <th>S.No</th>
+                                <th>Order Date</th>
+                                <th>Tracking Number</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                                <th class="not-export-column">Action</th>
                             </tr>
                         </thead>
                         <tbody>

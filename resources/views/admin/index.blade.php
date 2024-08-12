@@ -4,7 +4,8 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1" /> --}}
+    {{--
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!--favicon-->
@@ -26,15 +27,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css"
         integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <title>A1</title>
 </head>
 <style>
     .dataTables_wrapper .dataTables_length {
-      margin-right: 20px;
-      /* margin-bottom: 60px; */
+        margin-right: 20px;
+        /* margin-bottom: 60px; */
     }
-  </style>
+</style>
+
 <body>
     <!--wrapper-->
     <div class="wrapper">
@@ -51,7 +58,7 @@
         <!-- Bootstrap JS -->
         <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
         <!--plugins-->
-       
+
         <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
         <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
         <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
@@ -66,7 +73,7 @@
         <script src="{{ asset('admin/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('admin/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
 
-
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -77,14 +84,18 @@
         @endif
 
 
-        {{-- <script>
-            $(document).ready(function() {
-                $('#example').DataTable();
-            });
-        </script>
 
         <script>
-            $(document).ready(function() {
+            document.addEventListener('DOMContentLoaded', function () {
+                @if(session('status_alert'))
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.success("{{ session('status_alert') }}").delay(3);
+                @endif
+            });
+        </script>
+        {{--
+        <script>
+            $(document).ready(function () {
                 var table = $('#example2').DataTable({
                     lengthChange: false,
                     buttons: ['copy', 'excel', 'pdf', 'print']

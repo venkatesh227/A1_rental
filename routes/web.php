@@ -62,6 +62,8 @@ Route::group(['middleware' => ['UserAuthCheck']], function () {
 Route::get('captcha', [FrontendController::class, 'showCaptcha']);
 
 Route::group(['middleware' => ['AuthCheck']], function () {
+    Route::get('dashboard', [MainController::class, 'dashboard']);
+
     Route::get('categories', [CategoryController::class, 'index']);
     Route::get('add-category', [CategoryController::class, 'add_category']);
     Route::post('insert-category', [CategoryController::class, 'insert_category']);

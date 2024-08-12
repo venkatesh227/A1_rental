@@ -7,7 +7,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="bx bx-home-alt"></i></a></li>
                             <li class="breadcrumb-item active" aria-current="page"><b>Products</b></li>
                         </ol>
                     </nav>
@@ -30,7 +30,6 @@
                                     <th>Category</th>
                                     <th>SubCategory</th>
                                     <th>Product Name</th>
-                                    <th>Title</th>
                                     <th>Slug</th>
                                     <th>Small Description</th>
                                     <th>Large Description</th>
@@ -56,7 +55,6 @@
                                         <td>{{ $item->subcategory->category->name }}</td>
                                         <td>{{ $item->subcategory->name }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->title }}</td>
                                         <td>{{ $item->slug }}</td>
                                         <td>{{ $item->small_description }}</td>
                                         <td>{{ $item->description }}</td>

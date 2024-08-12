@@ -56,7 +56,7 @@
                             <!-- Password Input -->
                             <div class="row mb-3">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }} <span style="color: red;"> *</span></label>
                                 <div class="col-md-6 password-container">
                                     <input id="password" type="password"
                                         class="form-control" name="password">
@@ -72,7 +72,7 @@
                             <!-- Confirm Password Input -->
                             <div class="row mb-3">
                                 <label for="password_confirmation"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }} <span style="color: red;"> *</span></label>
                                 <div class="col-md-6 password-container">
                                     <input id="password_confirmation" type="password"
                                         class="form-control"

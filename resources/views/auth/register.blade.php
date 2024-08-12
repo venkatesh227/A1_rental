@@ -50,14 +50,19 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <div class="single-input-inner style-bg">
-                                        <input type="text" placeholder="Phone Number *" name="phone"
-                                            value="{{ old('phone') }}">
+                                <div class="single-input-inner style-bg">
+    <div style="display: flex; align-items: center;">
+        <input type="text" value="+1" readonly style="width: 100px; text-align: left; border: 1px solid #ccc; background-color: #f8f9fa; margin-right: 5px;">
+        <input type="text" placeholder="Phone Number *" name="phone"
+               value="{{ old('phone') }}" style="flex: 1;">
+    </div>
+     
                                         @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
+                                
                                 <div class="col-lg-12">
                                     <div class="single-input-inner style-bg">
                                         <input type="text" placeholder="Email id *" name="email"

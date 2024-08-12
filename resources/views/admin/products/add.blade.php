@@ -1,16 +1,4 @@
-<head>
-    <style>
-        /* b {
-            color: black;
-            background: 20px;
 
-            font-size: 25px;
-            /* Set the font size here */
-        }
-
-        */
-    </style>
-</head>
 @extends('admin.index')
 
 @section('content')
@@ -23,7 +11,7 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page"><b> Add Product</b></li>
                         </ol>
@@ -76,31 +64,20 @@
                             <div class="col-md-6">
                                 <label for="name" class="col-form-label">Product Name<span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name') }}">
+                                    value="{{ old('name') }}" oninput="generateSlug()">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-md-6">
-                                <label for="slug" class="col-form-label">Slug<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" id="slug" name="slug"
-                                    value="{{ old('slug') }}">
-                                @error('slug')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+    <label for="slug" class="col-form-label">Slug</label>
+    <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" readonly>
+    @error('slug')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
 
-
-
-                            <div class="col-md-6">
-                                <label for="title" class="col-form-label">Title<span style="color: red;">*</span></label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                    value="{{ old('title') }}">
-                                @error('title')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
 
                             <div class="col-md-6">
                                 <label for="small_description" class="col-form-label">Small Description<span style="color: red;">*</span></label>
@@ -202,6 +179,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+    function generateSlug() {
+        const name = document.getElementById('name').value;
+        const slug = name.toLowerCase()
+            .replace(/ /g, '-')       // Replace spaces with -
+            .replace(/[^\w-]+/g, ''); // Remove all non-word characters
+        document.getElementById('slug').value = slug;
+    }
+
+
     $(document).ready(function() {
         $('#category_id').on('change', function() {
             var category_id = $(this).val();

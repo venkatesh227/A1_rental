@@ -14,7 +14,6 @@ class Product extends Model
         'subcategory_id',
         'name',
         'slug',
-        'title',
         'small_description',
         'description',
         'additional_info',

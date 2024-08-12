@@ -20,7 +20,7 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th class="fw-bold">Frist Name</th>
+                                                <th class="fw-bold">First Name</th>
                                                 <td>{{ $userDetails->first_name }}</td>
                                             </tr>
                                             <tr>
@@ -97,10 +97,31 @@
                                         <h4>Order Status</h4>
                                     </label>
                                     <select name="order_status" id="order_status" class="form-select">
-                                        <option value="0" {{ $orderDetails[0]->Orders->status == 0 ? 'selected' : '' }}>Under Process</option>
+                                        <!-- <option value="0" {{ $orderDetails[0]->Orders->status == 0 ? 'selected' : '' }}>Under Process</option>
                                         <option value="1" {{ $orderDetails[0]->Orders->status == 1 ? 'selected' : '' }}>Accepted</option>
                                         <option value="2" {{ $orderDetails[0]->Orders->status == 2 ? 'selected' : '' }}>Completed</option>
-                                        <option value="3" {{ $orderDetails[0]->Orders->status == 3 ? 'selected' : '' }}>Cancelled</option>
+                                        <option value="3" {{ $orderDetails[0]->Orders->status == 3 ? 'selected' : '' }}>Cancelled</option> -->
+
+                                        <option value="0" 
+        {{ $orderDetails[0]->Orders->status == 0 ? 'selected' : '' }} 
+        {{ $orderDetails[0]->Orders->status > 0 ? 'disabled' : '' }}>
+        Under Process
+    </option>
+    <option value="1" 
+        {{ $orderDetails[0]->Orders->status == 1 ? 'selected' : '' }} 
+        {{ $orderDetails[0]->Orders->status > 1 ? 'disabled' : '' }}>
+        Accepted
+    </option>
+    <option value="2" 
+        {{ $orderDetails[0]->Orders->status == 2 ? 'selected' : '' }}
+        {{ $orderDetails[0]->Orders->status > 2 ? 'disabled' : '' }}>
+        Completed
+    </option>
+    <option value="3" 
+        {{ $orderDetails[0]->Orders->status == 3 ? 'selected' : '' }}>
+  
+        Cancelled
+    </option>
                                     </select>
                                     
                                     <button type="submit" name="update_order_status_btn"

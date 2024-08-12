@@ -66,9 +66,27 @@ class PasswordResetController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',       // must contain at least one uppercase letter
+                'regex:/[a-z]/',       // must contain at least one lowercase letter
+                'regex:/[0-9]/',       // must contain at least one digit
+                'regex:/[@$!%*#?&]/',  // must contain a special character
+            ],
+            'password_confirmation' => 'required|same:password',
+        ], [
+            'token.required' => 'The token is required.',
+            'email.required' => 'The email field is required.',
+            'password.required' => 'The password field is required.',
+            'password.string' => 'The password must be a string.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.regex' => 'The password must include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+            'password_confirmation.required' => 'The password confirmation field is required.',
+            'password_confirmation.same' => 'The password confirmation does not match.',
         ]);
+        
 
         $passwordReset = DB::table('password_resets')->where('token', $request->token)->first();
 
@@ -78,6 +96,11 @@ class PasswordResetController extends Controller
 
         $user = UserRegister::where('email', $request->email)->first();
         if ($user) {
+
+            if ($user->password == md5($request->password)) {
+                return back()->withErrors(['password' => 'The previous password and current password must be different.']);
+            }
+
             $user->password = md5($request->password);
             $user->save();
 

@@ -68,7 +68,6 @@ class ProductController extends Controller
             'selling_price' => 'required|numeric',
             'original_price' => 'required|numeric|gte:selling_price',
             'qty' => 'required',
-            'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'image' => 'required|mimes:jpeg,jpg,png,gif',
@@ -78,15 +77,14 @@ class ProductController extends Controller
             'name.required' => 'Product is Required',
             'name.unique' => 'Product is Already Exists',
             'slug.required' => 'Slug is Required',
-            'selling_price.required' => 'Original Price is Required',
-            'original_price.required' => 'Selling Price is Required',
+            'selling_price.required' => 'Selling Price is Required',
+            'original_price.required' => 'Original Price is Required',
             'original_price.gte' => 'Original Price must be greater than or equal to Selling Price',
             'selling_price.numeric' => 'Selling Price Must be a Numeric Value',
             'original_price.numeric' => 'Original Price Must be a Numeric Value',
             'qty.required' => 'Quantity is Required',
             'description.required' => 'Large Description is Required',
             'small_description.required' => 'Small Description is Required',
-            'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
             'image.required' => 'Image is Required',
@@ -98,7 +96,6 @@ class ProductController extends Controller
         $Product->subcategory_id = $request->input('subcategory_id');
         $Product->name = $request->input('name');
         $Product->slug = $request->input('slug');
-        $Product->title = $request->input('title');
         $Product->additional_info = $request->input('additional_info');
         $Product->shipping_delivery = $request->input('shipping_delivery');
         $Product->small_description = $request->input('small_description');
@@ -200,7 +197,6 @@ class ProductController extends Controller
             'description' => 'required',
             'selling_price' => 'required|numeric',
             'qty' => 'required',
-            'title' => 'required',
             'additional_info' => 'required',
             'shipping_delivery' => 'required',
             'original_price' => 'required|numeric|gte:selling_price',
@@ -219,7 +215,6 @@ class ProductController extends Controller
             'image.required' => 'Image is Required',
             'small_description.required' => 'Small Description is Required',
             'description.required' => 'Large Description is Required',
-            'title.required' => 'Title is Required',
             'additional_info.required' => 'Additional Info is Required',
             'shipping_delivery.required' => 'Shipping Delivery is Required',
             'image.image' => 'Only PNG, GIF, and JPG files are accepted',
@@ -231,7 +226,6 @@ class ProductController extends Controller
         $Product->name = $request->input('name');
         $Product->slug = $request->input('slug');
         $Product->original_price = $request->input('original_price');
-        $Product->title = $request->input('title');
         $Product->additional_info = $request->input('additional_info');
         $Product->shipping_delivery = $request->input('shipping_delivery');
         $Product->small_description = $request->input('small_description');

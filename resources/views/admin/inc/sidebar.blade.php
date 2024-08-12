@@ -6,14 +6,14 @@
        <!--navigation-->
        <ul class="metismenu" id="menu">
         
-           {{-- <li>
-               <a href="">
+           <li>
+               <a href="{{ url('dashboard') }}">
                    <div class="parent-icon"><i class="bx bx-home-alt"></i>
                    </div>
                    <div class="menu-title">Dashboard</div>
                </a>
 
-           </li> --}}
+           </li> 
 
            <li>
                <a href="{{ url('categories') }}">

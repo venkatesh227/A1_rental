@@ -11,17 +11,17 @@
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="dashboard.php"><i class="bx bx-home-alt"></i></a>
+                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page"><b>Add Category</b></li>
                         </ol>
                     </nav>
                 </div>
-                <div class="ms-auto text-end">
+                <!-- <div class="ms-auto text-end">
                     <div class="btn-group">
                         <a href="{{ url('categories') }}" class="btn btn-primary">Category List</a>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <hr />

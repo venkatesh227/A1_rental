@@ -20,7 +20,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet" />
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
     <title>A1</title>
+    <style>
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input[type="password"],
+        .password-container input[type="text"] {
+            padding-right: 30px;
+        }
+
+        .password-container .toggle-password {
+            position: absolute;
+            right: 20px;
+            top: 40%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="bg-login">
@@ -34,8 +54,7 @@
                             <div class="card-body">
                                 <div class="p-4">
                                     <div class="mb-3 text-center">
-                                        <img src="{{ asset('admin/images/logo-icon.png') }}" width="60"
-                                            alt="" />
+                                        <img src="{{ asset('admin/images/logo-icon.png') }}" width="60" alt="" />
                                     </div>
                                     <div class="text-center mb-4">
                                         <h5 class="">A1</h5>
@@ -62,10 +81,14 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
-                                                <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control border-end-0"
+                                                <div class="input-group password-container" id="show_hide_password">
+                                                    <!-- <input type="password" class="form-control border-end-0"
                                                         id="inputChoosePassword" value="" name="password"
-                                                        placeholder="Enter Password" />
+                                                        placeholder="Enter Password" /> -->
+                                                        <input type="password" class="form-control border-end-0" placeholder="Enter Password" name="password" id="password"
+                                                        value="{{ old('password') }}">
+                                                    <i class="fa fa-eye icon-eye toggle-password"
+                                                        onclick="togglePassword('password', this)"></i>
                                                 </div>
                                                 <span class="text-danger mt-2">
                                                     @error('password')
@@ -95,6 +118,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+
     <!--end wrapper-->
     <!-- Bootstrap JS -->
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>

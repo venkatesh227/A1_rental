@@ -14,9 +14,14 @@
     <link rel=icon href="assets/img/favicon.png" sizes="20x20" type="image/png">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('fronted/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('fronted/css/style.css') }}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
     <style>
         /* Custom styles for the vertical menu */
         .vertical-menu {
@@ -107,6 +112,7 @@
     <script src="{{ asset('fronted/js/custom.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
         var availableTags = [];
         $.ajax({
@@ -127,7 +133,16 @@
                 source: availableTags
             });
         }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('status_alert'))
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success("{{ session('status_alert') }}").delay(3);
+            @endif
+        });
     </script>
+
 
 
     <script src="{{ asset('fronted/js/sweetalert.min.js') }}"></script>
