@@ -91,19 +91,16 @@
                                             @foreach ($orderDetails as $item)
                                                 @php
                                                     $product_id = $item->product_id;
-                                                    $option_name = \App\Models\ProductImages::Where(
-                                                        'product_id',
-                                                        $product_id,
-                                                    )->first();
+                                                   
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $item->Product->name }}</td>
                                                     <td>{{ $item->qty }}</td>
                                                     <td>{{ '$' . $item->single_price }}</td>
                                                     <td>
-                                                        @if (!empty($option_name->image))
+                                                        @if (!empty($item->Product->image))
                                                             <img class="image-item-01"
-                                                                src="{{ asset('images/products/' . $option_name->image) }}"
+                                                                src="{{ asset('images/products/' . $item->Product->image) }}"
                                                                 alt="Product Image" width="100" height="100">
                                                         @endif
                                                     </td>

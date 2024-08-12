@@ -232,7 +232,6 @@ class ProductController extends Controller
         $Product->description = $request->input('description');
         $Product->selling_price = $request->input('selling_price');
         $Product->qty = $request->input('qty');
-        $Product->status = $request->input('status') == true ? '1' : '0'; // Use lowercase true
         $Product->updated_by = session('userId');
         $Product->updated_at = Carbon::now('Asia/Calcutta');
         $Product->update();

@@ -168,7 +168,8 @@
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Image<span
                                         style="color: red;">*</span></label>
-                                <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png ,image/jpg">
+                                <input type="file" class="form-control" id="image" name="image"
+                                    accept="image/jpeg, image/png ,image/jpg">
 
                                 @if (!empty($Products->id))
                                                                 @php
