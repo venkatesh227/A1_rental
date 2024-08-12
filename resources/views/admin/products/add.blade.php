@@ -157,7 +157,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
-                                <input type="file" class="form-control" id="image" name="image"value="{{ old('image') }}">
+                                <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}" accept="image/jpeg, image/png ,image/jpg">
                                 @error('image')
                                      <span class="text-danger">{{ $message }}</span>
                                  @enderror

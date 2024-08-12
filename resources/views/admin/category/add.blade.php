@@ -43,7 +43,7 @@
                         <div class="col-md-6">
                             <label for="image" class="col-form-label">Image</label><span style="color: red;">*</span>
                             <input type="file" class="form-control" id="image" name="image"
-                                value="{{ old('image') }}">
+                                value="{{ old('image') }}" accept="image/jpeg, image/png ,image/jpg">
                             @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

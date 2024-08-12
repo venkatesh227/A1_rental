@@ -59,7 +59,7 @@
 
                                 <div class="col-md-12">
                                     <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
-                                    <input type="file" class="form-control" id="image" name="image" value="">
+                                    <input type="file" class="form-control" id="image" name="image" value="" accept="image/jpeg, image/png ,image/jpg">
 
                                     @if ($subcategory->image)
 

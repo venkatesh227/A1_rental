@@ -51,7 +51,7 @@
 
                         <div class="col-md-6">
                             <label for="image" class="col-form-label">Image<span style="color: red;">*</span></label>
-                            <input type="file" class="form-control" id="image" name="image" value="">
+                            <input type="file" class="form-control" id="image" name="image" value="" accept="image/jpeg, image/png ,image/jpg">
 
                             @if ($category->image)
                             <img src="{{ asset('images/categories/' . $category->image) }}" height="100px" width="100px">
