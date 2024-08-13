@@ -93,6 +93,7 @@ $(document).ready(function () {
         });
 
         var prod_id = $(this).closest('.product_data').find('.prod_id').val();
+    
         var productRow = $(this).closest('.product_data');
         $.ajax({
             method: "post",

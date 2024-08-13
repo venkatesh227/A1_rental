@@ -69,30 +69,37 @@
                                                                 </div>
                                                                 <div class="container mt-4">
                                                                     <div class="d-flex justify-content-between align-items-center">
-                                                                        
+
                                                                         <div class="d-flex flex-grow-1 justify-content-center">
                                                                             <span>{{ '$' . $prod->selling_price }}</span>
                                                                         </div>
-                                                                       
+
                                                                         <del>{{ '$' . $prod->original_price }}</del>
                                                                     </div>
                                                                 </div>
 
 
                                                         </a>
+                                                        <input type="hidden" name="" value="{{ $prod->id }}" class="prod_id">
 
-                                                        <div class="quantity buttons_added mb-2">
-                                                            <input type="hidden" name="" value="{{ $prod->id }}" class="prod_id">
-                                                            <input type="button" value="-" class="minus decrement-btn">
-                                                            <input type="number" step="1" min="1" max="{{ $prod->qty }}" name="quantity"
-                                                                class="input-qty" value="1" disabled>
-                                                            <input type="button" value="+" class="plus increment-btn ">
-                                                        </div>
+                                                        @if($prod->qty > 0)
+                                                            <div class="quantity buttons_added mb-2">
 
-                                                        <div class="single-cart-button">
-                                                            <button type="submit" class="btn btn-title addToCartBtn">Add to Cart <i
-                                                                    class="fa fa-shopping-basket ms-2"></i></button>
-                                                        </div>
+                                                                <input type="button" value="-" class="minus decrement-btn">
+                                                                <input type="number" step="1" min="1" max="{{ $prod->qty }}" name="quantity"
+                                                                    class="input-qty" value="1" disabled>
+                                                                <input type="button" value="+" class="plus increment-btn ">
+                                                            </div>
+
+                                                            <div class="single-cart-button">
+                                                                <button type="submit" class="btn btn-title addToCartBtn">Add to Cart <i
+                                                                        class="fa fa-shopping-basket ms-2"></i></button>
+                                                            </div>
+                                                        @else
+                                                            <div class="single-cart-button">
+                                                                <button type="button" class="btn btn-title addToCartBtn" disabled>Out of Stock</button>
+                                                            </div>
+                                                        @endif
 
                                                     </div>
                                                 </div>

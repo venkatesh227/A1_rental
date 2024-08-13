@@ -202,6 +202,7 @@ class FrontendController extends Controller
         if (session('userId')) {
             $prod_id = $request->input('prod_id');
             $user_id = session('userId');
+            
             if (Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->exists()) {
                 $cartitem = Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->first();
                 $cartitem->delete();
@@ -231,13 +232,27 @@ class FrontendController extends Controller
 
     public function place_order(Request $request)
     {
+
+        $cartitems = Cart::where('user_id', session('userId'))->get();
+
+        foreach ($cartitems as $item) {
+            $prod = Product::where('id', $item->prod_id)->first();
+
+            if ($prod->qty >= $item->prod_qty) {
+                $prod->qty = $prod->qty - $item->prod_qty;
+                $prod->update();
+            } else {
+                return redirect('cart')->with('status', 'One or more products are out of stock');
+            }
+        }
+
+
         $order = new Order();
         $order->order_no = rand(1111, 9999);
         $order->user_id = session('userId');
         $order->no_of_products = $request->input('no_of_products');
         $order->grand_total = $request->input('grand_total');
         $order->created_by = session('userId');
-        ;
         $order->save();
         $cartitems = Cart::where('user_id', session('userId'))->get();
 
@@ -264,7 +279,7 @@ class FrontendController extends Controller
 
     public function myorders()
     {
-        $orders = Order::where('user_id', session('userId'))->get();
+        $orders = Order::where('user_id', session('userId'))->orderBy('created_at')->get();
         return view('frontend.orders.myorder', compact('orders'));
     }
 

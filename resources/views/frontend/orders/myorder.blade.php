@@ -45,7 +45,7 @@
                                 <table id="client_table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Sl. No</th>
+                                            <th>S.No</th>
                                             <th>Order Date</th>
                                             <th>Tracking Number</th>
                                             <th>Total Price</th>
@@ -60,7 +60,7 @@
                                         @foreach ($orders as $value)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ date('d-m-y', strtotime($value->created_at)) }}</td>
+                                                <td>{{ date('d-m-y h:i:s A', strtotime($value->created_at)) }}</td>
                                                 <td>{{ $value->order_no }}</td>
                                                 <td>{{ $value->grand_total }}</td>
                                                 {{-- <td>{{ $value->status }}</td> --}}
