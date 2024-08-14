@@ -14,6 +14,7 @@ use App\Models\UserRegister;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
@@ -150,6 +151,7 @@ class FrontendController extends Controller
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
             if ($Product) {
+                
                 $productImage = ProductImages::where('product_id', $Product->id)->first();
                 $productImages = ProductImages::where('product_id', $Product->id)->get();
             }
@@ -175,7 +177,9 @@ class FrontendController extends Controller
                 $cartitem->prod_id = $pro_id;
                 $cartitem->user_id = $user_id;
                 $cartitem->prod_qty = $pro_qty;
+                $cartitem->created_at = Carbon::now('Asia/Calcutta');
                 $cartitem->created_by = $user_id;
+             
                 $cartitem->save();
                 return response()->json(['status' => "Added To Cart"]);
             }
@@ -191,8 +195,8 @@ class FrontendController extends Controller
         $productImages = [];
 
         foreach ($cartitems as $item) {
-            $images = ProductImages::where('product_id', $item->prod_id)->first();
-            $productImages[$item->id] = $images;
+            $product_details = Product::where('id', $item->prod_id)->first();
+            $productImages[$item->id] = $product_details->image;
         }
 
         return view('frontend.cart', compact('category', 'cartitems', 'productImages'));
@@ -221,6 +225,7 @@ class FrontendController extends Controller
             if (Cart::where('prod_id', $prod_id)->where('user_id', session('userId'))->exists()) {
                 $cartqty = Cart::where('prod_id', $prod_id)->where('user_id', session('userId'))->first();
                 $cartqty->prod_qty = $product_qty;
+                $cartqty->updated_at = Carbon::now('Asia/Calcutta');
                 $cartqty->update();
                 return response()->json(['status' => "Quantity updated"]);
             }
@@ -239,7 +244,10 @@ class FrontendController extends Controller
             $prod = Product::where('id', $item->prod_id)->first();
 
             if ($prod->qty >= $item->prod_qty) {
+              
                 $prod->qty = $prod->qty - $item->prod_qty;
+                // dd($prod->qty);
+                $prod->updated_at = Carbon::now('Asia/Calcutta');
                 $prod->update();
             } else {
                 return redirect('cart')->with('status', 'One or more products are out of stock');
@@ -252,6 +260,7 @@ class FrontendController extends Controller
         $order->user_id = session('userId');
         $order->no_of_products = $request->input('no_of_products');
         $order->grand_total = $request->input('grand_total');
+        $order->created_at = Carbon::now('Asia/Calcutta');
         $order->created_by = session('userId');
         $order->save();
         $cartitems = Cart::where('user_id', session('userId'))->get();
@@ -267,9 +276,6 @@ class FrontendController extends Controller
                 'created_by' => session('userId'),
 
             ]);
-            $prod = Product::where('id', $item->prod_id)->first();
-            $prod->qty = $prod->qty - $item->prod_qty;
-            $prod->update();
         }
         $cartitems = Cart::where('user_id', session('userId'))->get();
         Cart::destroy($cartitems);
@@ -279,7 +285,7 @@ class FrontendController extends Controller
 
     public function myorders()
     {
-        $orders = Order::where('user_id', session('userId'))->orderBy('created_at')->get();
+        $orders = Order::where('user_id', session('userId'))->orderBy('created_at','desc')->get();
         return view('frontend.orders.myorder', compact('orders'));
     }
 

@@ -40,23 +40,30 @@
                             <div class="product-thumbnail-wrapper">
                                 <div class="single-thumbnail-slider-2">
                                     <div class="slider-item">
-                                        @if (!empty($productImage))
-                                            <img src="{{ asset('images/products/' . $productImage->image) }}" alt="item">
+                                        @if (!empty($Product->image))
+                                            <img id="mainImage" src="{{ asset('images/products/' . $Product->image) }}"
+                                                alt="item" height="300px" width="300px">
                                         @endif
-
                                     </div>
-
                                 </div>
 
                                 <div class="product-thumbnail-carousel-2">
+                                    @if (!empty($Product->image))
+                                        <div class="single-thumbnail-item">
+                                            <img class="thumbnail" src="{{ asset('images/products/' . $Product->image) }}"
+                                                alt="item" height="100px" width="100px">
+                                        </div>
+                                    @endif
                                     @foreach ($productImages as $image)
                                         <div class="single-thumbnail-item">
-                                            <img src="{{ asset('images/products/' . $image->image) }}" alt="item">
+                                            <img class="thumbnail"
+                                                src="{{ asset('images/product_images/' . $image->image) }}" alt="item"
+                                                height="100px" width="100px">
                                         </div>
                                     @endforeach
                                 </div>
-
                             </div>
+
                         </div>
                         <div class="col-lg-7">
                             <div class="product-item-details product_data">
@@ -175,4 +182,18 @@
 
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainImage');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function () {
+                const newSrc = this.getAttribute('src');
+                mainImage.setAttribute('src', newSrc);
+            });
+        });
+    });
+</script>
 @endsection

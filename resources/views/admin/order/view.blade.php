@@ -99,7 +99,7 @@
             language: {
                 infoEmpty: "Showing 0 to 0 of 0 Entries",
                 info: "Showing _START_ to _END_ of _TOTAL_ Entries",
-                lengthMenu: "Show _MENU_ Entries",
+                lengthMenu: "Show Entries _MENU_",
                 search: "Search:",
                 paginate: {
                     first: "First",

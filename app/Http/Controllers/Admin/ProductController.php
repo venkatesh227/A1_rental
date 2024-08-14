@@ -103,7 +103,9 @@ class ProductController extends Controller
         $Product->selling_price = $request->input('selling_price');
         $Product->original_price = $request->input('original_price');
         $Product->qty = $request->input('qty');
+        $Product->created_at = Carbon::now('Asia/Calcutta');
         $Product->created_by = session('adminId');
+       
 
         // Handle the single image upload
         if ($request->hasFile('image')) {

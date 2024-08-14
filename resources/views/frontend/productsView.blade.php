@@ -54,9 +54,9 @@
                                                             <div class="single-product-item">
                                                                 <div class="single-product-image">
                                                                     <td>
-                                                                        @if (!empty($option_name->image))
+                                                                        @if (!empty($prod->image))
                                                                             <img class="image-item-01"
-                                                                                src="{{ asset('images/products/' . $option_name->image) }}"
+                                                                                src="{{ asset('images/products/' . $prod->image) }}"
                                                                                 alt="Product Image" width="100" height="200">
                                                                         @endif
                                                                     </td>

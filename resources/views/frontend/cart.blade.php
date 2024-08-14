@@ -48,7 +48,7 @@
                                                                         <tr class="product_data">
                                                                             <th scope="row">
                                                                                 @if (isset($productImages[$item->id]))
-                                                                                    <img src="{{ asset('images/products/' . $productImages[$item->id]->image) }}"
+                                                                                    <img src="{{ asset('images/products/' . $productImages[$item->id]) }}"
                                                                                         alt="img">
                                                                                 @endif
                                                                             </th>
