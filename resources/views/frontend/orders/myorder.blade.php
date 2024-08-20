@@ -55,7 +55,7 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $i = 1;
+                                            $i = ($orders->currentPage() - 1) * $orders->perPage() + 1;
                                         @endphp
                                         @foreach ($orders as $value)
                                             <tr>
@@ -87,6 +87,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="d-flex justify-content-center">
+                                <nav>
+                                    {{ $orders->links('pagination::bootstrap-4') }}
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
 

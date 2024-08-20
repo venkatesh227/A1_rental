@@ -151,7 +151,7 @@ class FrontendController extends Controller
         if (Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->exists()) {
             $Product = Product::where('subcategory_id', $sub_id)->where('id', $prod_id)->where('status', '1')->first();
             if ($Product) {
-                
+
                 $productImage = ProductImages::where('product_id', $Product->id)->first();
                 $productImages = ProductImages::where('product_id', $Product->id)->get();
             }
@@ -179,7 +179,7 @@ class FrontendController extends Controller
                 $cartitem->prod_qty = $pro_qty;
                 $cartitem->created_at = Carbon::now('Asia/Calcutta');
                 $cartitem->created_by = $user_id;
-             
+
                 $cartitem->save();
                 return response()->json(['status' => "Added To Cart"]);
             }
@@ -206,7 +206,7 @@ class FrontendController extends Controller
         if (session('userId')) {
             $prod_id = $request->input('prod_id');
             $user_id = session('userId');
-            
+
             if (Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->exists()) {
                 $cartitem = Cart::where('prod_id', $prod_id)->where('user_id', $user_id)->first();
                 $cartitem->delete();
@@ -244,7 +244,7 @@ class FrontendController extends Controller
             $prod = Product::where('id', $item->prod_id)->first();
 
             if ($prod->qty >= $item->prod_qty) {
-              
+
                 $prod->qty = $prod->qty - $item->prod_qty;
                 // dd($prod->qty);
                 $prod->updated_at = Carbon::now('Asia/Calcutta');
@@ -253,39 +253,43 @@ class FrontendController extends Controller
                 return redirect('cart')->with('status', 'One or more products are out of stock');
             }
         }
+        return redirect('paypal/payment');
 
 
-        $order = new Order();
-        $order->order_no = rand(1111, 9999);
-        $order->user_id = session('userId');
-        $order->no_of_products = $request->input('no_of_products');
-        $order->grand_total = $request->input('grand_total');
-        $order->created_at = Carbon::now('Asia/Calcutta');
-        $order->created_by = session('userId');
-        $order->save();
-        $cartitems = Cart::where('user_id', session('userId'))->get();
+        // $order = new Order();
+        // $order->order_no = rand(1111, 9999);
+        // $order->user_id = session('userId');
+        // $order->no_of_products = $request->input('no_of_products');
+        // $order->grand_total = $request->input('grand_total');
+        // $order->created_at = Carbon::now('Asia/Calcutta');
+        // $order->created_by = session('userId');
+        // $order->save();
+        // $cartitems = Cart::where('user_id', session('userId'))->get();
 
-        foreach ($cartitems as $item) {
+        // foreach ($cartitems as $item) {
 
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item->prod_id,
-                'qty' => $item->prod_qty,
-                'subtotal' => $item->products->selling_price * $item->prod_qty,
-                'single_price' => $item->products->selling_price,
-                'created_by' => session('userId'),
+        //     OrderDetail::create([
+        //         'order_id' => $order->id,
+        //         'product_id' => $item->prod_id,
+        //         'qty' => $item->prod_qty,
+        //         'subtotal' => $item->products->selling_price * $item->prod_qty,
+        //         'single_price' => $item->products->selling_price,
+        //         'created_by' => session('userId'),
 
-            ]);
-        }
-        $cartitems = Cart::where('user_id', session('userId'))->get();
-        Cart::destroy($cartitems);
+        //     ]);
+        // }
+        // $cartitems = Cart::where('user_id', session('userId'))->get();
+        // Cart::destroy($cartitems);
 
-        return redirect('cart')->with('status', 'order placed successfully');
+        // return redirect('cart')->with('status', 'order placed successfully');
     }
 
     public function myorders()
     {
-        $orders = Order::where('user_id', session('userId'))->orderBy('created_at','desc')->get();
+        $orders = Order::where('user_id', session('userId'))
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return view('frontend.orders.myorder', compact('orders'));
     }
 

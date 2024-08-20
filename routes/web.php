@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ClientsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\Gateways\PaypalController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +60,16 @@ Route::group(['middleware' => ['UserAuthCheck']], function () {
     Route::get('cart', [FrontendController::class, 'view_cart']);
     Route::post('place-order', [FrontendController::class, 'place_order']);
     Route::get('myorders', [FrontendController::class, 'myorders']);
+
+
+
+
+    Route::post('paypal/payment', [PaypalController::class, 'payment'])->name('paypal.payment');
+    Route::get('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
+    Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+
+
+
 });
 
 Route::get('captcha', [FrontendController::class, 'showCaptcha']);

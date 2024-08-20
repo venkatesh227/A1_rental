@@ -118,7 +118,8 @@
         Completed
     </option>
     <option value="3" 
-        {{ $orderDetails[0]->Orders->status == 3 ? 'selected' : '' }}>
+        {{ $orderDetails[0]->Orders->status == 3 ? 'selected' : '' }}
+        {{ $orderDetails[0]->Orders->status == 2 ? 'disabled' : '' }}>
   
         Cancelled
     </option>

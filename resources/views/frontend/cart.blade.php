@@ -24,7 +24,7 @@
 <div class="cart-area  mt-5">
     <div class="container">
         <div class="row justify-content-center">
-            <form action="{{ url('place-order') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('paypal/payment') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if ($cartitems->count() > 0)
                                 <div class="col-lg-12">
