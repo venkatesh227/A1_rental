@@ -245,7 +245,7 @@
     <!-- about area end -->
 
     <!-- Categories Starts -->
-    <section class="categories-area pd-bottom-120">
+    {{-- <section class="categories-area pd-bottom-120">
         <div class="container p-0">
             <div class="row">
                 <div class="col-lg-12">
@@ -253,32 +253,33 @@
                         <h2 class="title">Categories</h2>
                     </div>
                     <div class="category-slider owl-carousel">
-                     @foreach ($category as $item)
-    @if (!empty($item->status))
-        <div class="item">
-            <div class="single-cat-item">
-                <div class="thumb">
-                <img class="image-item-01"
-     src="{{ asset('images/categories/' . $item->image) }}"
-     alt="{{ $item->name }}"
-     style="height: 300px; width: 300px;">
+                        @foreach ($category as $item)
+                            @if (!empty($item->status))
+                                <div class="item">
+                                    <div class="single-cat-item">
+                                        <div class="thumb">
+                                            <img class="image-item-01"
+                                                src="{{ asset('images/categories/' . $item->image) }}"
+                                                alt="{{ $item->name }}" style="height: 300px; width: 300px;">
 
-                </div>
-                <div class="single-cat-content">
-                    <h4><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a></h4>
-                    <a class="read-more-text"
-                        href="{{ url('view-subCategory/' . $item->id) }}">Explore Collection</a>
-                </div>
-            </div>
-        </div>
-    @endif
-@endforeach
+                                        </div>
+                                        <div class="single-cat-content">
+                                            <h4><a
+                                                    href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
+                                            </h4>
+                                            <a class="read-more-text"
+                                                href="{{ url('view-subCategory/' . $item->id) }}">Explore Collection</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
 
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Categories End -->
 
 
@@ -321,7 +322,7 @@
     <!-- Video End -->
 
     <!-- testimonial area start -->
-    <div class="testimonial-area pd-top-115">
+    {{-- <div class="testimonial-area pd-top-115">
         <div class="bg-half-main"></div>
         <div class="container">
             <div class="row justify-content-end">
@@ -413,6 +414,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- testimonial area end -->
 @endsection

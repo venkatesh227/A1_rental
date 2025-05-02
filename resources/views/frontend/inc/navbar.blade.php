@@ -19,28 +19,25 @@
                     <li>
                         <a href="{{ url('/') }}">Home</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Products</a>
-                        <ul class="sub-menu">
-                            @foreach (Category::all() as $item)
-                                @if (!empty($item->status == '1'))
-                                    <li><a href="{{ url('view-subCategory/' . $item->id) }}">{{ $item->name }}</a>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
+                    <li>
+                        <a href="{{ url('view-products') }}">Products</a>
                     </li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="{{url('email')}}">Contact Us</a></li>
+                    <li><a href="{{ url('email') }}">Contact Us</a></li>
+                    <li>
+                        <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
+                    </li>
+                    <li>
+                        <a class="cart-btn" href="{{ url('cart') }}">
+                            <span class="cart-count">{{ Cart::where('user_id', session('userId'))->count() }}</span>
+                            <i class="lnr lnr-cart"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
             <div class="nav-right-part nav-right-part-desktop">
 
-
-                <a class="search-bar-btn" href="#"><i class="lnr lnr-magnifier"></i></a>
-
-                <?php  $userLoggedIn = session()->has('userId'); ?>
+                <?php $userLoggedIn = session()->has('userId'); ?>
 
                 @if ($userLoggedIn)
                     <div class="collapse navbar-collapse">
@@ -56,11 +53,6 @@
                 @else
                     <a class="user-btn" href="{{ url('user-login') }}"><i class="lnr lnr-user"></i></a>
                 @endif
-
-                <a class="cart-btn" href="{{ url('cart') }}">
-                    <span class="cart-count">{{ Cart::where('user_id', session('userId'))->count() }}</span>
-                    <i class="lnr lnr-cart"></i>
-                </a>
             </div>
         </div>
     </nav>

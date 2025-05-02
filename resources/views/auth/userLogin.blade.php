@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @section('content')
 <!-- Banner Starts -->
-<div class="breadcrumb-area" style="background-image:url('assets/img/banner/b1.jpg')">
+<div class="breadcrumb-area" style="background-image:url('assets/img/banner/test1.jpeg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

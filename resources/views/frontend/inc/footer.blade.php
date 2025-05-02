@@ -1,6 +1,6 @@
 <footer class="footer-area">
     <div class="footer-widget">
-        <div class="container">
+        {{-- <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget widget widget_nav_menu">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="copyright-area">
         <div class="container">
@@ -57,7 +57,7 @@
                             <img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
                     </div>
                     <div class="copyright-content align-self-center text-center">
-                        &copy; Copyright 2023 - All rights reserved.
+                        &copy; Copyright <?php echo date('Y'); ?> - All rights reserved.
                     </div>
                     <div class="copyright-link align-self-center">
                         <ul>

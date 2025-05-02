@@ -132,17 +132,12 @@ class FrontendController extends Controller
         }
     }
 
-    public function view_products($sub_id)
+    public function view_products()
     {
         $category = Category::all();
-        if (Product::where('subcategory_id', $sub_id)->where('status', '1')->exists()) {
+        $Product = Product::where('status', '1')->get();
 
-            $Product = Product::where('subcategory_id', $sub_id)->where('status', '1')->get();
-
-            return view('frontend.productsView', compact('category', 'Product'));
-        } else {
-            return view('frontend.productsView', compact('category'));
-        }
+        return view('frontend.productsView', compact('category', 'Product'));
     }
 
     public function product_details($sub_id, $prod_id)
@@ -352,5 +347,4 @@ class FrontendController extends Controller
 
         return ['image' => $imageData, 'text' => $text];
     }
-
 }

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('content')
-    <div class="breadcrumb-area" style="background-image: url('{{ asset('fronted/img/banner/b1.jpg') }}')">
+    <div class="breadcrumb-area" style="background-image: url('{{ asset('fronted/img/banner/test1.jpeg') }}')">
 
         <div class="container">
             <div class="row">
