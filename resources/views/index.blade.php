@@ -35,9 +35,9 @@
                                                 as tables and chairs to décor such as backdrops and lounge furniture to
                                                 enhance any style. </p>
                                         </div>
-                                        <div class="banner-btn">
+                                        {{-- <div class="banner-btn">
                                             <a href="#" class="btn btn-base">Search Products</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="right-img">
@@ -85,9 +85,9 @@
                                                 as tables and chairs to décor such as backdrops and lounge furniture to
                                                 enhance any style. </p>
                                         </div>
-                                        <div class="banner-btn">
+                                        {{-- <div class="banner-btn">
                                             <a href="#" class="btn btn-base">Search Products</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="right-img">
@@ -135,9 +135,9 @@
                                                 as tables and chairs to décor such as backdrops and lounge furniture to
                                                 enhance any style. </p>
                                         </div>
-                                        <div class="banner-btn">
+                                        {{-- <div class="banner-btn">
                                             <a href="#" class="btn btn-base">Search Products</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="right-img">
@@ -188,10 +188,10 @@
                                                 as tables and chairs to décor such as backdrops and lounge furniture to
                                                 enhance any style. </p>
                                         </div>
-                                        <div class="banner-btn">
+                                        {{-- <div class="banner-btn">
 
                                             <a href="#" class="btn btn-base">Search Products</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="right-img">
@@ -234,7 +234,7 @@
                                     arches and backdrops, from wedding Structures such as Mandaps and Chuppahs to
                                     ceiling structures with greens and chandeliers, we want to make your event unique!
                                 </p>
-                                <a href="#" class="btn btn-title">Explore Collection <span>&rharu;</span></a>
+                                {{-- <a href="#" class="btn btn-title">Explore Collection <span>&rharu;</span></a> --}}
                             </div>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                             </p>
                         </div>
 
-                        <a href="#" class="btn btn-title">Read More... <span>&#8640;</span></a>
+                        {{-- <a href="#" class="btn btn-title">Read More... <span>&#8640;</span></a> --}}
                         <div class="video-icon">
                             <a class="video-play-btn" href="#" data-effect="mfp-zoom-in"><i
                                     class="fa fa-play"></i></a>

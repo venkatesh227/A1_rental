@@ -65,7 +65,7 @@
                                                                 class="minus changeqty decrement-btn">
                                                             <input type="number" step="1" min="1"
                                                                 max="{{ $item->products->qty }}" name="quantity"
-                                                                class="input-qty" value="{{ $item->prod_qty }}">
+                                                                class="input-qty" value="{{ $item->prod_qty }}" disabled>
                                                             <input type="button" value="+"
                                                                 class="plus changeqty increment-btn">
                                                         </div>
