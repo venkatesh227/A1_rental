@@ -160,7 +160,7 @@ class FrontendController extends Controller
     {
 
         $pro_id = $request->input('product_id');
-        $pro_qty = $request->input('product_qty');
+        $pro_qty = 1;
 
         if (session('userId')) {
             $user_id = session('userId');

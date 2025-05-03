@@ -23,9 +23,9 @@ class ProductController extends Controller
 
     public function add_product()
     {
-        $subcategories = Subcategory::orderBy('name', 'asc')->get();
-        $categories = Category::orderBy('name', 'asc')->get();
-        $products = Product::all();
+        $subcategories = Subcategory::where('status', '1')->orderBy('name', 'asc')->get();
+        $categories = Category::where('status', '1')->orderBy('name', 'asc')->get();
+        $products = Product::where('status', '1');
         return view('admin.products.add', compact('subcategories', 'categories', 'products'));
     }
 
@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function fetchSubcategories(Request $request)
     {
         $category_id = $request->input('category_id');
-        $subcategories = Subcategory::where('category_id', $category_id)->get();
+        $subcategories = Subcategory::where('category_id', $category_id)->where('status', '1')->get();
         $response = [];
         foreach ($subcategories as $subcategory) {
             $response[] = [
@@ -105,7 +105,7 @@ class ProductController extends Controller
         $Product->qty = $request->input('qty');
         $Product->created_at = Carbon::now('Asia/Calcutta');
         $Product->created_by = session('adminId');
-       
+
 
         // Handle the single image upload
         if ($request->hasFile('image')) {
