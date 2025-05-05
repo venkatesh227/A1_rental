@@ -26,7 +26,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="banner-content align-self-end">
-                                            <h2>Welcome to <br>K&S Events and Rentals</h2>
+                                            <h2>Welcome to <br>AZ Event Depot</h2>
                                             <p align="justify">Browse our rentals and create your Wishlist online by
                                                 adding items with just a click. We’ll send you a preliminary quote so
                                                 you can start designing your event.</p>
@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="banner-content align-self-end">
-                                            <h2>Welcome to <br>K&S Events and Rentals</h2>
+                                            <h2>Welcome to <br>AZ Event Depot</h2>
                                             <p align="justify">Browse our rentals and create your Wishlist online by
                                                 adding items with just a click. We’ll send you a preliminary quote so
                                                 you can start designing your event.</p>
@@ -126,7 +126,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="banner-content align-self-end">
-                                            <h2>Welcome to <br>K&S Events and Rentals</h2>
+                                            <h2>Welcome to <br>AZ Event Depot</h2>
                                             <p align="justify">Browse our rentals and create your Wishlist online by
                                                 adding items with just a click. We’ll send you a preliminary quote so
                                                 you can start designing your event.</p>
@@ -179,7 +179,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="banner-content align-self-end">
-                                            <h2>Welcome to <br>K&S Events and Rentals</h2>
+                                            <h2>Welcome to <br>AZ Event Depot</h2>
                                             <p align="justify">Browse our rentals and create your Wishlist online by
                                                 adding items with just a click. We’ll send you a preliminary quote so
                                                 you can start designing your event.</p>
@@ -228,7 +228,7 @@
                         <div class="about-inner-wrap">
                             <div class="section-title mb-0">
                                 <h2 class="title">OUR RENTALS</h2>
-                                <p class="content">K&S Events and Rentals is a full-service Event Décor Company,
+                                <p class="content">AZ Event Depot is a full-service Event Décor Company,
                                     encompassing event rentals, décor, design and planning. We have everything you need
                                     to make your corporate or private event spectacular; from tables and chairs to
                                     arches and backdrops, from wedding Structures such as Mandaps and Chuppahs to
@@ -297,7 +297,7 @@
                 <div class="col-lg-6">
                     <div class="video-content">
                         <div class="section-title pt-5">
-                            <h2 class="title mb-3">Why K&S for Event Rentals?</h2>
+                            <h2 class="title mb-3">Why AZ for Event Rentals?</h2>
                             <h4>More ways to be served</h4>
                             <p class="content">
                             <ul>

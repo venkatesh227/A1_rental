@@ -25,17 +25,17 @@
     <div class="pt-5"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <div class="vertical-menu">
                     <a href="{{url('/')}}" class="active">Home</a>
                     <a href="#">About</a>
                     <a href="#">Services</a>
                     <a href="#">Contact</a>
                 </div>
-            </div>
+            </div> --}}
 
 
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <span class="contact100-form-title">
@@ -50,7 +50,7 @@
                             @endif
 
                             <div class="mt-2">
-                                <input class="col-md-7 input100" type="text" name="name" placeholder="Name *"
+                                <input class="col-md-10 input100" type="text" name="name" placeholder="Name *"
                                     value="{{ old('name') }}">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="mt-2">
-                                <input type="text" class="col-md-7" name="email" placeholder="Email *"
+                                <input type="text" class="col-md-10" name="email" placeholder="Email *"
                                     value="{{ old('email') }}">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
@@ -73,7 +73,7 @@
                                 @enderror
                             </div>
                             <div class="mt-2">
-                                <input class="col-md-7 input100" type="text" name="subject" placeholder="Subject *"
+                                <input class="col-md-10 input100" type="text" name="subject" placeholder="Subject *"
                                     value="{{ old('subject') }}">
                                 <span class="focus-input100"></span>
                                 <span class="symbol-input100">
@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="mt-2">
-                                <textarea class="col-md-7" name="content"
+                                <textarea class="col-md-10" name="content"
                                     placeholder="Message *">{{ old('content') }}</textarea>
                                 <span class="focus-input100"></span>
                                 @error('content')
