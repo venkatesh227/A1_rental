@@ -54,7 +54,7 @@
                 <div class="col-lg-12 d-lg-flex justify-content-between">
                     <div class="copyright-logo align-self-center">
                         <a href="#">
-                            <img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
+                            <img src="{{ asset('fronted/img/logo1.png') }}" style="height:80px;width:auto;" alt="img"></a>
                     </div>
                     <div class="copyright-content align-self-center text-center">
                         &copy; Copyright <?php echo date('Y'); ?> - All rights reserved.

@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="logo">
-                <a href="{{ url('/') }}"><img src="{{ asset('fronted/img/logo1.png') }}" alt="img"></a>
+                <a href="{{ url('/') }}"><img src="{{ asset('fronted/img/logo1.png') }}" style="height:80px;width:auto;" alt="img"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="st_main_menu">
